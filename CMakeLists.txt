@@ -8,6 +8,7 @@ set(SOURCES
 	src/instructions.c
 	src/timer.c
 	src/debug.c
+	src/opcodes.c
 )
 
 add_executable(uBoy ${SOURCES})

@@ -1,5 +1,22 @@
 #include "instructions.h"
 
+// Loading immediate operands from ROM
+// ---------------------------------------------------
+
+uint8_t Instruction_LD_I8_ROM(void) {
+	uint8_t result = Memory_load_byte(Registers.PC);
+	Registers.PC++;
+	return result;
+}
+
+uint16_t Instruction_LD_I16_ROM(void) {
+	uint16_t msb = (uint16_t) Memory_load_byte(Registers.PC);
+	uint16_t lsb = (uint16_t) Memory_load_byte(Registers.PC + 1);
+	Registers.PC += 2;
+
+	return (msb << 8) | lsb;
+}
+
 // 8-bit Loads
 // ---------------------------------------------------
 

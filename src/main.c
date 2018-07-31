@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "memory.h"
+#include "opcodes.h"
 #include "instructions.h"
 #include "debug.h"
 
@@ -14,7 +15,7 @@ int main(int argc, char *argv[]) {
 	// Kill program if no ROM-path has been entered
 	if (argc < 2) {
 		printf("ERROR: Received no ROM-path.\n");
-	    	exit(EXIT_FAILURE);	
+	    exit(EXIT_FAILURE);	
 	}
 
 	// Open the file in the command-line argument
@@ -28,19 +29,22 @@ int main(int argc, char *argv[]) {
 
 	// Initialize emulator
 	Memory_init();
-	
-	//Debug_print_registers();
+	Opcodes_init();
 
-	// Main loop of the emulator
+	// TODO: Copy ROM to memory
+
+	// TODO: Main loop of the emulator
 	// 1. Instruction Fetch
 	// 2. Instruction Decode
 	// 3. Execution
 	// 4. Interrupt Catching
-	
+
 	exit(EXIT_SUCCESS);
 }
 
 void cleanup(void) {
-	fclose(rom);
+	if (rom)
+		fclose(rom);
+	
 	Memory_free();
 }

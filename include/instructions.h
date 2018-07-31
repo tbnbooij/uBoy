@@ -1,6 +1,12 @@
 #ifndef INSTRUCTIONS_H
 #define INSTRUCTIONS_H
 #include "memory.h"
+#include "opcodes.h"
+
+// Loading immediate operands from ROM
+// ---------------------------------------------------
+uint8_t Instruction_LD_I8_ROM(void);
+uint16_t Instruction_LD_I16_ROM(void);
 
 // 8-bit Loads
 // ---------------------------------------------------
