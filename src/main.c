@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Open the file in the command-line argument
-	fp = fopen(argv[1], "rb");
+	rom = fopen(argv[1], "rb");
 
 	// Kill program if ROM does not exist
 	if (!rom) {
