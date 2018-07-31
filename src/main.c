@@ -5,7 +5,7 @@
 #include "instructions.h"
 #include "debug.h"
 
-FILE *fp;
+FILE *rom;
 void cleanup(void);
 
 int main(int argc, char *argv[]) {
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 	fp = fopen(argv[1], "rb");
 
 	// Kill program if ROM does not exist
-	if (!fp) {
+	if (!rom) {
 		printf("ERROR: Received ROM-path does not exist.\n");
 		exit(EXIT_FAILURE);
 	}
@@ -41,6 +41,6 @@ int main(int argc, char *argv[]) {
 }
 
 void cleanup(void) {
-	fclose(fp);
+	fclose(rom);
 	Memory_free();
 }
