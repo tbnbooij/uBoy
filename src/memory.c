@@ -1,4 +1,48 @@
 #include "memory.h"
+#include "debug.h"
+
+void Registers_init(void) {
+	Registers.AF = 0;
+	Registers.BC = 0;
+	Registers.DE = 0;
+	Registers.HL = 0;
+	Registers.PC = 0x100;
+	Registers.SP = 0xFFFE;
+}
+
+// Flag manipulation
+// --------------------------------
+void Flag_set_Z(uint8_t state) {
+	Registers.F = (state << 7) | Registers.F;
+}
+
+void Flag_set_N(uint8_t state) {
+	Registers.F = (state << 6) | Registers.F;
+}
+
+void Flag_set_H(uint8_t state) {
+	Registers.F = (state << 5) | Registers.F;
+}
+
+void Flag_set_C(uint8_t state) {
+	Registers.F = (state << 4) | Registers.F;
+}
+
+uint8_t Flag_get_Z(void) {
+	return (Registers.F & 0x80) >> 7;
+}
+
+uint8_t Flag_get_N(void) {
+	return (Registers.F & 0x40) >> 6;
+}
+
+uint8_t Flag_get_H(void) {
+	return (Registers.F & 0x20) >> 5;
+}
+
+uint8_t Flag_get_C(void) {
+	return (Registers.F & 0x10) >> 4;
+}
 
 void Memory_init(void) {
 	Memory.ROM.bank_fixed = (uint8_t*) malloc(16*KILO_BYTE);

@@ -39,6 +39,10 @@ void Instruction_LD_R16_R16(uint16_t *r1, uint16_t *r2);
 // 16-bit Register-Register-Immediate-Sum Load
 void Instruction_LD_R16_R16_I8(uint16_t *r1, uint16_t *r2, uint8_t i);
 
-
+// Jumps & Calls
+// ---------------------------------------------------
+void Instruction_JP_CC_N(uint8_t test);
+void Instruction_RET(void);
+void Instruction_RET_CC(uint8_t test);
 
 #endif // INSTRUCTIONS_H

@@ -4,15 +4,17 @@
 // ---------------------------------------------------
 
 uint8_t Instruction_LD_I8_ROM(void) {
-	uint8_t result = Memory_load_byte(Registers.PC);
 	Registers.PC++;
+	uint8_t result = Memory_load_byte(Registers.PC);
 	return result;
 }
 
 uint16_t Instruction_LD_I16_ROM(void) {
+	Registers.PC++;
 	uint16_t msb = (uint16_t) Memory_load_byte(Registers.PC);
-	uint16_t lsb = (uint16_t) Memory_load_byte(Registers.PC + 1);
-	Registers.PC += 2;
+
+	Registers.PC++;
+	uint16_t lsb = (uint16_t) Memory_load_byte(Registers.PC);
 
 	return (msb << 8) | lsb;
 }
@@ -82,3 +84,32 @@ void Instruction_LD_R16_R16_I8(uint16_t *r1, uint16_t *r2, uint8_t i) {
 	*r1 = *r2 + i;
 }
 
+// Jumps & Calls
+// ---------------------------------------------------
+void Instruction_JP_CC_N(uint8_t test) {
+	uint8_t n = Instruction_LD_I8_ROM();
+
+	if (test) {
+		Registers.PC += n;
+	}
+	else  {
+		Registers.PC++;
+	}	
+
+	Timer_update(2);
+}
+
+void Instruction_RET(void) {
+	// TODO: Add after dealing with PUSH AND POP
+	printf("WARNING: RET has not been implemented yet!\n");
+	Timer_update(2);
+}
+
+void Instruction_RET_CC(uint8_t test) {
+	if (test) {
+		Instruction_RET();
+	}
+	else {
+		Timer_update(2);
+	}
+}

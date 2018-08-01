@@ -15,10 +15,11 @@ void Debug_print_registers(void) {
 	printf("BC: %hu\t\t(%04x)\n", Registers.BC, Registers.BC);
 	printf("DE: %hu\t\t(%04x)\n", Registers.DE, Registers.DE);
 	printf("SP: %hu\t\t(%04x)\n", Registers.SP, Registers.SP);
-	printf("DE: %hu\t\t(%04x)\n", Registers.PC, Registers.PC);
+	printf("PC: %hu\t\t(%04x)\n", Registers.PC, Registers.PC);
 }
 
 void Debug_print_opcode_table(void) {
+	printf("DEBUG: Print Opcode Table\n================================\n");
 	char c = 'x';
 	for (uint8_t i = 0; i <= 0xF; i++) {
 		for (uint8_t j = 0; j <= 0xF; j++) {

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include "timer.h"
 #define KILO_BYTE 1024
 
 // Register set
@@ -66,6 +67,21 @@ struct {
 	uint16_t SP;
 	uint16_t PC;
 } Registers;
+
+void Registers_init(void);
+
+// Flag manipulation
+// --------------------------------
+void Flag_set_Z(uint8_t state);
+void Flag_set_N(uint8_t state);
+void Flag_set_H(uint8_t state);
+void Flag_set_C(uint8_t state);
+
+uint8_t Flag_get_Z(void);
+uint8_t Flag_get_N(void);
+uint8_t Flag_get_H(void);
+uint8_t Flag_get_C(void);
+
 
 // Memory map
 // --------------------------------

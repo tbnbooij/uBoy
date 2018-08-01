@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include "timer.h"
 #include "memory.h"
 #include "opcodes.h"
 #include "instructions.h"
@@ -29,6 +30,8 @@ int main(int argc, char *argv[]) {
 
 	// Initialize emulator
 	Memory_init();
+	Registers_init();
+	Timer_init();
 	Opcodes_init();
 
 	// TODO: Copy ROM to memory

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "opcodes.h": "c",
+        "memory.h": "c"
+    }
+}
