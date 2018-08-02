@@ -1,6 +1,8 @@
 #include "memory.h"
 #include "debug.h"
 
+// Register Initialization
+// ---------------------------------------------------
 void Registers_init(void) {
 	Registers.AF = 0;
 	Registers.BC = 0;
@@ -44,6 +46,8 @@ uint8_t Flag_get_C(void) {
 	return (Registers.F & 0x10) >> 4;
 }
 
+// Memory Initialization & Freeing
+// ---------------------------------------------------
 void Memory_init(void) {
 	Memory.ROM.bank_fixed = (uint8_t*) malloc(16*KILO_BYTE);
 	Memory.ROM.bank_swap = (uint8_t*) malloc(16*KILO_BYTE);
@@ -82,6 +86,8 @@ void Memory_free(void) {
 	free(Memory.HRAM);
 }
 
+// Atomic Load & Store
+// ---------------------------------------------------
 uint8_t Memory_load_byte(uint16_t address) {
 	if (address <= 0x3FFF) {
 		return *(Memory.ROM.bank_fixed + address);
@@ -125,6 +131,12 @@ uint8_t Memory_load_byte(uint16_t address) {
 	}
 }	
 
+uint8_t Memory_load_byte_PC(void) {
+	uint8_t result = Memory_load_byte(Registers.PC);
+	Registers.PC++;
+	return result;
+}
+
 void Memory_store_byte(uint16_t address, uint8_t data) {
 	if (address <= 0x7FFF) {
 		printf("ERROR: Trying to write to ROM.\n");
@@ -164,4 +176,89 @@ void Memory_store_byte(uint16_t address, uint8_t data) {
 	else {
 		Memory.IE = data;
 	}
+}
+
+// Loading immediate operands from ROM
+// ---------------------------------------------------
+uint8_t Memory_LD_I8_ROM(void) {
+	return Memory_load_byte_PC();
+}
+
+uint16_t Memory_LD_I16_ROM(void) {
+	uint16_t lsb = (uint16_t) Memory_load_byte_PC();
+	uint16_t msb = (uint16_t) Memory_load_byte_PC();
+
+	return (msb << 8) | lsb;
+}
+
+// 8-bit Loads
+// ---------------------------------------------------
+// 8-bit Register-Register Loads
+void Memory_LD_R8_R8(uint8_t *r1, uint8_t *r2) {
+	*r1 = *r2;
+}
+
+void Memory_LD_R8_R16(uint8_t *r1, uint16_t *r2) {
+	*r1 = (uint8_t) *r2;
+}
+
+void Memory_LD_R16_R8(uint16_t *r1, uint8_t *r2) {
+	*r1 = (uint16_t) *r2;
+}
+
+// 8-bit Register-Immediate Loads
+void Memory_LD_R8_I8(uint8_t *r, uint8_t i) {
+	*r = i;
+}
+
+// 8-bit Register-Memory Interaction
+void Memory_LD_R8_MR8(uint8_t *r1, uint8_t *r2) {
+	*r1 = Memory_load_byte(0xFF00 + (int8_t) *r2);
+}
+
+void Memory_LD_MR8_R8(uint8_t *r1, uint8_t *r2) {
+	Memory_store_byte(0xFF00 + (int8_t) *r1, *r2);
+}
+
+void Memory_LD_R8_MR16(uint8_t *r1, uint16_t *r2) {
+	*r1 = Memory_load_byte(*r2);
+}
+
+void Memory_LD_MR16_R8(uint16_t *r1, uint8_t *r2) {
+	Memory_store_byte(*r1, *r2); 
+};
+
+// 8-bit Register-Immediate-Memory Interaction
+void Memory_LD_MI8_R8(uint8_t i, uint8_t *r) {
+	Memory_store_byte(0xFF00 + (int8_t) i, *r);
+}
+
+void Memory_LD_R8_MI8(uint8_t *r, uint8_t i) {
+	*r = Memory_load_byte(0xFF00 + (int8_t) i);
+}
+
+void Memory_LD_MR16_I8(uint16_t *r, uint8_t n) {
+	Memory_store_byte(*r, n);
+}
+
+void Memory_LD_MI16_R8(uint16_t nn, uint8_t *r) {
+	Memory_store_byte(nn, *r);
+}
+
+// 16-bit Loads
+// ---------------------------------------------------
+
+// 16-bit Register-Immediate Loads
+void Memory_LD_R16_I16(uint16_t *r, uint16_t i) {
+	*r = i;
+}
+
+// 16-bit Register-Register Loads
+void Memory_LD_R16_R16(uint16_t *r1, uint16_t *r2) {
+	*r1 = *r2;
+}
+
+// 16-bit Register-Register-Immediate-Sum Load
+void Memory_LD_R16_R16_I8(uint16_t *r1, uint16_t *r2, uint8_t i) {
+	*r1 = *r2 + i;
 }
