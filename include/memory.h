@@ -91,6 +91,8 @@ uint8_t Flag_test_H_U8_U8(uint8_t a, uint8_t b, uint8_t add);
 uint8_t Flag_test_C_U8_U8(uint8_t a, uint8_t b, uint8_t add);
 uint8_t Flag_test_H_U16_S8(uint16_t a, int8_t b);
 uint8_t Flag_test_C_U16_S8(uint16_t a, int8_t b);
+uint8_t Flag_test_H_U16_U16(uint16_t a, uint16_t b);
+uint8_t Flag_test_C_U16_U16(uint16_t a, uint16_t b);
 
 uint8_t Flag_get_Z(void);
 uint8_t Flag_get_N(void);

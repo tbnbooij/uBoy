@@ -276,6 +276,11 @@ void Opcode_not_implemented(uint8_t opcode) {
     exit(EXIT_FAILURE);
 }
 
+void Opcode_empty(uint8_t opcode) {
+	printf("ERROR: Tried to use a non-existent opcode (0x%02hhX)\n", opcode);
+    exit(EXIT_FAILURE);
+}
+
 void Opcode_0x00(void) {
 	// NOP
 	Timer.t += 4;
@@ -294,18 +299,21 @@ void Opcode_0x02(void) {
 }
 
 void Opcode_0x03(void) {
-	// #
-	Opcode_not_implemented(0x03);
+	// INC BC
+	Registers.BC++;
+	Timer.t += 8;
 }
 
 void Opcode_0x04(void) {
-	// #
-	Opcode_not_implemented(0x04);
+	// INC B
+	Instruction_INC_N(&Registers.B);
+	Timer.t += 4;
 }
 
 void Opcode_0x05(void) {
-	// #
-	Opcode_not_implemented(0x05);
+	// DEC B
+	Instruction_DEC_N(&Registers.B);
+	Timer.t -= 4;
 }
 
 void Opcode_0x06(void) {
@@ -315,8 +323,20 @@ void Opcode_0x06(void) {
 }
 
 void Opcode_0x07(void) {
-	// #
-	Opcode_not_implemented(0x07);
+	// RLCA
+	uint8_t bit7 = (Registers.A & 0x40) >> 7;
+
+	Registers.A <<= 1;
+	Registers.A |= bit7;
+
+	Flags_set(
+		0,
+		0,
+		0,
+		bit7
+	);
+
+	Timer.t += 4;
 }
 
 void Opcode_0x08(void) {
@@ -330,8 +350,9 @@ void Opcode_0x08(void) {
 }
 
 void Opcode_0x09(void) {
-	// #
-	Opcode_not_implemented(0x09);
+	// ADD HL, BC
+	Instruction_ADD_HL_N(Registers.BC);
+	Timer.t += 8;
 }
 
 void Opcode_0x0A(void) {
@@ -341,18 +362,21 @@ void Opcode_0x0A(void) {
 }
 
 void Opcode_0x0B(void) {
-	// #
-	Opcode_not_implemented(0x0B);
+	// DEC BC
+	Registers.BC--;
+	Timer.t += 8;
 }
 
 void Opcode_0x0C(void) {
-	// #
-	Opcode_not_implemented(0x0C);
+	// INC C
+	Instruction_INC_N(&Registers.C);
+	Timer.t += 4;
 }
 
 void Opcode_0x0D(void) {
-	// #
-	Opcode_not_implemented(0x0D);
+	// DEC C
+	Instruction_DEC_N(&Registers.C);
+	Timer.t -= 4;
 }
 
 void Opcode_0x0E(void) {
@@ -362,12 +386,24 @@ void Opcode_0x0E(void) {
 }
 
 void Opcode_0x0F(void) {
-	// #
-	Opcode_not_implemented(0x0F);
+	// RRCA
+	uint8_t bit0 = Registers.A & 0x01;
+
+	Registers.A = (Registers.A >> 1) | (bit0 << 7);
+
+	Flags_set(
+		0,
+		0,
+		0,
+		bit0
+	);
+
+	Timer.t += 4;
 }
 
 void Opcode_0x10(void) {
-	// #
+	// STOP
+	// TODO: Add STOP system
 	Opcode_not_implemented(0x10);
 }
 
@@ -384,18 +420,21 @@ void Opcode_0x12(void) {
 }
 
 void Opcode_0x13(void) {
-	// #
-	Opcode_not_implemented(0x13);
+	// INC DE
+	Registers.DE++;
+	Timer.t += 8;
 }
 
 void Opcode_0x14(void) {
-	// #
-	Opcode_not_implemented(0x14);
+	// INC D
+	Instruction_INC_N(&Registers.D);
+	Timer.t += 4;
 }
 
 void Opcode_0x15(void) {
-	// #
-	Opcode_not_implemented(0x15);
+	// DEC D
+	Instruction_DEC_N(&Registers.D);
+	Timer.t -= 4;
 }
 
 void Opcode_0x16(void) {
@@ -405,18 +444,32 @@ void Opcode_0x16(void) {
 }
 
 void Opcode_0x17(void) {
-	// #
-	Opcode_not_implemented(0x17);
+	// RLA
+	uint8_t carry = Flag_get_C();
+	uint8_t bit7 = (Registers.A & 0x40) >> 7;
+
+	Registers.A = (Registers.A << 1) | carry;
+	Flags_set(
+		0,
+		0,
+		0,
+		bit7
+	);
+
+	Timer.t += 4;
 }
 
 void Opcode_0x18(void) {
-	// #
-	Opcode_not_implemented(0x18);
+	// JR n
+	int8_t n = (int8_t) Memory_load_byte_PC();
+	Registers.PC += n;
+	Timer.t += 12;
 }
 
 void Opcode_0x19(void) {
-	// #
-	Opcode_not_implemented(0x19);
+	// ADD HL, DE
+	Instruction_ADD_HL_N(Registers.DE);
+	Timer.t += 8;
 }
 
 void Opcode_0x1A(void) {
@@ -426,18 +479,21 @@ void Opcode_0x1A(void) {
 }
 
 void Opcode_0x1B(void) {
-	// #
-	Opcode_not_implemented(0x1B);
+	// DEC DE
+	Registers.DE--;
+	Timer.t += 8;
 }
 
 void Opcode_0x1C(void) {
-	// #
-	Opcode_not_implemented(0x1C);
+	// INC E
+	Instruction_INC_N(&Registers.E);
+	Timer.t += 4;
 }
 
 void Opcode_0x1D(void) {
-	// #
-	Opcode_not_implemented(0x1D);
+	// DEC E
+	Instruction_DEC_N(&Registers.E);
+	Timer.t -= 4;
 }
 
 void Opcode_0x1E(void) {
@@ -447,13 +503,33 @@ void Opcode_0x1E(void) {
 }
 
 void Opcode_0x1F(void) {
-	// #
-	Opcode_not_implemented(0x1F);
+	// RRA
+	uint8_t carry = Flag_get_C();
+	uint8_t bit0 = Registers.A & 0x01;
+
+	Registers.A = (Registers.A >> 1) | (carry << 7);
+
+	Flags_set(
+		0,
+		0,
+		0,
+		bit0
+	);
+
+	Timer.t += 4;
 }
 
 void Opcode_0x20(void) {
-	// #
-	Opcode_not_implemented(0x20);
+	// JR NZ, n
+	int8_t n = (int8_t) Memory_load_byte_PC();
+
+	if (Flag_get_Z() == 0) {
+		Registers.PC += n;
+		Timer.t += 12;
+	}
+	else {
+		Timer.t += 8;
+	}
 }
 
 void Opcode_0x21(void) {
@@ -470,18 +546,21 @@ void Opcode_0x22(void) {
 }
 
 void Opcode_0x23(void) {
-	// #
-	Opcode_not_implemented(0x23);
+	// INC HL
+	Registers.HL++;
+	Timer.t += 8;
 }
 
 void Opcode_0x24(void) {
-	// #
-	Opcode_not_implemented(0x24);
+	// INC H
+	Instruction_INC_N(&Registers.H);
+	Timer.t += 4;
 }
 
 void Opcode_0x25(void) {
-	// #
-	Opcode_not_implemented(0x25);
+	// DEC H
+	Instruction_DEC_N(&Registers.H);
+	Timer.t -= 4;
 }
 
 void Opcode_0x26(void) {
@@ -491,18 +570,28 @@ void Opcode_0x26(void) {
 }
 
 void Opcode_0x27(void) {
-	// #
+	// DAA
+	// TODO: WHAT THE HELL IS DAA?!
 	Opcode_not_implemented(0x27);
 }
 
 void Opcode_0x28(void) {
-	// #
-	Opcode_not_implemented(0x28);
+	// JR Z, n
+	int8_t n = (int8_t) Memory_load_byte_PC();
+
+	if (Flag_get_Z() == 1) {
+		Registers.PC += n;
+		Timer.t += 12;
+	}
+	else {
+		Timer.t += 8;
+	}
 }
 
 void Opcode_0x29(void) {
-	// #
-	Opcode_not_implemented(0x29);
+	// ADD HL, HL
+	Instruction_ADD_HL_N(Registers.HL);
+	Timer.t += 8;
 }
 
 void Opcode_0x2A(void) {
@@ -513,18 +602,21 @@ void Opcode_0x2A(void) {
 }
 
 void Opcode_0x2B(void) {
-	// #
-	Opcode_not_implemented(0x2B);
+	// DEC HL
+	Registers.HL--;
+	Timer.t += 8;
 }
 
 void Opcode_0x2C(void) {
-	// #
-	Opcode_not_implemented(0x2C);
+	// INC L
+	Instruction_INC_N(&Registers.A);
+	Timer.t += 4;
 }
 
 void Opcode_0x2D(void) {
-	// #
-	Opcode_not_implemented(0x2D);
+	// DEC L
+	Instruction_DEC_N(&Registers.L);
+	Timer.t -= 4;
 }
 
 void Opcode_0x2E(void) {
@@ -534,13 +626,23 @@ void Opcode_0x2E(void) {
 }
 
 void Opcode_0x2F(void) {
-	// #
-	Opcode_not_implemented(0x2F);
+	// CPL
+	Flags_set(-1, 1, 1, -1);
+	Registers.A = ~Registers.A;
+	Timer.t += 4;
 }
 
 void Opcode_0x30(void) {
-	// #
-	Opcode_not_implemented(0x30);
+	// JR NC, n
+	int8_t n = (int8_t) Memory_load_byte_PC();
+
+	if (Flag_get_C() == 0) {
+		Registers.PC += n;
+		Timer.t += 12;
+	}
+	else {
+		Timer.t += 8;
+	}
 }
 
 void Opcode_0x31(void) {
@@ -557,18 +659,39 @@ void Opcode_0x32(void) {
 }
 
 void Opcode_0x33(void) {
-	// #
-	Opcode_not_implemented(0x33);
+	// INC SP
+	Registers.SP++;
+	Timer.t += 8;
 }
 
 void Opcode_0x34(void) {
-	// #
-	Opcode_not_implemented(0x34);
+	// INC (HL)
+	uint8_t n = Memory_load_byte(Registers.HL);
+
+	Flags_set(
+		(n + 1) == 0,
+		0,
+		Flag_test_H_U8_U8(n, 1, 1),
+		-1
+	);
+
+	Memory_store_byte(Registers.HL, (n + 1));
+	Timer.t += 12;
 }
 
 void Opcode_0x35(void) {
-	// #
-	Opcode_not_implemented(0x35);
+	// DEC (HL)
+	uint8_t n = Memory_load_byte(Registers.HL);
+
+	Flags_set(
+		(n - 1) == 0,
+		1,
+		Flag_test_H_U8_U8(n, 1, 0),
+		-1
+	);
+
+	Memory_store_byte(Registers.HL, (n - 1));
+	Timer.t += 12;
 }
 
 void Opcode_0x36(void) {
@@ -578,18 +701,28 @@ void Opcode_0x36(void) {
 }
 
 void Opcode_0x37(void) {
-	// #
-	Opcode_not_implemented(0x37);
+	// SCF
+	Flags_set(-1, 0, 0, 1);
+	Timer.t += 4;
 }
 
 void Opcode_0x38(void) {
-	// #
-	Opcode_not_implemented(0x38);
+	// JR C, n
+	int8_t n = (int8_t) Memory_load_byte_PC();
+
+	if (Flag_get_C() == 1) {
+		Registers.PC += n;
+		Timer.t += 12;
+	}
+	else {
+		Timer.t += 8;
+	}
 }
 
 void Opcode_0x39(void) {
-	// #
-	Opcode_not_implemented(0x39);
+	// ADD HL, SP
+	Instruction_ADD_HL_N(Registers.SP);
+	Timer.t += 8;
 }
 
 void Opcode_0x3A(void) {
@@ -600,18 +733,21 @@ void Opcode_0x3A(void) {
 }
 
 void Opcode_0x3B(void) {
-	// #
-	Opcode_not_implemented(0x3B);
+	// DEC SP
+	Registers.SP--;
+	Timer.t += 8;
 }
 
 void Opcode_0x3C(void) {
-	// #
-	Opcode_not_implemented(0x3C);
+	// INC A
+	Instruction_INC_N(&Registers.A);
+	Timer.t += 4;
 }
 
 void Opcode_0x3D(void) {
-	// #
-	Opcode_not_implemented(0x3D);
+	// DEC A
+	Instruction_DEC_N(&Registers.A);
+	Timer.t -= 4;
 }
 
 void Opcode_0x3E(void) {
@@ -621,8 +757,15 @@ void Opcode_0x3E(void) {
 }
 
 void Opcode_0x3F(void) {
-	// #
-	Opcode_not_implemented(0x3F);
+	// CCF
+	uint8_t c = 0;
+
+	if (!Flag_get_C())
+		c = 1;
+
+	Flags_set(-1, 0, 0, c);
+
+	Timer.t += 4;
 }
 
 void Opcode_0x40(void) {
@@ -949,7 +1092,8 @@ void Opcode_0x75(void) {
 }
 
 void Opcode_0x76(void) {
-	// #
+	// HALT
+	// TODO: Add infrastructure for HALTing
 	Opcode_not_implemented(0x76);
 }
 
@@ -1344,48 +1488,63 @@ void Opcode_0xB7(void) {
 }
 
 void Opcode_0xB8(void) {
-	// #
-	Opcode_not_implemented(0xB8);
+	// CP B
+	Instruction_CP_N(Registers.B);
+	Timer.t += 4;
 }
 
 void Opcode_0xB9(void) {
-	// #
-	Opcode_not_implemented(0xB9);
+	// CP C
+	Instruction_CP_N(Registers.C);
+	Timer.t += 4;
 }
 
 void Opcode_0xBA(void) {
-	// #
-	Opcode_not_implemented(0xBA);
+	// CP D
+	Instruction_CP_N(Registers.D);
+	Timer.t += 4;
 }
 
 void Opcode_0xBB(void) {
-	// #
-	Opcode_not_implemented(0xBB);
+	// CP E
+	Instruction_CP_N(Registers.E);
+	Timer.t += 4;
 }
 
 void Opcode_0xBC(void) {
-	// #
-	Opcode_not_implemented(0xBC);
+	// CP H
+	Instruction_CP_N(Registers.H);
+	Timer.t += 4;
 }
 
 void Opcode_0xBD(void) {
-	// #
-	Opcode_not_implemented(0xBD);
+	// CP L
+	Instruction_CP_N(Registers.L);
+	Timer.t += 4;
 }
 
 void Opcode_0xBE(void) {
-	// #
-	Opcode_not_implemented(0xBE);
+	// CP (HL)
+	Instruction_CP_N(Memory_load_byte(Registers.HL));
+	Timer.t += 8;
 }
 
 void Opcode_0xBF(void) {
-	// #
-	Opcode_not_implemented(0xBF);
+	// CP A
+	Instruction_CP_N(Registers.A);
+	Timer.t += 4;
 }
 
 void Opcode_0xC0(void) {
-	// #
-	Opcode_not_implemented(0xC0);
+	// RET NZ
+	
+	if (Flag_get_Z() == 0) {
+		Instruction_RET();
+		Timer.t += 20;
+	}
+	else {
+		Timer.t += 8;
+	}
 }
 
 void Opcode_0xC1(void) {
@@ -1397,18 +1556,35 @@ void Opcode_0xC1(void) {
 }
 
 void Opcode_0xC2(void) {
-	// #
-	Opcode_not_implemented(0xC2);
+	// JP NZ, nn
+	uint16_t nn = Memory_load_word_PC();
+
+	if (Flag_get_Z() == 0) {
+		Registers.PC = nn;
+		Timer.t += 16;
+	}
+	else {
+		Timer.t += 12;
+	}
 }
 
 void Opcode_0xC3(void) {
-	// #
-	Opcode_not_implemented(0xC3);
+	// JP nn
+	Registers.PC = Memory_load_word_PC();
+	Timer.t += 16;
 }
 
 void Opcode_0xC4(void) {
-	// #
-	Opcode_not_implemented(0xC4);
+	// CALL NZ, nn
+	uint16_t nn = Memory_load_word_PC();
+
+	if (Flag_get_Z() == 0) {
+		Instruction_CALL_NN(nn);
+		Timer.t += 24;
+	}
+	else {
+		Timer.t += 12;
+	}
 }
 
 void Opcode_0xC5(void) {
@@ -1426,38 +1602,65 @@ void Opcode_0xC6(void) {
 }
 
 void Opcode_0xC7(void) {
-	// #
-	Opcode_not_implemented(0xC7);
+	// RST 00H
+	Instruction_RST_N(0x00);
+	Timer.t += 16;
 }
 
 void Opcode_0xC8(void) {
-	// #
-	Opcode_not_implemented(0xC8);
+	// RET Z
+
+	if (Flag_get_Z() == 1) {
+		Instruction_RET();
+		Timer.t += 20;
+	}
+	else {
+		Timer.t += 8;
+	}
 }
 
 void Opcode_0xC9(void) {
-	// #
-	Opcode_not_implemented(0xC9);
+	// RET
+	Instruction_RET();
+	Timer.t += 16;
 }
 
 void Opcode_0xCA(void) {
-	// #
-	Opcode_not_implemented(0xCA);
+	// JP Z, nn
+	uint16_t nn = Memory_load_word_PC();
+
+	if (Flag_get_Z() == 1) {
+		Registers.PC = nn;
+		Timer.t += 16;
+	}
+	else {
+		Timer.t += 12;
+	}
 }
 
 void Opcode_0xCB(void) {
-	// #
+	// PREFIX CB
+	// TODO: Start working on this madness
 	Opcode_not_implemented(0xCB);
 }
 
 void Opcode_0xCC(void) {
-	// #
-	Opcode_not_implemented(0xCC);
+	// CALL Z, nn
+	uint16_t nn = Memory_load_word_PC();
+
+	if (Flag_get_Z() == 1) {
+		Instruction_CALL_NN(nn);
+		Timer.t += 24;
+	}
+	else {
+		Timer.t += 12;
+	}
 }
 
 void Opcode_0xCD(void) {
-	// #
-	Opcode_not_implemented(0xCD);
+	// CALL nn
+	Instruction_CALL_NN(Memory_load_word_PC());
+	Timer.t += 24;
 }
 
 void Opcode_0xCE(void) {
@@ -1467,13 +1670,21 @@ void Opcode_0xCE(void) {
 }
 
 void Opcode_0xCF(void) {
-	// #
-	Opcode_not_implemented(0xCF);
+	// RST 08H
+	Instruction_RST_N(0x08);
+	Timer.t += 16;
 }
 
 void Opcode_0xD0(void) {
-	// #
-	Opcode_not_implemented(0xD0);
+	// RET NC
+
+	if (Flag_get_C() == 0) {
+		Instruction_RET();
+		Timer.t += 20;
+	}
+	else {
+		Timer.t += 8;
+	}
 }
 
 void Opcode_0xD1(void) {
@@ -1485,18 +1696,34 @@ void Opcode_0xD1(void) {
 }
 
 void Opcode_0xD2(void) {
-	// #
-	Opcode_not_implemented(0xD2);
+	// JP NC, nn
+	uint16_t nn = Memory_load_word_PC();
+
+	if (Flag_get_C() == 0) {
+		Registers.PC = nn;
+		Timer.t += 16;
+	}
+	else {
+		Timer.t += 12;
+	}
 }
 
 void Opcode_0xD3(void) {
-	// #
-	Opcode_not_implemented(0xD3);
+	// EMPTY
+	Opcode_empty(0xD3);
 }
 
 void Opcode_0xD4(void) {
-	// #
-	Opcode_not_implemented(0xD4);
+	// CALL NC, nn
+	uint16_t nn = Memory_load_word_PC();
+
+	if (Flag_get_C() == 0) {
+		Instruction_CALL_NN(nn);
+		Timer.t += 24;
+	}
+	else {
+		Timer.t += 12;
+	}
 }
 
 void Opcode_0xD5(void) {
@@ -1514,38 +1741,65 @@ void Opcode_0xD6(void) {
 }
 
 void Opcode_0xD7(void) {
-	// #
-	Opcode_not_implemented(0xD7);
+	// RST 10H
+	Instruction_RST_N(0x10);
+	Timer.t += 16;
 }
 
 void Opcode_0xD8(void) {
-	// #
-	Opcode_not_implemented(0xD8);
+	// RET C
+
+	if (Flag_get_C() == 1) {
+		Instruction_RET();
+		Timer.t += 20;
+	}
+	else {
+		Timer.t += 8;
+	}
 }
 
 void Opcode_0xD9(void) {
-	// #
+	// RETI
+	Instruction_RET();
+	// TODO: Enable interrupts
+	Timer.t += 16;
 	Opcode_not_implemented(0xD9);
 }
 
 void Opcode_0xDA(void) {
-	// #
-	Opcode_not_implemented(0xDA);
+	// JP C, nn
+	uint16_t nn = Memory_load_word_PC();
+
+	if (Flag_get_C() == 1) {
+		Registers.PC = nn;
+		Timer.t += 16;
+	}
+	else {
+		Timer.t += 12;
+	}
 }
 
 void Opcode_0xDB(void) {
-	// #
-	Opcode_not_implemented(0xDB);
+	// EMPTY
+	Opcode_empty(0xDB);
 }
 
 void Opcode_0xDC(void) {
-	// #
-	Opcode_not_implemented(0xDC);
+	// CALL C, nn
+	uint16_t nn = Memory_load_word_PC();
+
+	if (Flag_get_C() == 0) {
+		Instruction_CALL_NN(nn);
+		Timer.t += 24;
+	}
+	else {
+		Timer.t += 12;
+	}
 }
 
 void Opcode_0xDD(void) {
-	// #
-	Opcode_not_implemented(0xDD);
+	// EMPTY
+	Opcode_empty(0xDD);
 }
 
 void Opcode_0xDE(void) {
@@ -1555,8 +1809,9 @@ void Opcode_0xDE(void) {
 }
 
 void Opcode_0xDF(void) {
-	// #
-	Opcode_not_implemented(0xDF);
+	// RST 18H
+	Instruction_RST_N(0x18);
+	Timer.t += 16;
 }
 
 void Opcode_0xE0(void) {
@@ -1580,13 +1835,13 @@ void Opcode_0xE2(void) {
 }
 
 void Opcode_0xE3(void) {
-	// #
-	Opcode_not_implemented(0xE3);
+	// EMPTY
+	Opcode_empty(0xE3);
 }
 
 void Opcode_0xE4(void) {
-	// #
-	Opcode_not_implemented(0xE4);
+	// EMPTY
+	Opcode_empty(0xE4);
 }
 
 void Opcode_0xE5(void) {
@@ -1604,18 +1859,30 @@ void Opcode_0xE6(void) {
 }
 
 void Opcode_0xE7(void) {
-	// #
-	Opcode_not_implemented(0xE7);
+	// RST 20H
+	Instruction_RST_N(0x20);
+	Timer.t += 16;
 }
 
 void Opcode_0xE8(void) {
-	// #
-	Opcode_not_implemented(0xE8);
+	// ADD SP, n
+	int8_t n = (int8_t) Memory_load_byte_PC();
+
+	Flags_set(
+		0,
+		0,
+		Flag_test_H_U16_S8(Registers.SP, n),
+		Flag_test_C_U16_S8(Registers.SP, n)
+	);
+
+	Registers.SP += n;
+	Timer.t += 16;
 }
 
 void Opcode_0xE9(void) {
-	// #
-	Opcode_not_implemented(0xE9);
+	// JP (HL)
+	Registers.PC = Registers.HL;
+	Timer.t += 4;
 }
 
 void Opcode_0xEA(void) {
@@ -1625,18 +1892,18 @@ void Opcode_0xEA(void) {
 }
 
 void Opcode_0xEB(void) {
-	// #
-	Opcode_not_implemented(0xEB);
+	// EMPTY
+	Opcode_empty(0xEB);
 }
 
 void Opcode_0xEC(void) {
-	// #
-	Opcode_not_implemented(0xEC);
+	// EMPTY
+	Opcode_empty(0xEC);
 }
 
 void Opcode_0xED(void) {
-	// #
-	Opcode_not_implemented(0xED);
+	// EMPTY
+	Opcode_empty(0xED);
 }
 
 void Opcode_0xEE(void) {
@@ -1646,8 +1913,9 @@ void Opcode_0xEE(void) {
 }
 
 void Opcode_0xEF(void) {
-	// #
-	Opcode_not_implemented(0xEF);
+	// RST 28H
+	Instruction_RST_N(0x28);
+	Timer.t += 16;
 }
 
 void Opcode_0xF0(void) {
@@ -1671,13 +1939,14 @@ void Opcode_0xF2(void) {
 }
 
 void Opcode_0xF3(void) {
-	// #
+	// DI
+	// TODO: Implement Interrupt architecture
 	Opcode_not_implemented(0xF3);
 }
 
 void Opcode_0xF4(void) {
-	// #
-	Opcode_not_implemented(0xF4);
+	// EMPTY
+	Opcode_empty(0xF4);
 }
 
 void Opcode_0xF5(void) {
@@ -1695,8 +1964,9 @@ void Opcode_0xF6(void) {
 }
 
 void Opcode_0xF7(void) {
-	// #
-	Opcode_not_implemented(0xF7);
+	// RST 30H
+	Instruction_RST_N(0x30);
+	Timer.t += 16;
 }
 
 void Opcode_0xF8(void) {
@@ -1724,26 +1994,29 @@ void Opcode_0xFA(void) {
 }
 
 void Opcode_0xFB(void) {
-	// #
+	// EI
+	// TODO: Implement Interrupt architecture
 	Opcode_not_implemented(0xFB);
 }
 
 void Opcode_0xFC(void) {
-	// #
-	Opcode_not_implemented(0xFC);
+	// EMPTY
+	Opcode_empty(0xFC);
 }
 
 void Opcode_0xFD(void) {
-	// #
-	Opcode_not_implemented(0xFD);
+	// EMPTY
+	Opcode_empty(0xFD);
 }
 
 void Opcode_0xFE(void) {
-	// #
-	Opcode_not_implemented(0xFE);
+	// CP n
+	Instruction_CP_N(Memory_load_byte_PC());
+	Timer.t += 8;
 }
 
 void Opcode_0xFF(void) {
-	// #
-	Opcode_not_implemented(0xFF);
+	// RST 38H
+	Instruction_RST_N(0x38);
+	Timer.t += 16;
 }
