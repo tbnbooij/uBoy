@@ -3,618 +3,1747 @@
 // Filling the opcode table
 // ---------------------------------------------------
 void Opcodes_init(void) {
-	
-	// 8-bit arithmetic
-	for (uint8_t i = 0; i < 0xFF; i++) {
-		Opcodes[i] = Opcode_ALU_8;
-	}
-	
-	// 8-bit loads/stores/moves
-	for (uint8_t i = 0x40; i <= 0x7F; i++) {
-		Opcodes[i] = Opcode_LD_8;
-	}
-
-	for (uint8_t i = 0x02; i <= 0x3E; i += 4) {
-		Opcodes[i] = Opcode_LD_8;
-	}
-	
-	uint8_t LD_8[6] = {0xE0, 0xF0,
-						0xE2, 0xF2,
-						0xEA, 0xFA};
-	
-	for (uint8_t i = 0; i < 6; i++) {
-		Opcodes[LD_8[i]] = Opcode_LD_8;
-	}
-	
-	// 16-bit arithmetic
-	uint8_t ALU_16[13] = {0x03, 0x13, 0x23, 0x33,
-							0xE8,
-							0x09, 0x19, 0x29, 0x39,
-							0x0B, 0x1B, 0x2B, 0x3B};
-	
-	for (uint8_t i = 0; i < 13; i++) {
-		Opcodes[ALU_16[i]] = Opcode_ALU_16;
-	}
-	
-	// Miscellaneous/control instructions
-	uint8_t MISC[6] = {0x00, 0x10, 0x76, 0xF3, 0xCB, 0xFB};
-
-	for (uint8_t i = 0; i < 6; i++) {
-		Opcodes[MISC[i]] = Opcode_MISC;
-	}
-	
-	// Jumps and calls
-	uint8_t JP[30] = {0x20, 0x30, 0xC0, 0xD0, 
-						0xC2, 0xD2, 
-						0xC3, 
-						0xC4, 0xD4,
-						0xC7, 0xD7, 0xE7, 0xF7,
-						0x18, 0x28, 0x38, 0xC8, 0xD8,
-						0xC9, 0xD9, 0xE9,
-						0xCA, 0xDA,
-						0xCC, 0xDC,
-						0xCD,
-						0xCF, 0xDF, 0xEF, 0xFF};
-	
-	for (uint8_t i = 0; i < 30; i++) {
-		Opcodes[JP[i]] = Opcode_JP;
-	}
-	
-	// 16-bit loads/stores/moves
-	uint8_t LD_16[15] = {0x01, 0x11, 0x21, 0x31,
-						0xC1, 0xD1, 0xE1, 0xF1,
-						0xC5, 0xD5, 0xE5, 0xF5,
-						0x08, 0xF8,
-						0xF9};
-	
-	for (uint8_t i = 0; i < 15; i++) {
-		Opcodes[LD_16[i]] = Opcode_LD_16;
-	}
-
-	// 8-bit rotations/shifts/bitwise operations
-	uint8_t BIT[4] = {0x07, 0x17,
-						0x0F, 0x1F};
-	
-	for (uint8_t i = 0; i < 4; i++) {
-		Opcodes[BIT[i]] = Opcode_BIT;
-	}
-
-	// Empty cells
-	uint8_t EMPTY[11] = {0xD3, 0xE3,
-						0xE4, 0xF4,
-						0xDB, 0xEB,
-						0xEC, 0xFC,
-						0xDD, 0xED, 0xFD};
-	
-	for (uint8_t i = 0; i < 11; i++) {
-		Opcodes[EMPTY[i]] = NULL;
-	}
-	
-}
-
-// Opcode groups
-// ---------------------------------------------------
-void Opcode_LD_8(uint8_t opcode) {
-	switch (opcode) {
-		// LD nn, n
-		case 0x06:
-			// LD B, n
-			Instruction_LD_R8_I8(&Registers.B);
-			break;
-		case 0x0E:
-			// LD C, n
-			Instruction_LD_R8_I8(&Registers.C);
-			break;
-		case 0x16:
-			// LD D, n
-			Instruction_LD_R8_I8(&Registers.D);
-			break;
-		case 0x1E:
-			// LD E, n
-			Instruction_LD_R8_I8(&Registers.E);
-			break;
-		case 0x26:
-			// LD H, n
-			Instruction_LD_R8_I8(&Registers.H);
-			break;
-		case 0x2E:
-			// LD L, n
-			Instruction_LD_R8_I8(&Registers.L);
-			break;
-
-		// LD r1, r2
-		case 0x7F:
-			// LD A, A
-			Instruction_LD_R8_R8(&Registers.A, &Registers.A);
-			break;
-		case 0x78:
-			// LD A, B
-			Instruction_LD_R8_R8(&Registers.A, &Registers.B);
-			break;
-		case 0x79:
-			// LD A, C
-			Instruction_LD_R8_R8(&Registers.A, &Registers.C);
-			break;
-		case 0x7A:
-			// LD A, D
-			Instruction_LD_R8_R8(&Registers.A, &Registers.D);
-			break;
-		case 0x7B:
-			// LD A, E
-			Instruction_LD_R8_R8(&Registers.A, &Registers.E);
-			break;
-		case 0x7C:
-			// LD A, H
-			Instruction_LD_R8_R8(&Registers.A, &Registers.H);
-			break;
-		case 0x7D:
-			// LD A, L
-			Instruction_LD_R8_R8(&Registers.A, &Registers.L);
-			break;
-		case 0x40:
-			// LD B, B
-			Instruction_LD_R8_R8(&Registers.B, &Registers.B);
-			break;
-		case 0x41:
-			// LD B, C
-			Instruction_LD_R8_R8(&Registers.B, &Registers.C);
-			break;
-		case 0x42:
-			// LD B, D
-			Instruction_LD_R8_R8(&Registers.B, &Registers.D);
-			break;
-		case 0x43:
-			// LD B, E
-			Instruction_LD_R8_R8(&Registers.B, &Registers.E);
-			break;
-		case 0x44:
-			// LD B, H
-			Instruction_LD_R8_R8(&Registers.B, &Registers.H);
-			break;
-		case 0x45:
-			// LD B, L
-			Instruction_LD_R8_R8(&Registers.B, &Registers.L);
-			break;
-		case 0x48:
-			// LD C, B
-			Instruction_LD_R8_R8(&Registers.C, &Registers.B);
-			break;
-		case 0x49:
-			// LD C, C
-			Instruction_LD_R8_R8(&Registers.C, &Registers.C);
-			break;
-		case 0x4A:
-			// LD C, D
-			Instruction_LD_R8_R8(&Registers.C, &Registers.D);
-			break;
-		case 0x4B:
-			// LD C, E
-			Instruction_LD_R8_R8(&Registers.C, &Registers.E);
-			break;
-		case 0x4C:
-			// LD C, H
-			Instruction_LD_R8_R8(&Registers.C, &Registers.H);
-			break;
-		case 0x4D:
-			// LD C, L
-			Instruction_LD_R8_R8(&Registers.C, &Registers.L);
-			break;
-		case 0x50:
-			// LD D, B
-			Instruction_LD_R8_R8(&Registers.D, &Registers.B);
-			break;
-		case 0x51:
-			// LD D, C
-			Instruction_LD_R8_R8(&Registers.D, &Registers.C);
-			break;
-		case 0x52:
-			// LD D, D
-			Instruction_LD_R8_R8(&Registers.D, &Registers.D);
-			break;
-		case 0x53:
-			// LD D, E
-			Instruction_LD_R8_R8(&Registers.D, &Registers.E);
-			break;
-		case 0x54:
-			// LD D, H
-			Instruction_LD_R8_R8(&Registers.D, &Registers.H);
-			break;
-		case 0x55:
-			// LD D, L
-			Instruction_LD_R8_R8(&Registers.D, &Registers.L);
-			break;
-		case 0x58:
-			// LD E, B
-			Instruction_LD_R8_R8(&Registers.E, &Registers.B);
-			break;
-		case 0x59:
-			// LD E, C
-			Instruction_LD_R8_R8(&Registers.E, &Registers.C);
-			break;
-		case 0x5A:
-			// LD E, D
-			Instruction_LD_R8_R8(&Registers.E, &Registers.D);
-			break;
-		case 0x5B:
-			// LD E, E
-			Instruction_LD_R8_R8(&Registers.E, &Registers.E);
-			break;
-		case 0x5C:
-			// LD E, H
-			Instruction_LD_R8_R8(&Registers.E, &Registers.H);
-			break;
-		case 0x5D:
-			// LD E, L
-			Instruction_LD_R8_R8(&Registers.E, &Registers.L);
-			break;
-		case 0x60:
-			// LD H, B
-			Instruction_LD_R8_R8(&Registers.H, &Registers.B);
-			break;
-		case 0x61:
-			// LD H, C
-			Instruction_LD_R8_R8(&Registers.H, &Registers.C);
-			break;
-		case 0x62:
-			// LD H, D
-			Instruction_LD_R8_R8(&Registers.H, &Registers.D);
-			break;
-		case 0x63:
-			// LD H, E
-			Instruction_LD_R8_R8(&Registers.H, &Registers.E);
-			break;
-		case 0x64:
-			// LD H, H
-			Instruction_LD_R8_R8(&Registers.H, &Registers.H);
-			break;
-		case 0x65:
-			// LD H, L
-			Instruction_LD_R8_R8(&Registers.H, &Registers.L);
-			break;
-		case 0x68:
-			// LD L, B
-			Instruction_LD_R8_R8(&Registers.L, &Registers.B);
-			break;
-		case 0x69:
-			// LD L, C
-			Instruction_LD_R8_R8(&Registers.H, &Registers.C);
-			break;
-		case 0x6A:
-			// LD L, D
-			Instruction_LD_R8_R8(&Registers.H, &Registers.D);
-			break;
-		case 0x6B:
-			// LD L, E
-			Instruction_LD_R8_R8(&Registers.H, &Registers.E);
-			break;
-		case 0x6C:
-			// LD L, H
-			Instruction_LD_R8_R8(&Registers.H, &Registers.H);
-			break;
-		case 0x6D:
-			// LD L, L
-			Instruction_LD_R8_R8(&Registers.H, &Registers.L);
-			break;
-		case 0x7E:
-			// LD A, (HL)
-			Instruction_LD_R8_MR16(&Registers.A, &Registers.HL);
-			break;
-		case 0x46:
-			// LD B, (HL)
-			Instruction_LD_R8_MR16(&Registers.B, &Registers.HL);
-			break;
-		case 0x4E:
-			// LD C, (HL)
-			Instruction_LD_R8_MR16(&Registers.C, &Registers.HL);
-			break;
-		case 0x56:
-			// LD D, (HL)
-			Instruction_LD_R8_MR16(&Registers.D, &Registers.HL);
-			break;
-		case 0x5E:
-			// LD E, (HL)
-			Instruction_LD_R8_MR16(&Registers.E, &Registers.HL);
-			break;
-		case 0x66:
-			// LD H, (HL)
-			Instruction_LD_R8_MR16(&Registers.H, &Registers.HL);
-			break;
-		case 0x6E:
-			// LD L, (HL)
-			Instruction_LD_R8_MR16(&Registers.L, &Registers.HL);
-			break;
-		case 0x70:
-			// LD (HL), B
-			Instruction_LD_MR16_R8(&Registers.HL, &Registers.B);
-			break;
-		case 0x71:
-			// LD (HL), C
-			Instruction_LD_MR16_R8(&Registers.HL, &Registers.C);
-			break;
-		case 0x72:
-			// LD (HL), D
-			Instruction_LD_MR16_R8(&Registers.HL, &Registers.D);
-			break;
-		case 0x73:
-			// LD (HL), E
-			Instruction_LD_MR16_R8(&Registers.HL, &Registers.E);
-			break;
-		case 0x74:
-			// LD (HL), H
-			Instruction_LD_MR16_R8(&Registers.HL, &Registers.H);
-			break;
-		case 0x75:
-			// LD (HL), L
-			Instruction_LD_MR16_R8(&Registers.HL, &Registers.L);
-			break;
-		case 0x36:
-			// LD (HL), n
-			Instruction_LD_MR16_I8(&Registers.HL);
-			break;
-		
-		// LD A, n
-		case 0x0A:
-			// LD A, (BC)
-			Instruction_LD_R8_MR16(&Registers.A, &Registers.BC);
-			break;
-		case 0x1A:
-			// LD A, (DE)
-			Instruction_LD_R8_MR16(&Registers.A, &Registers.DE);
-			break;
-		case 0xFA:
-			// LD A, (nn)
-			Instruction_LD_R8_MI16(&Registers.A);
-			break;
-		case 0x3E:
-			// LD A, n
-			Instruction_LD_R8_I8(&Registers.A);
-			break;
-		
-		// LD n, A
-		case 0x02:
-			// LD (BC), A
-			Instruction_LD_MR16_R8(&Registers.BC, &Registers.A);
-			break;
-		case 0x12:
-			// LD (DE), A
-			Instruction_LD_MR16_R8(&Registers.DE, &Registers.A);
-			break;
-		case 0x77:
-			// LD (HL), A
-			Instruction_LD_MR16_R8(&Registers.HL, &Registers.A);
-			break;
-		case 0xEA:
-			// LD (nn), A
-			Instruction_LD_MI16_R8(&Registers.A);
-			break;
-		
-		// LD instructions with few or hardly any copies
-		case 0xF2:
-			// LD A, (C)
-			Instruction_LD_A_MC();
-			break;
-		case 0xE2:
-			// LD (C), A
-			Instruction_LD_MC_A();
-			break;
-		case 0x3A:
-			// LDD A, (HL)
-			Instruction_LDD_A_HL();
-			break;
-		case 0x32:
-			// LDD (HL), A
-			Instruction_LDD_HL_A();
-			break;
-		case 0x2A:
-			// LDI A, (HL)
-			Instruction_LDI_A_HL();
-			break;
-		case 0x22:
-			// LDI (HL), A
-			Instruction_LDI_HL_A();
-			break;
-		case 0xE0:
-			// LDH (n), A
-			Instruction_LDH_MI8_A();
-			break;
-		case 0xF0:
-			// LDH A, (n)
-			Instruction_LDH_A_MI8();
-			break;
-		default:
-			Opcode_WRONG_GROUP_ERROR(opcode);
-			break;
-	}
-}
-
-void Opcode_LD_16(uint8_t opcode) {
-
-}
-
-void Opcode_ALU_8(uint8_t opcode) {
-
-}
-
-void Opcode_ALU_16(uint8_t opcode) {
-
-}
-
-void Opcode_MISC(uint8_t opcode) {
-	switch (opcode) {
-		case 0x00:
-			// NOP
-			Timer_update(4);
-			break;
-		case 0x10:
-			// STOP 0
-
-			break;
-		case 0x76:
-			// HALT
-
-			break;
-		case 0xF3:
-			// DI
-
-			break;
-		case 0xCB:
-			// PREFIX CB
-
-			break;
-		case 0xFB:
-			// EI
-
-			break;
-		default:
-			Opcode_WRONG_GROUP_ERROR(opcode);
-			break;
-	}
-}
-
-void Opcode_JP(uint8_t opcode) {
-	switch (opcode) {
-		case 0x20:
-			// JR NZ, r8
-			Instruction_JP_CC_N(!Flag_get_Z());
-			break;
-		case 0x30:
-			// JR NC, r8
-			Instruction_JP_CC_N(!Flag_get_C());
-			break;
-		case 0x28:
-			// JR Z, r8
-			Instruction_JP_CC_N(Flag_get_Z());
-			break;
-		case 0x38:
-			// JR C, r8
-			Instruction_JP_CC_N(Flag_get_C());
-			break;
-		case 0xC9:
-			// RET
-			Instruction_RET();
-			break;
-		case 0xC0:
-			// RET NZ
-			Instruction_RET_CC(!Flag_get_Z());
-			break;
-		case 0xD0:
-			// RET NC
-			Instruction_RET_CC(!Flag_get_C());
-			break;
-		case 0xC8:
-			// RET Z
-			Instruction_RET_CC(Flag_get_Z());
-			break;
-		case 0xD8:
-			// RET C
-			Instruction_RET_CC(Flag_get_C());
-			break;
-		case 0xC2:
-			// JP NZ, a16
-
-			break;
-		case 0xD2:
-			// JP NC, a16
-
-			break;
-		case 0xC3:
-			// JP a16
-
-			break;
-		case 0xC4:
-			// CALL NZ, a16
-
-			break;
-		case 0xD4:
-			// CALL NC, a16
-
-			break;
-		case 0xC7:
-			// RST 00H
-
-			break;
-		case 0xD7:
-			// RST 10H
-
-			break;
-		case 0xE7:
-			// RST 20H
-
-			break;
-		case 0xF7:
-			// RST 30H
-
-			break;
-		case 0x18:
-			// JR r8
-
-			break;
-		case 0xD9:
-			// RETI
-
-			break;
-		case 0xE9:
-			// JP (HL)
-
-			break;
-		case 0xCA:
-			// JP Z, a16
-
-			break;
-		case 0xDA:
-			// JP C, a16
-
-			break;
-		case 0xCC:
-			// CALL Z, a16
-
-			break;
-		case 0xDC:
-			// CALL C, a16
-
-			break;
-		case 0xCD:
-			// CALL a16
-
-			break;
-		case 0xCF:
-			// RST 08H
-
-			break;
-		case 0xDF:
-			// RST 18H
-
-			break;
-		case 0xEF:
-			// RST 28H
-
-			break;
-		case 0xFF:
-			// RST 38H
-
-			break;
-		default:
-			Opcode_WRONG_GROUP_ERROR(opcode);
-			break;
-	}
-}
-
-void Opcode_BIT(uint8_t opcode) {
-
-}
-
-void Opcode_WRONG_GROUP_ERROR(uint8_t opcode) {
-	printf("ERROR: Opcode (0x%02hhX) was detected in wrong group.\n", opcode);
+    Opcodes[0x00] = Opcode_0x00;
+    Opcodes[0x01] = Opcode_0x01;
+    Opcodes[0x02] = Opcode_0x02;
+    Opcodes[0x03] = Opcode_0x03;
+    Opcodes[0x04] = Opcode_0x04;
+    Opcodes[0x05] = Opcode_0x05;
+    Opcodes[0x06] = Opcode_0x06;
+    Opcodes[0x07] = Opcode_0x07;
+    Opcodes[0x08] = Opcode_0x08;
+    Opcodes[0x09] = Opcode_0x09;
+    Opcodes[0x0A] = Opcode_0x0A;
+    Opcodes[0x0B] = Opcode_0x0B;
+    Opcodes[0x0C] = Opcode_0x0C;
+    Opcodes[0x0D] = Opcode_0x0D;
+    Opcodes[0x0E] = Opcode_0x0E;
+    Opcodes[0x0F] = Opcode_0x0F;
+    Opcodes[0x10] = Opcode_0x10;
+    Opcodes[0x11] = Opcode_0x11;
+    Opcodes[0x12] = Opcode_0x12;
+    Opcodes[0x13] = Opcode_0x13;
+    Opcodes[0x14] = Opcode_0x14;
+    Opcodes[0x15] = Opcode_0x15;
+    Opcodes[0x16] = Opcode_0x16;
+    Opcodes[0x17] = Opcode_0x17;
+    Opcodes[0x18] = Opcode_0x18;
+    Opcodes[0x19] = Opcode_0x19;
+    Opcodes[0x1A] = Opcode_0x1A;
+    Opcodes[0x1B] = Opcode_0x1B;
+    Opcodes[0x1C] = Opcode_0x1C;
+    Opcodes[0x1D] = Opcode_0x1D;
+    Opcodes[0x1E] = Opcode_0x1E;
+    Opcodes[0x1F] = Opcode_0x1F;
+    Opcodes[0x20] = Opcode_0x20;
+    Opcodes[0x21] = Opcode_0x21;
+    Opcodes[0x22] = Opcode_0x22;
+    Opcodes[0x23] = Opcode_0x23;
+    Opcodes[0x24] = Opcode_0x24;
+    Opcodes[0x25] = Opcode_0x25;
+    Opcodes[0x26] = Opcode_0x26;
+    Opcodes[0x27] = Opcode_0x27;
+    Opcodes[0x28] = Opcode_0x28;
+    Opcodes[0x29] = Opcode_0x29;
+    Opcodes[0x2A] = Opcode_0x2A;
+    Opcodes[0x2B] = Opcode_0x2B;
+    Opcodes[0x2C] = Opcode_0x2C;
+    Opcodes[0x2D] = Opcode_0x2D;
+    Opcodes[0x2E] = Opcode_0x2E;
+    Opcodes[0x2F] = Opcode_0x2F;
+    Opcodes[0x30] = Opcode_0x30;
+    Opcodes[0x31] = Opcode_0x31;
+    Opcodes[0x32] = Opcode_0x32;
+    Opcodes[0x33] = Opcode_0x33;
+    Opcodes[0x34] = Opcode_0x34;
+    Opcodes[0x35] = Opcode_0x35;
+    Opcodes[0x36] = Opcode_0x36;
+    Opcodes[0x37] = Opcode_0x37;
+    Opcodes[0x38] = Opcode_0x38;
+    Opcodes[0x39] = Opcode_0x39;
+    Opcodes[0x3A] = Opcode_0x3A;
+    Opcodes[0x3B] = Opcode_0x3B;
+    Opcodes[0x3C] = Opcode_0x3C;
+    Opcodes[0x3D] = Opcode_0x3D;
+    Opcodes[0x3E] = Opcode_0x3E;
+    Opcodes[0x3F] = Opcode_0x3F;
+    Opcodes[0x40] = Opcode_0x40;
+    Opcodes[0x41] = Opcode_0x41;
+    Opcodes[0x42] = Opcode_0x42;
+    Opcodes[0x43] = Opcode_0x43;
+    Opcodes[0x44] = Opcode_0x44;
+    Opcodes[0x45] = Opcode_0x45;
+    Opcodes[0x46] = Opcode_0x46;
+    Opcodes[0x47] = Opcode_0x47;
+    Opcodes[0x48] = Opcode_0x48;
+    Opcodes[0x49] = Opcode_0x49;
+    Opcodes[0x4A] = Opcode_0x4A;
+    Opcodes[0x4B] = Opcode_0x4B;
+    Opcodes[0x4C] = Opcode_0x4C;
+    Opcodes[0x4D] = Opcode_0x4D;
+    Opcodes[0x4E] = Opcode_0x4E;
+    Opcodes[0x4F] = Opcode_0x4F;
+    Opcodes[0x50] = Opcode_0x50;
+    Opcodes[0x51] = Opcode_0x51;
+    Opcodes[0x52] = Opcode_0x52;
+    Opcodes[0x53] = Opcode_0x53;
+    Opcodes[0x54] = Opcode_0x54;
+    Opcodes[0x55] = Opcode_0x55;
+    Opcodes[0x56] = Opcode_0x56;
+    Opcodes[0x57] = Opcode_0x57;
+    Opcodes[0x58] = Opcode_0x58;
+    Opcodes[0x59] = Opcode_0x59;
+    Opcodes[0x5A] = Opcode_0x5A;
+    Opcodes[0x5B] = Opcode_0x5B;
+    Opcodes[0x5C] = Opcode_0x5C;
+    Opcodes[0x5D] = Opcode_0x5D;
+    Opcodes[0x5E] = Opcode_0x5E;
+    Opcodes[0x5F] = Opcode_0x5F;
+    Opcodes[0x60] = Opcode_0x60;
+    Opcodes[0x61] = Opcode_0x61;
+    Opcodes[0x62] = Opcode_0x62;
+    Opcodes[0x63] = Opcode_0x63;
+    Opcodes[0x64] = Opcode_0x64;
+    Opcodes[0x65] = Opcode_0x65;
+    Opcodes[0x66] = Opcode_0x66;
+    Opcodes[0x67] = Opcode_0x67;
+    Opcodes[0x68] = Opcode_0x68;
+    Opcodes[0x69] = Opcode_0x69;
+    Opcodes[0x6A] = Opcode_0x6A;
+    Opcodes[0x6B] = Opcode_0x6B;
+    Opcodes[0x6C] = Opcode_0x6C;
+    Opcodes[0x6D] = Opcode_0x6D;
+    Opcodes[0x6E] = Opcode_0x6E;
+    Opcodes[0x6F] = Opcode_0x6F;
+    Opcodes[0x70] = Opcode_0x70;
+    Opcodes[0x71] = Opcode_0x71;
+    Opcodes[0x72] = Opcode_0x72;
+    Opcodes[0x73] = Opcode_0x73;
+    Opcodes[0x74] = Opcode_0x74;
+    Opcodes[0x75] = Opcode_0x75;
+    Opcodes[0x76] = Opcode_0x76;
+    Opcodes[0x77] = Opcode_0x77;
+    Opcodes[0x78] = Opcode_0x78;
+    Opcodes[0x79] = Opcode_0x79;
+    Opcodes[0x7A] = Opcode_0x7A;
+    Opcodes[0x7B] = Opcode_0x7B;
+    Opcodes[0x7C] = Opcode_0x7C;
+    Opcodes[0x7D] = Opcode_0x7D;
+    Opcodes[0x7E] = Opcode_0x7E;
+    Opcodes[0x7F] = Opcode_0x7F;
+    Opcodes[0x80] = Opcode_0x80;
+    Opcodes[0x81] = Opcode_0x81;
+    Opcodes[0x82] = Opcode_0x82;
+    Opcodes[0x83] = Opcode_0x83;
+    Opcodes[0x84] = Opcode_0x84;
+    Opcodes[0x85] = Opcode_0x85;
+    Opcodes[0x86] = Opcode_0x86;
+    Opcodes[0x87] = Opcode_0x87;
+    Opcodes[0x88] = Opcode_0x88;
+    Opcodes[0x89] = Opcode_0x89;
+    Opcodes[0x8A] = Opcode_0x8A;
+    Opcodes[0x8B] = Opcode_0x8B;
+    Opcodes[0x8C] = Opcode_0x8C;
+    Opcodes[0x8D] = Opcode_0x8D;
+    Opcodes[0x8E] = Opcode_0x8E;
+    Opcodes[0x8F] = Opcode_0x8F;
+    Opcodes[0x90] = Opcode_0x90;
+    Opcodes[0x91] = Opcode_0x91;
+    Opcodes[0x92] = Opcode_0x92;
+    Opcodes[0x93] = Opcode_0x93;
+    Opcodes[0x94] = Opcode_0x94;
+    Opcodes[0x95] = Opcode_0x95;
+    Opcodes[0x96] = Opcode_0x96;
+    Opcodes[0x97] = Opcode_0x97;
+    Opcodes[0x98] = Opcode_0x98;
+    Opcodes[0x99] = Opcode_0x99;
+    Opcodes[0x9A] = Opcode_0x9A;
+    Opcodes[0x9B] = Opcode_0x9B;
+    Opcodes[0x9C] = Opcode_0x9C;
+    Opcodes[0x9D] = Opcode_0x9D;
+    Opcodes[0x9E] = Opcode_0x9E;
+    Opcodes[0x9F] = Opcode_0x9F;
+    Opcodes[0xA0] = Opcode_0xA0;
+    Opcodes[0xA1] = Opcode_0xA1;
+    Opcodes[0xA2] = Opcode_0xA2;
+    Opcodes[0xA3] = Opcode_0xA3;
+    Opcodes[0xA4] = Opcode_0xA4;
+    Opcodes[0xA5] = Opcode_0xA5;
+    Opcodes[0xA6] = Opcode_0xA6;
+    Opcodes[0xA7] = Opcode_0xA7;
+    Opcodes[0xA8] = Opcode_0xA8;
+    Opcodes[0xA9] = Opcode_0xA9;
+    Opcodes[0xAA] = Opcode_0xAA;
+    Opcodes[0xAB] = Opcode_0xAB;
+    Opcodes[0xAC] = Opcode_0xAC;
+    Opcodes[0xAD] = Opcode_0xAD;
+    Opcodes[0xAE] = Opcode_0xAE;
+    Opcodes[0xAF] = Opcode_0xAF;
+    Opcodes[0xB0] = Opcode_0xB0;
+    Opcodes[0xB1] = Opcode_0xB1;
+    Opcodes[0xB2] = Opcode_0xB2;
+    Opcodes[0xB3] = Opcode_0xB3;
+    Opcodes[0xB4] = Opcode_0xB4;
+    Opcodes[0xB5] = Opcode_0xB5;
+    Opcodes[0xB6] = Opcode_0xB6;
+    Opcodes[0xB7] = Opcode_0xB7;
+    Opcodes[0xB8] = Opcode_0xB8;
+    Opcodes[0xB9] = Opcode_0xB9;
+    Opcodes[0xBA] = Opcode_0xBA;
+    Opcodes[0xBB] = Opcode_0xBB;
+    Opcodes[0xBC] = Opcode_0xBC;
+    Opcodes[0xBD] = Opcode_0xBD;
+    Opcodes[0xBE] = Opcode_0xBE;
+    Opcodes[0xBF] = Opcode_0xBF;
+    Opcodes[0xC0] = Opcode_0xC0;
+    Opcodes[0xC1] = Opcode_0xC1;
+    Opcodes[0xC2] = Opcode_0xC2;
+    Opcodes[0xC3] = Opcode_0xC3;
+    Opcodes[0xC4] = Opcode_0xC4;
+    Opcodes[0xC5] = Opcode_0xC5;
+    Opcodes[0xC6] = Opcode_0xC6;
+    Opcodes[0xC7] = Opcode_0xC7;
+    Opcodes[0xC8] = Opcode_0xC8;
+    Opcodes[0xC9] = Opcode_0xC9;
+    Opcodes[0xCA] = Opcode_0xCA;
+    Opcodes[0xCB] = Opcode_0xCB;
+    Opcodes[0xCC] = Opcode_0xCC;
+    Opcodes[0xCD] = Opcode_0xCD;
+    Opcodes[0xCE] = Opcode_0xCE;
+    Opcodes[0xCF] = Opcode_0xCF;
+    Opcodes[0xD0] = Opcode_0xD0;
+    Opcodes[0xD1] = Opcode_0xD1;
+    Opcodes[0xD2] = Opcode_0xD2;
+    Opcodes[0xD3] = Opcode_0xD3;
+    Opcodes[0xD4] = Opcode_0xD4;
+    Opcodes[0xD5] = Opcode_0xD5;
+    Opcodes[0xD6] = Opcode_0xD6;
+    Opcodes[0xD7] = Opcode_0xD7;
+    Opcodes[0xD8] = Opcode_0xD8;
+    Opcodes[0xD9] = Opcode_0xD9;
+    Opcodes[0xDA] = Opcode_0xDA;
+    Opcodes[0xDB] = Opcode_0xDB;
+    Opcodes[0xDC] = Opcode_0xDC;
+    Opcodes[0xDD] = Opcode_0xDD;
+    Opcodes[0xDE] = Opcode_0xDE;
+    Opcodes[0xDF] = Opcode_0xDF;
+    Opcodes[0xE0] = Opcode_0xE0;
+    Opcodes[0xE1] = Opcode_0xE1;
+    Opcodes[0xE2] = Opcode_0xE2;
+    Opcodes[0xE3] = Opcode_0xE3;
+    Opcodes[0xE4] = Opcode_0xE4;
+    Opcodes[0xE5] = Opcode_0xE5;
+    Opcodes[0xE6] = Opcode_0xE6;
+    Opcodes[0xE7] = Opcode_0xE7;
+    Opcodes[0xE8] = Opcode_0xE8;
+    Opcodes[0xE9] = Opcode_0xE9;
+    Opcodes[0xEA] = Opcode_0xEA;
+    Opcodes[0xEB] = Opcode_0xEB;
+    Opcodes[0xEC] = Opcode_0xEC;
+    Opcodes[0xED] = Opcode_0xED;
+    Opcodes[0xEE] = Opcode_0xEE;
+    Opcodes[0xEF] = Opcode_0xEF;
+    Opcodes[0xF0] = Opcode_0xF0;
+    Opcodes[0xF1] = Opcode_0xF1;
+    Opcodes[0xF2] = Opcode_0xF2;
+    Opcodes[0xF3] = Opcode_0xF3;
+    Opcodes[0xF4] = Opcode_0xF4;
+    Opcodes[0xF5] = Opcode_0xF5;
+    Opcodes[0xF6] = Opcode_0xF6;
+    Opcodes[0xF7] = Opcode_0xF7;
+    Opcodes[0xF8] = Opcode_0xF8;
+    Opcodes[0xF9] = Opcode_0xF9;
+    Opcodes[0xFA] = Opcode_0xFA;
+    Opcodes[0xFB] = Opcode_0xFB;
+    Opcodes[0xFC] = Opcode_0xFC;
+    Opcodes[0xFD] = Opcode_0xFD;
+    Opcodes[0xFE] = Opcode_0xFE;
+    Opcodes[0xFF] = Opcode_0xFF;
 }
 
 // Opcode Fetching & Decoding
 // ---------------------------------------------------
 uint8_t Opcode_fetch(void) {
-	uint8_t result = Memory_load_byte(Registers.PC);
-	Registers.PC++;
-	return result;
+	return Memory_load_byte_PC();
 }
 
 void Opcode_decode(uint8_t opcode) {
+	(*Opcodes[opcode])();
+}
 
+void Opcode_not_implemented(uint8_t opcode) {
+    printf("ERROR: Opcode not implemented (0x%02hhX)\n", opcode);
+    exit(EXIT_FAILURE);
+}
+
+void Opcode_0x00(void) {
+	// NOP
+	Timer.t += 4;
+}
+
+void Opcode_0x01(void) {
+	// LD BC, nn
+	Registers.BC = Memory_load_word_PC();
+	Timer.t += 12;
+}
+
+void Opcode_0x02(void) {
+	// LD (BC), A
+	Memory_store_byte(Registers.BC, Registers.A);
+	Timer.t += 8;
+}
+
+void Opcode_0x03(void) {
+	// #
+	Opcode_not_implemented(0x03);
+}
+
+void Opcode_0x04(void) {
+	// #
+	Opcode_not_implemented(0x04);
+}
+
+void Opcode_0x05(void) {
+	// #
+	Opcode_not_implemented(0x05);
+}
+
+void Opcode_0x06(void) {
+	// LD B, n
+	Registers.B = Memory_load_byte_PC();
+	Timer.t += 8;
+}
+
+void Opcode_0x07(void) {
+	// #
+	Opcode_not_implemented(0x07);
+}
+
+void Opcode_0x08(void) {
+	// LD (nn), SP
+	uint16_t nn = Memory_load_word_PC();
+
+	Memory_store_byte(nn, Extract_LSB(Registers.SP));
+	Memory_store_byte((nn + 1), Extract_MSB(Registers.SP));
+
+	Timer.t += 20;
+}
+
+void Opcode_0x09(void) {
+	// #
+	Opcode_not_implemented(0x09);
+}
+
+void Opcode_0x0A(void) {
+	// LD A, (BC)
+	Registers.A = Memory_load_byte(Registers.BC);
+	Timer.t += 8;
+}
+
+void Opcode_0x0B(void) {
+	// #
+	Opcode_not_implemented(0x0B);
+}
+
+void Opcode_0x0C(void) {
+	// #
+	Opcode_not_implemented(0x0C);
+}
+
+void Opcode_0x0D(void) {
+	// #
+	Opcode_not_implemented(0x0D);
+}
+
+void Opcode_0x0E(void) {
+	// LD C, n
+	Registers.C = Memory_load_byte_PC();
+	Timer.t += 8;
+}
+
+void Opcode_0x0F(void) {
+	// #
+	Opcode_not_implemented(0x0F);
+}
+
+void Opcode_0x10(void) {
+	// #
+	Opcode_not_implemented(0x10);
+}
+
+void Opcode_0x11(void) {
+	// LD DE, nn
+	Registers.DE = Memory_load_word_PC();
+	Timer.t += 12;
+}
+
+void Opcode_0x12(void) {
+	// LD (DE), A
+	Memory_store_byte(Registers.DE, Registers.A);
+	Timer.t += 8;
+}
+
+void Opcode_0x13(void) {
+	// #
+	Opcode_not_implemented(0x13);
+}
+
+void Opcode_0x14(void) {
+	// #
+	Opcode_not_implemented(0x14);
+}
+
+void Opcode_0x15(void) {
+	// #
+	Opcode_not_implemented(0x15);
+}
+
+void Opcode_0x16(void) {
+	// LD D, n
+	Registers.D = Memory_load_byte_PC();
+	Timer.t += 8;
+}
+
+void Opcode_0x17(void) {
+	// #
+	Opcode_not_implemented(0x17);
+}
+
+void Opcode_0x18(void) {
+	// #
+	Opcode_not_implemented(0x18);
+}
+
+void Opcode_0x19(void) {
+	// #
+	Opcode_not_implemented(0x19);
+}
+
+void Opcode_0x1A(void) {
+	// LD A, (DE)
+	Registers.A = Memory_load_byte(Registers.DE);
+	Timer.t += 8;
+}
+
+void Opcode_0x1B(void) {
+	// #
+	Opcode_not_implemented(0x1B);
+}
+
+void Opcode_0x1C(void) {
+	// #
+	Opcode_not_implemented(0x1C);
+}
+
+void Opcode_0x1D(void) {
+	// #
+	Opcode_not_implemented(0x1D);
+}
+
+void Opcode_0x1E(void) {
+	// LD E, n
+	Registers.E = Memory_load_byte_PC();
+	Timer.t += 8;
+}
+
+void Opcode_0x1F(void) {
+	// #
+	Opcode_not_implemented(0x1F);
+}
+
+void Opcode_0x20(void) {
+	// #
+	Opcode_not_implemented(0x20);
+}
+
+void Opcode_0x21(void) {
+	// LD HL, nn
+	Registers.HL = Memory_load_word_PC();
+	Timer.t += 12;
+}
+
+void Opcode_0x22(void) {
+	// LD (HL+), A
+	Memory_store_byte(Registers.HL, Registers.A);
+	Registers.HL++;
+	Timer.t += 8;
+}
+
+void Opcode_0x23(void) {
+	// #
+	Opcode_not_implemented(0x23);
+}
+
+void Opcode_0x24(void) {
+	// #
+	Opcode_not_implemented(0x24);
+}
+
+void Opcode_0x25(void) {
+	// #
+	Opcode_not_implemented(0x25);
+}
+
+void Opcode_0x26(void) {
+	// LD E, n
+	Registers.E = Memory_load_byte_PC();
+	Timer.t += 8;
+}
+
+void Opcode_0x27(void) {
+	// #
+	Opcode_not_implemented(0x27);
+}
+
+void Opcode_0x28(void) {
+	// #
+	Opcode_not_implemented(0x28);
+}
+
+void Opcode_0x29(void) {
+	// #
+	Opcode_not_implemented(0x29);
+}
+
+void Opcode_0x2A(void) {
+	// LD A, (HL+)
+	Registers.A = Memory_load_byte(Registers.HL);
+	Registers.HL++;
+	Timer.t += 8;
+}
+
+void Opcode_0x2B(void) {
+	// #
+	Opcode_not_implemented(0x2B);
+}
+
+void Opcode_0x2C(void) {
+	// #
+	Opcode_not_implemented(0x2C);
+}
+
+void Opcode_0x2D(void) {
+	// #
+	Opcode_not_implemented(0x2D);
+}
+
+void Opcode_0x2E(void) {
+	// LD L, n
+	Registers.L = Memory_load_byte_PC();
+	Timer.t += 8;
+}
+
+void Opcode_0x2F(void) {
+	// #
+	Opcode_not_implemented(0x2F);
+}
+
+void Opcode_0x30(void) {
+	// #
+	Opcode_not_implemented(0x30);
+}
+
+void Opcode_0x31(void) {
+	// LD SP, nn
+	Registers.SP = Memory_load_word_PC();
+	Timer.t += 12;
+}
+
+void Opcode_0x32(void) {
+	// LD (HL-), A
+	Memory_store_byte(Registers.HL, Registers.A);
+	Registers.HL--;
+	Timer.t += 8;
+}
+
+void Opcode_0x33(void) {
+	// #
+	Opcode_not_implemented(0x33);
+}
+
+void Opcode_0x34(void) {
+	// #
+	Opcode_not_implemented(0x34);
+}
+
+void Opcode_0x35(void) {
+	// #
+	Opcode_not_implemented(0x35);
+}
+
+void Opcode_0x36(void) {
+	// LD (HL), n
+	Memory_store_byte(Registers.HL, Memory_load_byte_PC());
+	Timer.t += 12;
+}
+
+void Opcode_0x37(void) {
+	// #
+	Opcode_not_implemented(0x37);
+}
+
+void Opcode_0x38(void) {
+	// #
+	Opcode_not_implemented(0x38);
+}
+
+void Opcode_0x39(void) {
+	// #
+	Opcode_not_implemented(0x39);
+}
+
+void Opcode_0x3A(void) {
+	// LD A, (HL-)
+	Registers.A = Memory_load_byte(Registers.HL);
+	Registers.HL--;
+	Timer.t += 8;
+}
+
+void Opcode_0x3B(void) {
+	// #
+	Opcode_not_implemented(0x3B);
+}
+
+void Opcode_0x3C(void) {
+	// #
+	Opcode_not_implemented(0x3C);
+}
+
+void Opcode_0x3D(void) {
+	// #
+	Opcode_not_implemented(0x3D);
+}
+
+void Opcode_0x3E(void) {
+	// LD A, n
+	Registers.A = Memory_load_byte_PC();
+	Timer.t += 8;
+}
+
+void Opcode_0x3F(void) {
+	// #
+	Opcode_not_implemented(0x3F);
+}
+
+void Opcode_0x40(void) {
+	// LD B, B
+	Registers.B = Registers.B;
+	Timer.t += 4;
+}
+
+void Opcode_0x41(void) {
+	// LD B, C
+	Registers.B = Registers.C;
+	Timer.t += 4;
+}
+
+void Opcode_0x42(void) {
+	// LD B, D
+	Registers.B = Registers.D;
+	Timer.t += 4;
+}
+
+void Opcode_0x43(void) {
+	// LD B, E
+	Registers.B = Registers.E;
+	Timer.t += 4;
+}
+
+void Opcode_0x44(void) {
+	// LD B, H
+	Registers.B = Registers.H;
+	Timer.t += 4;
+}
+
+void Opcode_0x45(void) {
+	// LD B, L
+	Registers.B = Registers.L;
+	Timer.t += 4;
+}
+
+void Opcode_0x46(void) {
+	// LD B, (HL)
+	Registers.B = Memory_load_byte(Registers.HL);
+	Timer.t += 8;
+}
+
+void Opcode_0x47(void) {
+	// LD B, A
+	Registers.B = Registers.A;
+	Timer.t += 4;
+}
+
+void Opcode_0x48(void) {
+	// LD C, B
+	Registers.C = Registers.B;
+	Timer.t += 4;
+}
+
+void Opcode_0x49(void) {
+	// LD C, C
+	Registers.C = Registers.C;
+	Timer.t += 4;
+}
+
+void Opcode_0x4A(void) {
+	// LD C, D
+	Registers.C = Registers.D;
+	Timer.t += 4;
+}
+
+void Opcode_0x4B(void) {
+	// LD C, E
+	Registers.C = Registers.E;
+	Timer.t += 4;
+}
+
+void Opcode_0x4C(void) {
+	// LD C, H
+	Registers.C = Registers.H;
+	Timer.t += 4;
+}
+
+void Opcode_0x4D(void) {
+	// LD C, L
+	Registers.C = Registers.L;
+	Timer.t += 4;
+}
+
+void Opcode_0x4E(void) {
+	// LD C, (HL)
+	Registers.C = Memory_load_byte(Registers.HL);
+	Timer.t += 8;
+}
+
+void Opcode_0x4F(void) {
+	// LD C, A
+	Registers.C = Registers.A;
+	Timer.t += 4;
+}
+
+void Opcode_0x50(void) {
+	// LD D, B
+	Registers.D = Registers.B;
+	Timer.t += 4;
+}
+
+void Opcode_0x51(void) {
+	// LD D, C
+	Registers.D = Registers.C;
+	Timer.t += 4;
+}
+
+void Opcode_0x52(void) {
+	// LD D, D
+	Registers.D = Registers.D;
+	Timer.t += 4;
+}
+
+void Opcode_0x53(void) {
+	// LD D, E
+	Registers.D = Registers.E;
+	Timer.t += 4;
+}
+
+void Opcode_0x54(void) {
+	// LD D, H
+	Registers.D = Registers.H;
+	Timer.t += 4;
+}
+
+void Opcode_0x55(void) {
+	// LD D, L
+	Registers.D = Registers.L;
+	Timer.t += 4;
+}
+
+void Opcode_0x56(void) {
+	// LD D, (HL)
+	Registers.D = Memory_load_byte(Registers.HL);
+	Timer.t += 8;
+}
+
+void Opcode_0x57(void) {
+	// LD D, A
+	Registers.D = Registers.A;
+	Timer.t += 4;
+}
+
+void Opcode_0x58(void) {
+	// LD E, B
+	Registers.E = Registers.B;
+	Timer.t += 4;
+}
+
+void Opcode_0x59(void) {
+	// LD E, C
+	Registers.E = Registers.C;
+	Timer.t += 4;
+}
+
+void Opcode_0x5A(void) {
+	// LD E, D
+	Registers.E = Registers.D;
+	Timer.t += 4;
+}
+
+void Opcode_0x5B(void) {
+	// LD E, E
+	Registers.E = Registers.E;
+	Timer.t += 4;
+}
+
+void Opcode_0x5C(void) {
+	// LD E, H
+	Registers.E = Registers.H;
+	Timer.t += 4;
+}
+
+void Opcode_0x5D(void) {
+	// LD E, L
+	Registers.E = Registers.L;
+	Timer.t += 4;
+}
+
+void Opcode_0x5E(void) {
+	// LD E, (HL)
+	Registers.E = Memory_load_byte(Registers.HL);
+	Timer.t += 8;
+}
+
+void Opcode_0x5F(void) {
+	// #
+	Opcode_not_implemented(0x5F);
+}
+
+void Opcode_0x60(void) {
+	// LD H, B
+	Registers.H = Registers.B;
+	Timer.t += 4;
+}
+
+void Opcode_0x61(void) {
+	// LD H, C
+	Registers.H = Registers.C;
+	Timer.t += 4;
+}
+
+void Opcode_0x62(void) {
+	// LD H, D
+	Registers.H = Registers.D;
+	Timer.t += 4;
+}
+
+void Opcode_0x63(void) {
+	// LD H, E
+	Registers.H = Registers.E;
+	Timer.t += 4;
+}
+
+void Opcode_0x64(void) {
+	// LD H, H
+	Registers.H = Registers.H;
+	Timer.t += 4;
+}
+
+void Opcode_0x65(void) {
+	// LD H, L
+	Registers.H = Registers.L;
+	Timer.t += 4;
+}
+
+void Opcode_0x66(void) {
+	// LD H, (HL)
+	Registers.H = Memory_load_byte(Registers.HL);
+	Timer.t += 8;
+}
+
+void Opcode_0x67(void) {
+	// LD H, A
+	Registers.H = Registers.A;
+	Timer.t += 4;
+}
+
+void Opcode_0x68(void) {
+	// LD L, B
+	Registers.L = Registers.B;
+	Timer.t += 4;
+}
+
+void Opcode_0x69(void) {
+	// LD L, C
+	Registers.L = Registers.C;
+	Timer.t += 4;
+}
+
+void Opcode_0x6A(void) {
+	// LD L, D
+	Registers.L = Registers.D;
+	Timer.t += 4;
+}
+
+void Opcode_0x6B(void) {
+	// LD L, E
+	Registers.L = Registers.E;
+	Timer.t += 4;
+}
+
+void Opcode_0x6C(void) {
+	// LD L, H
+	Registers.L = Registers.H;
+	Timer.t += 4;
+}
+
+void Opcode_0x6D(void) {
+	// LD L, L
+	Registers.L = Registers.L;
+	Timer.t += 4;
+}
+
+void Opcode_0x6E(void) {
+	// LD L, (HL)
+	Registers.L = Memory_load_byte(Registers.HL);
+	Timer.t += 8;
+}
+
+void Opcode_0x6F(void) {
+	// LD L, A
+	Registers.L = Registers.A;
+	Timer.t += 4;
+}
+
+void Opcode_0x70(void) {
+	// LD (HL), B
+	Memory_store_byte(Registers.HL, Registers.B);
+	Timer.t += 8;
+}
+
+void Opcode_0x71(void) {
+	// LD (HL), C
+	Memory_store_byte(Registers.HL, Registers.C);
+	Timer.t += 8;
+}
+
+void Opcode_0x72(void) {
+	// LD (HL), D
+	Memory_store_byte(Registers.HL, Registers.D);
+	Timer.t += 8;
+}
+
+void Opcode_0x73(void) {
+	// LD (HL), E
+	Memory_store_byte(Registers.HL, Registers.E);
+	Timer.t += 8;
+}
+
+void Opcode_0x74(void) {
+	// LD (HL), H
+	Memory_store_byte(Registers.HL, Registers.H);
+	Timer.t += 8;
+}
+
+void Opcode_0x75(void) {
+	// LD (HL), L
+	Memory_store_byte(Registers.HL, Registers.L);
+	Timer.t += 8;
+}
+
+void Opcode_0x76(void) {
+	// #
+	Opcode_not_implemented(0x76);
+}
+
+void Opcode_0x77(void) {
+	// LD (HL), A
+	Memory_store_byte(Registers.HL, Registers.A);
+	Timer.t += 8;
+}
+
+void Opcode_0x78(void) {
+	// LD A, B
+	Registers.A = Registers.B;
+	Timer.t += 4;
+}
+
+void Opcode_0x79(void) {
+	// LD A, C
+	Registers.A = Registers.C;
+	Timer.t += 4;
+}
+
+void Opcode_0x7A(void) {
+	// LD A, D
+	Registers.A = Registers.D;
+	Timer.t += 4;
+}
+
+void Opcode_0x7B(void) {
+	// LD A, E
+	Registers.A = Registers.E;
+	Timer.t += 4;
+}
+
+void Opcode_0x7C(void) {
+	// LD A, H
+	Registers.A = Registers.H;
+	Timer.t += 4;
+}
+
+void Opcode_0x7D(void) {
+	// LD A, L
+	Registers.A = Registers.L;
+	Timer.t += 4;
+}
+
+void Opcode_0x7E(void) {
+	// LD A, (HL)
+	Registers.A = Memory_load_byte(Registers.HL);
+	Timer.t += 8;
+}
+
+void Opcode_0x7F(void) {
+	// LD A, A
+	Registers.A = Registers.A;
+	Timer.t += 4;
+}
+
+void Opcode_0x80(void) {
+	// ADD A, B
+	Instruction_ADD_A_N(Registers.B);
+	Timer.t += 4;
+}
+
+void Opcode_0x81(void) {
+	// ADD A, C
+	Instruction_ADD_A_N(Registers.C);
+	Timer.t += 4;
+}
+
+void Opcode_0x82(void) {
+	// ADD A, D
+	Instruction_ADD_A_N(Registers.D);
+	Timer.t += 4;
+}
+
+void Opcode_0x83(void) {
+	// ADD A, E
+	Instruction_ADD_A_N(Registers.E);
+	Timer.t += 4;
+}
+
+void Opcode_0x84(void) {
+	// ADD A, H
+	Instruction_ADD_A_N(Registers.H);
+	Timer.t += 4;
+}
+
+void Opcode_0x85(void) {
+	// ADD A, L
+	Instruction_ADD_A_N(Registers.L);
+	Timer.t += 4;
+}
+
+void Opcode_0x86(void) {
+	// ADD A, (HL)
+	Instruction_ADD_A_N(Memory_load_byte(Registers.HL));
+	Timer.t += 8;
+}
+
+void Opcode_0x87(void) {
+	// ADD A, A
+	Instruction_ADD_A_N(Registers.A);
+	Timer.t += 4;
+}
+
+void Opcode_0x88(void) {
+	// ADC A, B
+	Instruction_ADC_A_N(Registers.B);
+	Timer.t += 4;
+}
+
+void Opcode_0x89(void) {
+	// ADC A, C
+	Instruction_ADC_A_N(Registers.C);
+	Timer.t += 4;
+}
+
+void Opcode_0x8A(void) {
+	// ADC A, D
+	Instruction_ADC_A_N(Registers.D);
+	Timer.t += 4;
+}
+
+void Opcode_0x8B(void) {
+	// ADC A, E
+	Instruction_ADC_A_N(Registers.E);
+	Timer.t += 4;
+}
+
+void Opcode_0x8C(void) {
+	// ADC A, H
+	Instruction_ADC_A_N(Registers.H);
+	Timer.t += 4;
+}
+
+void Opcode_0x8D(void) {
+	// ADC A, L
+	Instruction_ADC_A_N(Registers.L);
+	Timer.t += 4;
+}
+
+void Opcode_0x8E(void) {
+	// ADC A, (HL)
+	Instruction_ADC_A_N(Memory_load_byte(Registers.HL));
+	Timer.t += 8;
+}
+
+void Opcode_0x8F(void) {
+	// ADC A, A
+	Instruction_ADC_A_N(Registers.A);
+	Timer.t += 4;
+}
+
+void Opcode_0x90(void) {
+	// SUB B
+	Instruction_SUB_N(Registers.B);
+	Timer.t += 4;
+}
+
+void Opcode_0x91(void) {
+	// SUB C
+	Instruction_SUB_N(Registers.C);
+	Timer.t += 4;
+}
+
+void Opcode_0x92(void) {
+	// SUB D
+	Instruction_SUB_N(Registers.D);
+	Timer.t += 4;
+}
+
+void Opcode_0x93(void) {
+	// SUB E
+	Instruction_SUB_N(Registers.E);
+	Timer.t += 4;
+}
+
+void Opcode_0x94(void) {
+	// SUB H
+	Instruction_SUB_N(Registers.H);
+	Timer.t += 4;
+}
+
+void Opcode_0x95(void) {
+	// SUB L
+	Instruction_SUB_N(Registers.L);
+	Timer.t += 4;
+}
+
+void Opcode_0x96(void) {
+	// SUB (HL)
+	Instruction_SUB_N(Memory_load_byte(Registers.HL));
+	Timer.t += 8;
+}
+
+void Opcode_0x97(void) {
+	// SUB A
+	Instruction_SUB_N(Registers.A);
+	Timer.t += 4;
+}
+
+void Opcode_0x98(void) {
+	// SBC A, B
+	Instruction_SBC_A_N(Registers.B);
+	Timer.t += 4;
+}
+
+void Opcode_0x99(void) {
+	// SBC A, C
+	Instruction_SBC_A_N(Registers.C);
+	Timer.t += 4;
+}
+
+void Opcode_0x9A(void) {
+	// SBC A, D
+	Instruction_SBC_A_N(Registers.D);
+	Timer.t += 4;
+}
+
+void Opcode_0x9B(void) {
+	// SBC A, E
+	Instruction_SBC_A_N(Registers.E);
+	Timer.t += 4;
+}
+
+void Opcode_0x9C(void) {
+	// SBC A, H
+	Instruction_SBC_A_N(Registers.H);
+	Timer.t += 4;
+}
+
+void Opcode_0x9D(void) {
+	// SBC A, L
+	Instruction_SBC_A_N(Registers.L);
+	Timer.t += 4;
+}
+
+void Opcode_0x9E(void) {
+	// SBC A, (HL)
+	Instruction_SBC_A_N(Memory_load_byte(Registers.HL));
+	Timer.t += 8;
+}
+
+void Opcode_0x9F(void) {
+	// SBC A, A
+	Instruction_SBC_A_N(Registers.A);
+	Timer.t += 4;
+}
+
+void Opcode_0xA0(void) {
+	// AND B
+	Instruction_AND_N(Registers.B);
+	Timer.t += 4;
+}
+
+void Opcode_0xA1(void) {
+	// AND C
+	Instruction_AND_N(Registers.C);
+	Timer.t += 4;
+}
+
+void Opcode_0xA2(void) {
+	// AND D
+	Instruction_AND_N(Registers.D);
+	Timer.t += 4;
+}
+
+void Opcode_0xA3(void) {
+	// AND E
+	Instruction_AND_N(Registers.E);
+	Timer.t += 4;
+}
+
+void Opcode_0xA4(void) {
+	// AND H
+	Instruction_AND_N(Registers.H);
+	Timer.t += 4;
+}
+
+void Opcode_0xA5(void) {
+	// AND L
+	Instruction_AND_N(Registers.L);
+	Timer.t += 4;
+}
+
+void Opcode_0xA6(void) {
+	// AND (HL)
+	Instruction_AND_N(Memory_load_byte(Registers.HL));
+	Timer.t += 8;
+}
+
+void Opcode_0xA7(void) {
+	// AND A
+	Instruction_AND_N(Registers.A);
+	Timer.t += 4;
+}
+
+void Opcode_0xA8(void) {
+	// XOR B
+	Instruction_XOR_N(Registers.B);
+	Timer.t += 4;
+}
+
+void Opcode_0xA9(void) {
+	// XOR C
+	Instruction_XOR_N(Registers.C);
+	Timer.t += 4;
+}
+
+void Opcode_0xAA(void) {
+	// XOR D
+	Instruction_XOR_N(Registers.D);
+	Timer.t += 4;
+}
+
+void Opcode_0xAB(void) {
+	// XOR E
+	Instruction_XOR_N(Registers.E);
+	Timer.t += 4;
+}
+
+void Opcode_0xAC(void) {
+	// XOR H
+	Instruction_XOR_N(Registers.H);
+	Timer.t += 4;
+}
+
+void Opcode_0xAD(void) {
+	// XOR L
+	Instruction_XOR_N(Registers.L);
+	Timer.t += 4;
+}
+
+void Opcode_0xAE(void) {
+	// XOR (HL)
+	Instruction_XOR_N(Memory_load_byte(Registers.HL));
+	Timer.t += 8;
+}
+
+void Opcode_0xAF(void) {
+	// XOR A
+	Instruction_XOR_N(Registers.A);
+	Timer.t += 4;
+}
+
+void Opcode_0xB0(void) {
+	// OR B
+	Instruction_OR_N(Registers.B);
+	Timer.t += 4;
+}
+
+void Opcode_0xB1(void) {
+	// OR C
+	Instruction_OR_N(Registers.C);
+	Timer.t += 4;
+}
+
+void Opcode_0xB2(void) {
+	// OR D
+	Instruction_OR_N(Registers.D);
+	Timer.t += 4;
+}
+
+void Opcode_0xB3(void) {
+	// OR E
+	Instruction_OR_N(Registers.E);
+	Timer.t += 4;
+}
+
+void Opcode_0xB4(void) {
+	// OR H
+	Instruction_OR_N(Registers.H);
+	Timer.t += 4;
+}
+
+void Opcode_0xB5(void) {
+	// OR L
+	Instruction_OR_N(Registers.L);
+	Timer.t += 4;
+}
+
+void Opcode_0xB6(void) {
+	// OR (HL)
+	Instruction_OR_N(Memory_load_byte(Registers.HL));
+	Timer.t += 8;
+}
+
+void Opcode_0xB7(void) {
+	// OR A
+	Instruction_OR_N(Registers.A);
+	Timer.t += 4;
+}
+
+void Opcode_0xB8(void) {
+	// #
+	Opcode_not_implemented(0xB8);
+}
+
+void Opcode_0xB9(void) {
+	// #
+	Opcode_not_implemented(0xB9);
+}
+
+void Opcode_0xBA(void) {
+	// #
+	Opcode_not_implemented(0xBA);
+}
+
+void Opcode_0xBB(void) {
+	// #
+	Opcode_not_implemented(0xBB);
+}
+
+void Opcode_0xBC(void) {
+	// #
+	Opcode_not_implemented(0xBC);
+}
+
+void Opcode_0xBD(void) {
+	// #
+	Opcode_not_implemented(0xBD);
+}
+
+void Opcode_0xBE(void) {
+	// #
+	Opcode_not_implemented(0xBE);
+}
+
+void Opcode_0xBF(void) {
+	// #
+	Opcode_not_implemented(0xBF);
+}
+
+void Opcode_0xC0(void) {
+	// #
+	Opcode_not_implemented(0xC0);
+}
+
+void Opcode_0xC1(void) {
+	// POP BC
+	Registers.C = Memory_load_byte(Registers.SP);
+	Registers.B = Memory_load_byte(Registers.SP + 1);
+	Registers.SP += 2;
+	Timer.t += 12;
+}
+
+void Opcode_0xC2(void) {
+	// #
+	Opcode_not_implemented(0xC2);
+}
+
+void Opcode_0xC3(void) {
+	// #
+	Opcode_not_implemented(0xC3);
+}
+
+void Opcode_0xC4(void) {
+	// #
+	Opcode_not_implemented(0xC4);
+}
+
+void Opcode_0xC5(void) {
+	// PUSH BC
+	Memory_store_byte(Registers.SP - 1, Registers.B);
+	Memory_store_byte(Registers.SP - 2, Registers.C);
+	Registers.SP -= 2;
+	Timer.t += 16;
+}
+
+void Opcode_0xC6(void) {
+	// ADD A, n
+	Instruction_ADD_A_N(Memory_load_byte_PC());
+	Timer.t += 8;
+}
+
+void Opcode_0xC7(void) {
+	// #
+	Opcode_not_implemented(0xC7);
+}
+
+void Opcode_0xC8(void) {
+	// #
+	Opcode_not_implemented(0xC8);
+}
+
+void Opcode_0xC9(void) {
+	// #
+	Opcode_not_implemented(0xC9);
+}
+
+void Opcode_0xCA(void) {
+	// #
+	Opcode_not_implemented(0xCA);
+}
+
+void Opcode_0xCB(void) {
+	// #
+	Opcode_not_implemented(0xCB);
+}
+
+void Opcode_0xCC(void) {
+	// #
+	Opcode_not_implemented(0xCC);
+}
+
+void Opcode_0xCD(void) {
+	// #
+	Opcode_not_implemented(0xCD);
+}
+
+void Opcode_0xCE(void) {
+	// ADC A, n
+	Instruction_ADC_A_N(Memory_load_byte_PC());
+	Timer.t += 8;
+}
+
+void Opcode_0xCF(void) {
+	// #
+	Opcode_not_implemented(0xCF);
+}
+
+void Opcode_0xD0(void) {
+	// #
+	Opcode_not_implemented(0xD0);
+}
+
+void Opcode_0xD1(void) {
+	// POP DE
+	Registers.E = Memory_load_byte(Registers.SP);
+	Registers.D = Memory_load_byte(Registers.SP + 1);
+	Registers.SP += 2;
+	Timer.t += 12;
+}
+
+void Opcode_0xD2(void) {
+	// #
+	Opcode_not_implemented(0xD2);
+}
+
+void Opcode_0xD3(void) {
+	// #
+	Opcode_not_implemented(0xD3);
+}
+
+void Opcode_0xD4(void) {
+	// #
+	Opcode_not_implemented(0xD4);
+}
+
+void Opcode_0xD5(void) {
+	// PUSH DE
+	Memory_store_byte(Registers.SP - 1, Registers.D);
+	Memory_store_byte(Registers.SP - 2, Registers.E);
+	Registers.SP -= 2;
+	Timer.t += 16;
+}
+
+void Opcode_0xD6(void) {
+	// SUB n
+	Instruction_SUB_N(Memory_load_byte_PC());
+	Timer.t += 8;
+}
+
+void Opcode_0xD7(void) {
+	// #
+	Opcode_not_implemented(0xD7);
+}
+
+void Opcode_0xD8(void) {
+	// #
+	Opcode_not_implemented(0xD8);
+}
+
+void Opcode_0xD9(void) {
+	// #
+	Opcode_not_implemented(0xD9);
+}
+
+void Opcode_0xDA(void) {
+	// #
+	Opcode_not_implemented(0xDA);
+}
+
+void Opcode_0xDB(void) {
+	// #
+	Opcode_not_implemented(0xDB);
+}
+
+void Opcode_0xDC(void) {
+	// #
+	Opcode_not_implemented(0xDC);
+}
+
+void Opcode_0xDD(void) {
+	// #
+	Opcode_not_implemented(0xDD);
+}
+
+void Opcode_0xDE(void) {
+	// SBC A, n
+	Instruction_SBC_A_N(Memory_load_byte_PC());
+	Timer.t += 8;
+}
+
+void Opcode_0xDF(void) {
+	// #
+	Opcode_not_implemented(0xDF);
+}
+
+void Opcode_0xE0(void) {
+	// LDH (n), A
+	Memory_store_byte(((uint16_t) 0xFF) + Memory_load_byte_PC(), Registers.A);
+	Timer.t += 12;
+}
+
+void Opcode_0xE1(void) {
+	// POP HL
+	Registers.L = Memory_load_byte(Registers.SP);
+	Registers.H = Memory_load_byte(Registers.SP + 1);
+	Registers.SP += 2;
+	Timer.t += 12;
+}
+
+void Opcode_0xE2(void) {
+	// LD (C), A
+	Memory_store_byte(((uint16_t) 0xFF00) + Registers.C, Registers.A);
+	Timer.t += 8;
+}
+
+void Opcode_0xE3(void) {
+	// #
+	Opcode_not_implemented(0xE3);
+}
+
+void Opcode_0xE4(void) {
+	// #
+	Opcode_not_implemented(0xE4);
+}
+
+void Opcode_0xE5(void) {
+	// PUSH HL
+	Memory_store_byte(Registers.SP - 1, Registers.H);
+	Memory_store_byte(Registers.SP - 2, Registers.L);
+	Registers.SP -= 2;
+	Timer.t += 16;
+}
+
+void Opcode_0xE6(void) {
+	// AND n
+	Instruction_AND_N(Memory_load_byte_PC());
+	Timer.t += 8;
+}
+
+void Opcode_0xE7(void) {
+	// #
+	Opcode_not_implemented(0xE7);
+}
+
+void Opcode_0xE8(void) {
+	// #
+	Opcode_not_implemented(0xE8);
+}
+
+void Opcode_0xE9(void) {
+	// #
+	Opcode_not_implemented(0xE9);
+}
+
+void Opcode_0xEA(void) {
+	// LD (nn), A
+	Memory_store_byte(Memory_load_word_PC(), Registers.A);
+	Timer.t += 16;
+}
+
+void Opcode_0xEB(void) {
+	// #
+	Opcode_not_implemented(0xEB);
+}
+
+void Opcode_0xEC(void) {
+	// #
+	Opcode_not_implemented(0xEC);
+}
+
+void Opcode_0xED(void) {
+	// #
+	Opcode_not_implemented(0xED);
+}
+
+void Opcode_0xEE(void) {
+	// XOR n
+	Instruction_XOR_N(Memory_load_byte_PC());
+	Timer.t += 8;
+}
+
+void Opcode_0xEF(void) {
+	// #
+	Opcode_not_implemented(0xEF);
+}
+
+void Opcode_0xF0(void) {
+	// LDH A, (n)
+	Registers.A = Memory_load_byte(((uint16_t) 0xFF00) + Memory_load_byte_PC());
+	Timer.t += 12;
+}
+
+void Opcode_0xF1(void) {
+	// POP AF
+	Registers.F = Memory_load_byte(Registers.SP);
+	Registers.A = Memory_load_byte(Registers.SP + 1);
+	Registers.SP += 2;
+	Timer.t += 12;
+}
+
+void Opcode_0xF2(void) {
+	// LD A, (C)
+	Registers.A = Memory_load_byte(((uint16_t) 0xFF00) + Registers.C);
+	Timer.t += 8;
+}
+
+void Opcode_0xF3(void) {
+	// #
+	Opcode_not_implemented(0xF3);
+}
+
+void Opcode_0xF4(void) {
+	// #
+	Opcode_not_implemented(0xF4);
+}
+
+void Opcode_0xF5(void) {
+	// PUSH AF
+	Memory_store_byte(Registers.SP - 1, Registers.A);
+	Memory_store_byte(Registers.SP - 2, Registers.F);
+	Registers.SP -= 2;
+	Timer.t += 16;
+}
+
+void Opcode_0xF6(void) {
+	// OR n
+	Instruction_OR_N(Memory_load_byte_PC());
+	Timer.t += 8;
+}
+
+void Opcode_0xF7(void) {
+	// #
+	Opcode_not_implemented(0xF7);
+}
+
+void Opcode_0xF8(void) {
+	// LDHL SP, n
+	int8_t n = (int8_t) Memory_load_byte_PC();
+	Flags_set(0, 
+			  0, 
+			  Flag_test_H_U16_S8(Registers.SP, n), 
+			  Flag_test_C_U16_S8(Registers.SP, n));
+	
+	Registers.HL = Registers.SP + n;
+	Timer.t += 12;
+}
+
+void Opcode_0xF9(void) {
+	// LD SP, HL
+	Registers.SP = Registers.HL;
+	Timer.t += 8;
+}
+
+void Opcode_0xFA(void) {
+	// LD A, (nn)
+	Registers.A = Memory_load_byte(Memory_load_word_PC());
+	Timer.t += 16;
+}
+
+void Opcode_0xFB(void) {
+	// #
+	Opcode_not_implemented(0xFB);
+}
+
+void Opcode_0xFC(void) {
+	// #
+	Opcode_not_implemented(0xFC);
+}
+
+void Opcode_0xFD(void) {
+	// #
+	Opcode_not_implemented(0xFD);
+}
+
+void Opcode_0xFE(void) {
+	// #
+	Opcode_not_implemented(0xFE);
+}
+
+void Opcode_0xFF(void) {
+	// #
+	Opcode_not_implemented(0xFF);
 }

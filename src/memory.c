@@ -1,6 +1,23 @@
 #include "memory.h"
 #include "debug.h"
 
+// MSB and LSB Manipulation (16-bit)
+// ---------------------------------------------------
+uint8_t Extract_MSB(uint16_t i) {
+	return (uint8_t) (i & 0xFF00) >> 8;	
+}
+
+uint8_t Extract_LSB(uint16_t i) {
+	return (uint8_t) (i & 0x00FF);
+}
+
+uint16_t Combine_MSB_LSB(uint8_t msb, uint8_t lsb) {
+	uint16_t _msb = (uint16_t) msb;
+	uint16_t _lsb = (uint16_t) lsb;
+
+	return (_msb << 8) | _lsb;
+}
+
 // Register Initialization
 // ---------------------------------------------------
 void Registers_init(void) {
@@ -29,6 +46,47 @@ void Flag_set_H(uint8_t state) {
 void Flag_set_C(uint8_t state) {
 	Registers.F = (state << 4) | Registers.F;
 }
+
+void Flags_set(uint8_t Z, uint8_t N, uint8_t H, uint8_t C) {
+	if (Z != -1) Flag_set_Z(Z);
+	if (N != -1) Flag_set_N(N);
+	if (H != -1) Flag_set_H(H);
+	if (C != -1) Flag_set_C(C);
+}
+
+uint8_t Flag_test_H_U8_U8(uint8_t a, uint8_t b, uint8_t add) {
+	if (add == 1)
+		return (uint8_t) ((((a & 0xF) + (b & 0xF)) & 0x10) == 0x10);
+	else
+		return (uint8_t) ((a & 0xF) > (b & 0xF));
+}
+
+uint8_t Flag_test_C_U8_U8(uint8_t a, uint8_t b, uint8_t add) {
+	if (add == 1)
+		return (uint8_t) (((uint16_t) (a + b)) > 0xFF);
+	else 
+		return (uint8_t) (a > b);
+}
+
+
+uint8_t Flag_test_H_U16_S8(uint16_t a, int8_t b) {
+	if (b >= 0) {
+		return (uint8_t) ((((a & 0xF) + (b & 0xF)) & 0x10) == 0x10);
+	}
+	else {
+		return (uint8_t) ((a & 0xF) < abs(b & 0xF));
+	}
+}
+
+uint8_t Flag_test_C_U16_S8(uint16_t a, int8_t b) {
+	if (b >= 0) {
+		return 0;
+	}
+	else {
+		return (uint8_t) (Extract_LSB(a) < abs(b));
+	}
+}
+
 
 uint8_t Flag_get_Z(void) {
 	return (Registers.F & 0x80) >> 7;
@@ -180,85 +238,9 @@ void Memory_store_byte(uint16_t address, uint8_t data) {
 
 // Loading immediate operands from ROM
 // ---------------------------------------------------
-uint8_t Memory_LD_I8_ROM(void) {
-	return Memory_load_byte_PC();
-}
-
-uint16_t Memory_LD_I16_ROM(void) {
+uint16_t Memory_load_word_PC(void) {
 	uint16_t lsb = (uint16_t) Memory_load_byte_PC();
 	uint16_t msb = (uint16_t) Memory_load_byte_PC();
 
 	return (msb << 8) | lsb;
-}
-
-// 8-bit Loads
-// ---------------------------------------------------
-// 8-bit Register-Register Loads
-void Memory_LD_R8_R8(uint8_t *r1, uint8_t *r2) {
-	*r1 = *r2;
-}
-
-void Memory_LD_R8_R16(uint8_t *r1, uint16_t *r2) {
-	*r1 = (uint8_t) *r2;
-}
-
-void Memory_LD_R16_R8(uint16_t *r1, uint8_t *r2) {
-	*r1 = (uint16_t) *r2;
-}
-
-// 8-bit Register-Immediate Loads
-void Memory_LD_R8_I8(uint8_t *r, uint8_t i) {
-	*r = i;
-}
-
-// 8-bit Register-Memory Interaction
-void Memory_LD_R8_MR8(uint8_t *r1, uint8_t *r2) {
-	*r1 = Memory_load_byte(0xFF00 + (int8_t) *r2);
-}
-
-void Memory_LD_MR8_R8(uint8_t *r1, uint8_t *r2) {
-	Memory_store_byte(0xFF00 + (int8_t) *r1, *r2);
-}
-
-void Memory_LD_R8_MR16(uint8_t *r1, uint16_t *r2) {
-	*r1 = Memory_load_byte(*r2);
-}
-
-void Memory_LD_MR16_R8(uint16_t *r1, uint8_t *r2) {
-	Memory_store_byte(*r1, *r2); 
-};
-
-// 8-bit Register-Immediate-Memory Interaction
-void Memory_LD_MI8_R8(uint8_t i, uint8_t *r) {
-	Memory_store_byte(0xFF00 + (int8_t) i, *r);
-}
-
-void Memory_LD_R8_MI8(uint8_t *r, uint8_t i) {
-	*r = Memory_load_byte(0xFF00 + (int8_t) i);
-}
-
-void Memory_LD_MR16_I8(uint16_t *r, uint8_t n) {
-	Memory_store_byte(*r, n);
-}
-
-void Memory_LD_MI16_R8(uint16_t nn, uint8_t *r) {
-	Memory_store_byte(nn, *r);
-}
-
-// 16-bit Loads
-// ---------------------------------------------------
-
-// 16-bit Register-Immediate Loads
-void Memory_LD_R16_I16(uint16_t *r, uint16_t i) {
-	*r = i;
-}
-
-// 16-bit Register-Register Loads
-void Memory_LD_R16_R16(uint16_t *r1, uint16_t *r2) {
-	*r1 = *r2;
-}
-
-// 16-bit Register-Register-Immediate-Sum Load
-void Memory_LD_R16_R16_I8(uint16_t *r1, uint16_t *r2, uint8_t i) {
-	*r1 = *r2 + i;
 }
