@@ -145,3 +145,189 @@ void Instruction_RET(void) {
     Registers.SP += 2;
     Registers.PC = Combine_MSB_LSB(msb, lsb);
 }
+
+// Rotates and shifts (CB-opcodes)
+
+void Instruction_SET_N_R(uint8_t n, uint8_t *r) {
+    *r |= (1 << n);
+}
+
+void Instruction_SET_N_M(uint8_t n, uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_SET_N_R(n, &b);
+    Memory_store_byte(m, b);
+}
+
+void Instruction_RES_N_R(uint8_t n, uint8_t *r) {
+    *r &= (~(1 << n));
+}
+
+void Instruction_RES_N_M(uint8_t n, uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_RES_N_R(n, &b);
+    Memory_store_byte(m, b);
+}
+
+void Instruction_BIT_N_R(uint8_t n, uint8_t r) {
+    Flags_set(
+        (~((r & (1 << n)) >> n)) & 1,
+        0,
+        1,
+        -1
+    );
+}
+
+void Instruction_BIT_N_M(uint8_t n, uint16_t m) {
+    Instruction_BIT_N_R(n, Memory_load_byte(m));
+}
+
+void Instruction_SWAP_N_R(uint8_t *r) {
+    *r = ((*r & 0x0F) << 4) | ((*r & 0xF0) >> 4);
+
+    Flags_set(
+        *r == 0,
+        0,
+        0,
+        0
+    );
+}
+
+void Instruction_SWAP_N_M(uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_SWAP_N_R(&b);
+    Memory_store_byte(m, b);
+}
+
+void Instruction_SRL_N_R(uint8_t *r) {
+    uint8_t bit0 = *r & 1;
+    *r >>= 1;
+
+    Flags_set(
+        *r == 0,
+        0,
+        0,
+        bit0
+    );
+}
+
+void Instruction_SRL_N_M(uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_SRL_N_R(&b);
+    Memory_store_byte(m, b);
+}
+
+void Instruction_SLA_N_R(uint8_t *r) {
+    uint8_t bit7 = (*r & 0x80) >> 7;
+    *r <<= 1;
+    
+    Flags_set(
+        *r == 0,
+        0,
+        0,
+        bit7
+    );
+}
+
+void Instruction_SLA_N_M(uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_SLA_N_R(&b);
+    Memory_store_byte(m, b);
+}
+
+void Instruction_SRA_N_R(uint8_t *r) {
+    uint8_t bit0 = *r & 1;
+    uint8_t bit7 = *r & 0x80;
+    *r = (*r >> 1) | bit7;
+
+    Flags_set(
+        *r == 0,
+        0,
+        0,
+        bit0
+    );
+}
+
+void Instruction_SRA_N_M(uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_SRA_N_R(&b);
+    Memory_store_byte(m, b);
+}
+
+void Instruction_RL_N_R(uint8_t *r) {
+    uint8_t bit7 = (*r & 0x80) >> 7;
+    uint8_t bit0 = Flag_get_C();
+
+    *r = (*r << 1) | bit0;
+
+    Flags_set(
+        *r == 0,
+        0,
+        0,
+        bit7
+    );
+}
+
+void Instruction_RL_N_M(uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_RL_N_R(&b);
+    Memory_store_byte(m, b);
+}
+
+void Instruction_RR_N_R(uint8_t *r) {
+    uint8_t bit0 = *r & 1;
+    uint8_t bit7 = Flag_get_C() << 7;
+
+    *r = (*r >> 1) | bit7;
+
+    Flags_set(
+        *r == 0,
+        0,
+        0,
+        bit0
+    );
+}
+
+void Instruction_RR_N_M(uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_RR_N_R(&b);
+    Memory_store_byte(m, b);
+}
+
+void Instruction_RLC_N_R(uint8_t *r) {
+    uint8_t b = (*r & 0x80) >> 0;
+
+    *r = (*r << 1) | b;
+
+    Flags_set(
+        *r == 0,
+        0,
+        0,
+        b
+    );
+}
+
+void Instruction_RLC_N_M(uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_RLC_N_R(&b);
+    Memory_store_byte(m, b);
+}
+
+void Instruction_RRC_N_R(uint8_t *r) {
+    uint8_t b = *r & 1;
+
+    *r = (*r >> 1) | (b << 7);
+
+    Flags_set(
+        *r == 0,
+        0,
+        0,
+        b
+    );
+}
+
+void Instruction_RRC_N_M(uint16_t m) {
+    uint8_t b = Memory_load_byte(m);
+    Instruction_RRC_N_R(&b);
+    Memory_store_byte(m, b);
+}
+

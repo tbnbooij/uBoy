@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "instructions.h"
 #include "timer.h"
+#include "cbopcodes.h"
 
 // Filling the opcode table
 // ---------------------------------------------------
@@ -17,6 +18,7 @@ uint8_t Opcode_fetch(void);
 void Opcode_decode(uint8_t opcode);
 
 // Opcode Tables
+// ---------------------------------------------------
 void (*Opcodes[0xFF + 1])(void);
 void Opcode_not_implemented(uint8_t opcode);
 

@@ -259,6 +259,8 @@ void Opcodes_init(void) {
     Opcodes[0xFD] = Opcode_0xFD;
     Opcodes[0xFE] = Opcode_0xFE;
     Opcodes[0xFF] = Opcode_0xFF;
+
+	CBOpcodes_init();
 }
 
 // Opcode Fetching & Decoding
@@ -1640,8 +1642,7 @@ void Opcode_0xCA(void) {
 
 void Opcode_0xCB(void) {
 	// PREFIX CB
-	// TODO: Start working on this madness
-	Opcode_not_implemented(0xCB);
+	CBOpcode_decode(Memory_load_byte_PC());
 }
 
 void Opcode_0xCC(void) {

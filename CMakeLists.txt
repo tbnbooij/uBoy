@@ -9,6 +9,7 @@ set(SOURCES
 	src/timer.c
 	src/debug.c
 	src/opcodes.c
+	src/cbopcodes.c
 	src/test.c
 )
 

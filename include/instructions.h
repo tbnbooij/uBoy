@@ -18,10 +18,33 @@ void Instruction_DEC_N(uint8_t *r);
 // 16-bit arithmetic
 void Instruction_ADD_HL_N(uint16_t n);
 
+// Calls and jumps
 void Instruction_CALL_NN(uint16_t nn);
-
 void Instruction_RST_N(uint8_t n);
-
 void Instruction_RET(void);
+
+// Shifts and rotates (CB-opcodes)
+void Instruction_SET_N_R(uint8_t n, uint8_t *r);
+void Instruction_SET_N_M(uint8_t n, uint16_t m);
+void Instruction_RES_N_R(uint8_t n, uint8_t *r);
+void Instruction_RES_N_M(uint8_t n, uint16_t m);
+void Instruction_BIT_N_R(uint8_t n, uint8_t r);
+void Instruction_BIT_N_M(uint8_t n, uint16_t m);
+void Instruction_SWAP_N_R(uint8_t *r);
+void Instruction_SWAP_N_M(uint16_t m);
+void Instruction_SRL_N_R(uint8_t *r);
+void Instruction_SRL_N_M(uint16_t m);
+void Instruction_SLA_N_R(uint8_t *r);
+void Instruction_SLA_N_M(uint16_t m);
+void Instruction_SRA_N_R(uint8_t *r);
+void Instruction_SRA_N_M(uint16_t m);
+void Instruction_RL_N_R(uint8_t *r);
+void Instruction_RL_N_M(uint16_t m);
+void Instruction_RR_N_R(uint8_t *r);
+void Instruction_RR_N_M(uint16_t m);
+void Instruction_RLC_N_R(uint8_t *r);
+void Instruction_RLC_N_M(uint16_t m);
+void Instruction_RRC_N_R(uint8_t *r);
+void Instruction_RRC_N_M(uint16_t m);
 
 #endif // INSTRUCTIONS_H

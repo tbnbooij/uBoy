@@ -147,11 +147,11 @@ void Memory_free(void);
 // Atomic Load & Store
 // ---------------------------------------------------
 uint8_t Memory_load_byte(uint16_t address);
-uint8_t Memory_load_byte_PC(void);
 void Memory_store_byte(uint16_t address, uint8_t data);
 
 // Loading immediate operands from ROM
 // ---------------------------------------------------
+uint8_t Memory_load_byte_PC(void);
 uint16_t Memory_load_word_PC(void);
 
 #endif // MEMORY_H
