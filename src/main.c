@@ -1,19 +1,10 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "timer.h"
-#include "memory.h"
-#include "opcodes.h"
-#include "instructions.h"
-#include "debug.h"
-//#include "test.h"
-
-FILE *rom;
-void cleanup(void);
+#include "cpu.h"
 
 int main(int argc, char *argv[]) {
-	printf("[uBoy] A small (attempt at) a Game Boy emulator\n-----------------------------------------------\n");
-	atexit(&cleanup);
+	CPU_init();
 
 	// Kill program if no ROM-path has been entered
 	if (argc < 2) {
@@ -21,25 +12,8 @@ int main(int argc, char *argv[]) {
 	    exit(EXIT_FAILURE);	
 	}
 	
-	// Open the file in the command-line argument
-	rom = fopen(argv[1], "rb");
-	printf("[uBoy] Fetching ROM\n");
-
-	// Kill program if ROM does not exist
-	if (!rom) {
-		printf("ERROR: Received ROM-path does not exist.\n");
-		exit(EXIT_FAILURE);
-	}
-
-	printf("[uBoy] Initializing emulator\n");
-	// Initialize emulator
-	Memory_init();
-	Registers_init();
-	Timer_init();
-	Opcodes_init();
-
-	//Test_implementation_opcodes(); 
-
+	CPU_input(argv[1]);
+	
 	// TODO: Copy ROM to memory
 
 	// TODO: Main loop of the emulator
@@ -48,13 +22,7 @@ int main(int argc, char *argv[]) {
 	// 3. Execution
 	// 4. Interrupt Catching
 
-	exit(EXIT_SUCCESS);
-}
+	CPU_start();
 
-void cleanup(void) {
-	printf("[uBoy] Quitting the program\n");
-	if (rom)
-		fclose(rom);
-	
-	Memory_free();
+	exit(EXIT_SUCCESS);
 }

@@ -18,3 +18,16 @@ void Debug_print_registers(void) {
 	printf("PC: %hu\t\t(%04x)\n", Registers.PC, Registers.PC);
 }
 
+void Debug_print_ROM(uint16_t begin, uint16_t end) {
+	if (begin > end) {
+		printf("ERROR: Debug print ROM begin address is after end address.\n");
+	}
+
+	printf("DEBUG: Print ROM\n================\n");
+	uint16_t i = begin;
+
+	while (i <= end) {
+		printf("(0x%04hX) - %02hhX\n", i, Memory_load_byte(i));
+		i++;
+	}
+}
