@@ -15,8 +15,6 @@ void Memory_init(void) {
 
 	Memory.OAM = (uint8_t*) malloc(160);
 
-	Memory.IO = (uint8_t*) malloc(128);
-
 	Memory.HRAM = (uint8_t*) malloc(127);
 
 	Memory.IE = 0;
@@ -34,8 +32,6 @@ void Memory_free(void) {
 	free(Memory.RAM.bank_swap);
 
 	free(Memory.OAM);
-
-	free(Memory.IO);
 
 	free(Memory.HRAM);
 }
@@ -74,27 +70,17 @@ uint8_t Memory_load_byte(uint16_t address) {
 		printf("ERROR: Trying to read from unusable memory.\n");
 		exit(EXIT_FAILURE);
 	}
-	else if (address <= 0xFF7F) {
-		return *(Memory.IO - 0xFF00 + address);
-	}
-	else if (address <= 0xFFFE) {
-		return *(Memory.HRAM - 0xFF80 + address);
+	else if (address <= 0xFF7F || address == 0xFFFF) {
+		return IO_read_byte(address);
 	}
 	else {
-		return Memory.IE;
+		return *(Memory.HRAM - 0xFF80 + address);
 	}
 }	
 
-uint8_t Memory_load_byte_PC(void) {
-	uint8_t result = Memory_load_byte(Registers.PC);
-	Registers.PC++;
-	return result;
-}
-
 void Memory_store_byte(uint16_t address, uint8_t data) {
 	if (address <= 0x7FFF) {
-		printf("ERROR: Trying to write to ROM.\n");
-		exit(EXIT_FAILURE);
+		MBC_store_byte(address, data);
 	}
 	else if (address <= 0x9FFF) {
 		*(Memory.VRAM - 0x8000 + address) = data;
@@ -118,11 +104,10 @@ void Memory_store_byte(uint16_t address, uint8_t data) {
 		*(Memory.OAM - 0xFE00 + address) = data;
 	}
 	else if (address <= 0xFEFF) {
-		printf("ERROR: Trying to write to unusable memory.\n");
-		exit(EXIT_FAILURE);
+		//printf("WARNING: Trying to write to unusable memory. (0x%04hX)\n", address);
 	}
 	else if (address <= 0xFF7F) {
-		*(Memory.IO - 0xFF00 + address) = data;
+		IO_store_byte(address, data);
 	}
 	else if (address <= 0xFFFE) {
 		*(Memory.HRAM - 0xFF80 + address) = data;
@@ -134,9 +119,25 @@ void Memory_store_byte(uint16_t address, uint8_t data) {
 
 // Loading immediate operands from ROM
 // ---------------------------------------------------
+uint8_t Memory_load_byte_PC(void) {
+	uint8_t result = Memory_load_byte(Registers.PC);
+	Registers.PC++;
+	return result;
+}
+
 uint16_t Memory_load_word_PC(void) {
 	uint16_t lsb = (uint16_t) Memory_load_byte_PC();
 	uint16_t msb = (uint16_t) Memory_load_byte_PC();
 
 	return (msb << 8) | lsb;
+}
+
+// Memory Bank Controller
+// ---------------------------------------------------
+void MBC_init(void) {
+
+}
+
+void MBC_store_byte(uint16_t address, uint8_t data) {
+
 }

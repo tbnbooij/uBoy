@@ -1,6 +1,9 @@
 #ifndef CPU_H
 #define CPU_H
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
 #include "state.h"
 #include "memory.h"
 #include "opcodes.h"
@@ -15,9 +18,11 @@ void CPU_init(void);
 void CPU_input(char *filepath);
 void CPU_init_modules(void);
 void CPU_start(void);
+void CPU_next(void);
 void CPU_exit(void);
 
-uint8_t File_read_byte(FILE *fp, uint16_t address);
+uint8_t File_read_byte(uint16_t address);
 void File_load_rom(void);
+void File_read_header(void);
 
 #endif // CPU_H

@@ -1,13 +1,20 @@
 #include "state.h"
 
+void State_init(void) {
+	Registers_init();
+	Timer.t = 0;
+	State.mode = MODE_RUN;
+	State.IME = 1;
+}
+
 // MSB and LSB Manipulation (16-bit)
 // ---------------------------------------------------
 uint8_t Extract_MSB(uint16_t i) {
-	return (uint8_t) (i & 0xFF00) >> 8;	
+	return i >> 8;	
 }
 
 uint8_t Extract_LSB(uint16_t i) {
-	return (uint8_t) (i & 0x00FF);
+	return (i & 0x00FF);
 }
 
 uint16_t Combine_MSB_LSB(uint8_t msb, uint8_t lsb) {
@@ -20,10 +27,10 @@ uint16_t Combine_MSB_LSB(uint8_t msb, uint8_t lsb) {
 // Register Initialization
 // ---------------------------------------------------
 void Registers_init(void) {
-	Registers.AF = 0;
-	Registers.BC = 0;
-	Registers.DE = 0;
-	Registers.HL = 0;
+	Registers.AF = 0x01B0;
+	Registers.BC = 0x0013;
+	Registers.DE = 0x00D8;
+	Registers.HL = 0x014D;
 	Registers.PC = 0x100;
 	Registers.SP = 0xFFFE;
 }

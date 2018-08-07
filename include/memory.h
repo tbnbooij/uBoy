@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "debug.h"
+#include "io.h"
 #define KILO_BYTE 1024
 
 // Memory map
@@ -59,5 +60,15 @@ void Memory_store_byte(uint16_t address, uint8_t data);
 // ---------------------------------------------------
 uint8_t Memory_load_byte_PC(void);
 uint16_t Memory_load_word_PC(void);
+
+// Memory Bank Controller
+// ---------------------------------------------------
+
+struct {
+
+} MBC;
+
+void MBC_init(void);
+void MBC_store_byte(uint16_t address, uint8_t data);
 
 #endif // MEMORY_H

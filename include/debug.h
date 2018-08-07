@@ -4,7 +4,7 @@
 #include "memory.h"
 #include "opcodes.h"
 
-void Debug_print_registers(void);
+void Debug_print_state(void);
 void Debug_print_ROM(uint16_t begin, uint16_t end);
 
 #endif // DEBUG_H

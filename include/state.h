@@ -6,13 +6,25 @@
 #define MODE_HALT 1
 #define MODE_STOP 2
 
+void State_init(void);
+
 struct {
     uint8_t mode;
+	uint8_t IME;
 } State;
 
 struct {
     uint64_t t;
 } Timer;
+
+struct {
+	char name[17];
+	uint8_t CGB_flag;
+	uint8_t cartridge_type;
+	uint8_t ROM_size;
+	uint8_t RAM_size;
+	uint8_t destination;
+} Cartridge;
 
 // Extraction of MSB and LSB (16-bit)
 // ---------------------------------------------------

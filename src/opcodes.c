@@ -2036,9 +2036,8 @@ void Opcode_0xD8(void) {
 void Opcode_0xD9(void) {
 	// RETI
 	Instruction_RET();
-	// TODO: Enable interrupts
+	State.IME = 1;
 	Timer.t += 16;
-	Opcode_not_implemented(0xD9);
 }
 
 void Opcode_0xDA(void) {
@@ -2215,8 +2214,8 @@ void Opcode_0xF2(void) {
 
 void Opcode_0xF3(void) {
 	// DI
-	// TODO: Implement Interrupt architecture
-	Opcode_not_implemented(0xF3);
+	State.IME = 0;
+	Timer.t += 4;
 }
 
 void Opcode_0xF4(void) {
@@ -2270,8 +2269,8 @@ void Opcode_0xFA(void) {
 
 void Opcode_0xFB(void) {
 	// EI
-	// TODO: Implement Interrupt architecture
-	Opcode_not_implemented(0xFB);
+	State.IME = 1;
+	Timer.t += 4;
 }
 
 void Opcode_0xFC(void) {
