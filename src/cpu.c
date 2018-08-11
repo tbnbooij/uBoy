@@ -22,6 +22,8 @@ void CPU_init_modules(void) {
 	IO_init();
 	Opcodes_init();
 	File_read_header();
+	Graphics_init();
+	Graphics_randomize();
 }
 
 void CPU_start(void) {
@@ -91,6 +93,7 @@ void CPU_exit(void) {
     if (CPU.source)
         fclose(CPU.source);
     
+	Graphics_exit();
 	Memory_free();
 }
 

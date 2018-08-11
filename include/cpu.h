@@ -9,6 +9,7 @@
 #include "opcodes.h"
 #include "instructions.h"
 #include "debug.h"
+#include "graphics.h"
 
 struct {
     FILE *source;
