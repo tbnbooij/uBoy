@@ -1,6 +1,6 @@
 #include "debug.h"
 
-void Debug_print_state(void) {
+void Debug_print_state(uint64_t clk) {
 	printf("DEBUG: Print State\n================================\n");
 
 	printf("8-bit registers:\n");
@@ -18,7 +18,7 @@ void Debug_print_state(void) {
 	printf("Z: %hhu\nN: %hhu\nH: %hhu\nC: %hhu\n", Flag_get_Z(), Flag_get_N(), Flag_get_H(), Flag_get_C());
 
 	printf("\n");
-	printf("Timer: %lu\n", Timer.t);
+	printf("Timer: %lu\n", clk);
 }
 
 void Debug_print_ROM(uint16_t begin, uint16_t end) {

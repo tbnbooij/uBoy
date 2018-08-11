@@ -2,7 +2,6 @@
 
 void State_init(void) {
 	Registers_init();
-	Timer.t = 0;
 	State.mode = MODE_RUN;
 	State.IME = 1;
 }

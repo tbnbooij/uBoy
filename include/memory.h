@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include "debug.h"
 #include "io.h"
+#include "state.h"
 #define KILO_BYTE 1024
 
 // Memory map

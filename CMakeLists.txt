@@ -10,8 +10,7 @@ set(SOURCES
 	src/memory.c
 	src/instructions.c
 	src/debug.c
-	src/opcodes.c
-	src/graphics.c
+	src/ppu.c
 )
 
 add_executable(uBoy ${SOURCES})

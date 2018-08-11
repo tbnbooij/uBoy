@@ -14,10 +14,6 @@ struct {
 } State;
 
 struct {
-    uint64_t t;
-} Timer;
-
-struct {
 	char name[17];
 	uint8_t CGB_flag;
 	uint8_t cartridge_type;

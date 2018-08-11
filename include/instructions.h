@@ -1,7 +1,7 @@
 #ifndef INSTRUCTIONS_H
 #define INSTRUCTIONS_H
 #include "memory.h"
-#include "opcodes.h"
+#include "state.h"
 
 // 8-bit arithmetic
 void Instruction_ADD_A_N(uint8_t n);
