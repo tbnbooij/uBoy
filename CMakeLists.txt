@@ -6,7 +6,6 @@ set(SOURCES
 	src/main.c
 	src/cpu.c
 	src/state.c
-	src/io.c
 	src/memory.c
 	src/instructions.c
 	src/debug.c

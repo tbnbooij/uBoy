@@ -5,18 +5,17 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-// Window dimensions
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 #define SCALE 3
 
-// PPU modes
 #define MODE_HBLANK 0
 #define MODE_VBLANK 1
 #define MODE_OAM 2
 #define MODE_VRAM 3
 
-struct {
+static struct
+{
     uint8_t mode;
     uint16_t modeclk;
     uint8_t line;
@@ -27,12 +26,11 @@ static SDL_Window *window = NULL;
 static SDL_Surface *surface = NULL;
 static uint32_t palette[5];
 
-void PPU_init(void);
-void PPU_init_palette(void);
-void PPU_clock_update(int8_t delta);
-void PPU_draw(void);
-void PPU_randomize(void);
-void PPU_exit(void);
-
+extern void PPU_init(void);
+static void PPU_init_palette(void);
+extern void PPU_clock_update(int8_t delta);
+extern void PPU_draw(void);
+extern void PPU_randomize(void);
+extern void PPU_exit(void);
 
 #endif // PPU_H

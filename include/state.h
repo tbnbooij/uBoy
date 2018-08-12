@@ -2,18 +2,18 @@
 #define STATE_H
 #include <stdint.h>
 #include <stdlib.h>
-#define MODE_RUN  0
+#define MODE_RUN 0
 #define MODE_HALT 1
 #define MODE_STOP 2
 
-void State_init(void);
-
-struct {
-    uint8_t mode;
+struct
+{
+	uint8_t mode;
 	uint8_t IME;
 } State;
 
-struct {
+struct
+{
 	char name[17];
 	uint8_t CGB_flag;
 	uint8_t cartridge_type;
@@ -22,40 +22,11 @@ struct {
 	uint8_t destination;
 } Cartridge;
 
-// Extraction of MSB and LSB (16-bit)
-// ---------------------------------------------------
-uint8_t Extract_MSB(uint16_t i);
-uint8_t Extract_LSB(uint16_t i);
-uint16_t Combine_MSB_LSB(uint8_t msb, uint8_t lsb);
-
-// Register set
-// --------------------------------
-//
-// 8-bit registers
-// --------------------------------
-// A: Accumulator
-// F: Flags register
-// B, C, D, E, H & L: General purpose
-//
-// 16-bit registers
-// --------------------------------
-// AF, BC, DE, HL: General purpose (combination of two 8-bit registers)
-// SP: Stack pointer
-// PC: Program counter
-//
-// Flags register
-// --------------------------------
-// 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0
-// Z   N   H   C   0   0   0   0 
-//
-// Z: Zero flag
-// N: Subtract flag
-// H: Half carry flag
-// C: Carry flag
-
-struct {
+struct
+{
 	union {
-		struct {
+		struct
+		{
 			uint8_t F;
 			uint8_t A;
 		};
@@ -63,7 +34,8 @@ struct {
 	};
 
 	union {
-		struct {
+		struct
+		{
 			uint8_t C;
 			uint8_t B;
 		};
@@ -71,7 +43,8 @@ struct {
 	};
 
 	union {
-		struct {
+		struct
+		{
 			uint8_t E;
 			uint8_t D;
 		};
@@ -79,7 +52,8 @@ struct {
 	};
 
 	union {
-		struct {
+		struct
+		{
 			uint8_t L;
 			uint8_t H;
 		};
@@ -90,29 +64,31 @@ struct {
 	uint16_t PC;
 } Registers;
 
-// Register Initialization
-// ---------------------------------------------------
-void Registers_init(void);
+extern void State_init(void);
 
-// Flag manipulation
-// --------------------------------
-void Flag_set_Z(uint8_t state);
-void Flag_set_N(uint8_t state);
-void Flag_set_H(uint8_t state);
-void Flag_set_C(uint8_t state);
+extern uint8_t Extract_MSB(uint16_t i);
+extern uint8_t Extract_LSB(uint16_t i);
+extern uint16_t Combine_MSB_LSB(uint8_t msb, uint8_t lsb);
 
-void Flags_set(uint8_t Z, uint8_t N, uint8_t H, uint8_t C);
+extern void Registers_init(void);
 
-uint8_t Flag_test_H_U8_U8(uint8_t a, uint8_t b, uint8_t add);
-uint8_t Flag_test_C_U8_U8(uint8_t a, uint8_t b, uint8_t add);
-uint8_t Flag_test_H_U16_S8(uint16_t a, int8_t b);
-uint8_t Flag_test_C_U16_S8(uint16_t a, int8_t b);
-uint8_t Flag_test_H_U16_U16(uint16_t a, uint16_t b);
-uint8_t Flag_test_C_U16_U16(uint16_t a, uint16_t b);
+extern void Flag_set_Z(uint8_t state);
+extern void Flag_set_N(uint8_t state);
+extern void Flag_set_H(uint8_t state);
+extern void Flag_set_C(uint8_t state);
 
-uint8_t Flag_get_Z(void);
-uint8_t Flag_get_N(void);
-uint8_t Flag_get_H(void);
-uint8_t Flag_get_C(void);
+extern void Flags_set(uint8_t Z, uint8_t N, uint8_t H, uint8_t C);
+
+extern uint8_t Flag_test_H_U8_U8(uint8_t a, uint8_t b, uint8_t add);
+extern uint8_t Flag_test_C_U8_U8(uint8_t a, uint8_t b, uint8_t add);
+extern uint8_t Flag_test_H_U16_S8(uint16_t a, int8_t b);
+extern uint8_t Flag_test_C_U16_S8(uint16_t a, int8_t b);
+extern uint8_t Flag_test_H_U16_U16(uint16_t a, uint16_t b);
+extern uint8_t Flag_test_C_U16_U16(uint16_t a, uint16_t b);
+
+extern uint8_t Flag_get_Z(void);
+extern uint8_t Flag_get_N(void);
+extern uint8_t Flag_get_H(void);
+extern uint8_t Flag_get_C(void);
 
 #endif // STATE_H

@@ -1,6 +1,7 @@
 #include "debug.h"
 
-void Debug_print_state(uint64_t clk) {
+void Debug_print_state(uint64_t clk)
+{
 	printf("DEBUG: Print State\n================================\n");
 
 	printf("8-bit registers:\n");
@@ -21,15 +22,18 @@ void Debug_print_state(uint64_t clk) {
 	printf("Timer: %lu\n", clk);
 }
 
-void Debug_print_ROM(uint16_t begin, uint16_t end) {
-	if (begin > end) {
+void Debug_print_ROM(uint16_t begin, uint16_t end)
+{
+	if (begin > end)
+	{
 		printf("ERROR: Debug print ROM begin address is after end address.\n");
 	}
 
 	printf("DEBUG: Print ROM\n================\n");
 	uint16_t i = begin;
 
-	while (i <= end) {
+	while (i <= end)
+	{
 		printf("(0x%04hX) - %02hhX\n", i, Memory_load_byte(i));
 		i++;
 	}
