@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['extract_5flsb',['Extract_LSB',['../state_8h.html#aad7eb305fc11715b17a900da0b0e6de3',1,'state.h']]],
-  ['extract_5fmsb',['Extract_MSB',['../state_8h.html#ae1658eac5102fd259c5b22dd458cbab2',1,'state.h']]]
+  ['debug_5fprint_5from',['Debug_print_ROM',['../debug_8h.html#a64c16fd1418259fb9c6340e98ec45fe0',1,'debug.h']]],
+  ['debug_5fprint_5fstate',['Debug_print_state',['../debug_8h.html#a25a1308ae22d814a4424bc9c396a77ff',1,'debug.h']]]
 ];

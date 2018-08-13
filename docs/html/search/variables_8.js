@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['oam',['OAM',['../memory_8h.html#a199eddb4cf868e571fd2ed01c7a8a32e',1,'memory.h']]],
-  ['obp0',['OBP0',['../memory_8h.html#a7c04e9a18ac693d6b7ba31764c3ee70e',1,'memory.h']]],
-  ['obp1',['OBP1',['../memory_8h.html#a53b57174a234f73bc93e80bd543d546a',1,'memory.h']]]
+  ['l',['L',['../state_8h.html#aee73cc056696e504430c53eaa9c58cf0',1,'state.h']]],
+  ['lcdc',['LCDC',['../memory_8h.html#a4fef16b094b310f510df6cacf7fa56c6',1,'memory.h']]],
+  ['line',['line',['../ppu_8h.html#a49601971f24dd78db5dc626c92dcd990',1,'ppu.h']]],
+  ['ly',['LY',['../memory_8h.html#aac72867167411ab30a371a9d8e8076d1',1,'memory.h']]],
+  ['lyc',['LYC',['../memory_8h.html#a8ae5a3bf622f470d0e5739b3b427e8a7',1,'memory.h']]]
 ];

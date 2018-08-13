@@ -1,0 +1,78 @@
+\hypertarget{debug_8h}{}\section{include/debug.h File Reference}
+\label{debug_8h}\index{include/debug.\+h@{include/debug.\+h}}
+
+
+A set of debugging functions for testing the emulator.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}memory.\+h\char`\"{}}\newline
+Include dependency graph for debug.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{debug_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{debug_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{debug_8h_a25a1308ae22d814a4424bc9c396a77ff}{Debug\+\_\+print\+\_\+state} (uint64\+\_\+t \hyperlink{cpu_8h_a9f98b8e7bb24f1072d2214c113b4a140}{clk})
+\begin{DoxyCompactList}\small\item\em Print the state of the emulator (registers, clock, etc.) to stdout. \end{DoxyCompactList}\item 
+void \hyperlink{debug_8h_a64c16fd1418259fb9c6340e98ec45fe0}{Debug\+\_\+print\+\_\+\+R\+OM} (uint16\+\_\+t begin, uint16\+\_\+t end)
+\begin{DoxyCompactList}\small\item\em Print a slice of the currently loaded R\+OM to stdout with their respective addresses. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A set of debugging functions for testing the emulator. 
+
+\begin{DoxyAuthor}{Author}
+tbnbooij 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/08-\/13 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{debug_8h_a64c16fd1418259fb9c6340e98ec45fe0}\label{debug_8h_a64c16fd1418259fb9c6340e98ec45fe0}} 
+\index{debug.\+h@{debug.\+h}!Debug\+\_\+print\+\_\+\+R\+OM@{Debug\+\_\+print\+\_\+\+R\+OM}}
+\index{Debug\+\_\+print\+\_\+\+R\+OM@{Debug\+\_\+print\+\_\+\+R\+OM}!debug.\+h@{debug.\+h}}
+\subsubsection{\texorpdfstring{Debug\+\_\+print\+\_\+\+R\+O\+M()}{Debug\_print\_ROM()}}
+{\footnotesize\ttfamily void Debug\+\_\+print\+\_\+\+R\+OM (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{begin,  }\item[{uint16\+\_\+t}]{end }\end{DoxyParamCaption})}
+
+
+
+Print a slice of the currently loaded R\+OM to stdout with their respective addresses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & The 16-\/bit address at which the slice starts \\
+\hline
+{\em end} & The 16-\/bit address at which the slide ends \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{debug_8h_a25a1308ae22d814a4424bc9c396a77ff}\label{debug_8h_a25a1308ae22d814a4424bc9c396a77ff}} 
+\index{debug.\+h@{debug.\+h}!Debug\+\_\+print\+\_\+state@{Debug\+\_\+print\+\_\+state}}
+\index{Debug\+\_\+print\+\_\+state@{Debug\+\_\+print\+\_\+state}!debug.\+h@{debug.\+h}}
+\subsubsection{\texorpdfstring{Debug\+\_\+print\+\_\+state()}{Debug\_print\_state()}}
+{\footnotesize\ttfamily void Debug\+\_\+print\+\_\+state (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{clk }\end{DoxyParamCaption})}
+
+
+
+Print the state of the emulator (registers, clock, etc.) to stdout. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em clk} & The current C\+PU clock \\
+\hline
+\end{DoxyParams}

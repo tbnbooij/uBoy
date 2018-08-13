@@ -1,0 +1,7 @@
+<map id="include/cpu.h" name="include/cpu.h">
+<area shape="rect" id="node6" href="$state_8h.html" title="Representation of the state of the emulator (registers, CPU mode, flags) and a set of utility functio..." alt="" coords="175,229,238,256"/>
+<area shape="rect" id="node8" href="$memory_8h.html" title="Representation of the Game Boy&#39;s memory model and operations to read and write to this memory..." alt="" coords="292,155,372,181"/>
+<area shape="rect" id="node10" href="$debug_8h.html" title="A set of debugging functions for testing the emulator. " alt="" coords="415,229,483,256"/>
+<area shape="rect" id="node11" href="$instructions_8h.html" title="A set of reusable instructions that are called by the opcode functions. " alt="" coords="226,80,326,107"/>
+<area shape="rect" id="node12" href="$ppu_8h.html" title="The Picture Processing Unit of the emulator, responsible for generating the video output..." alt="" coords="45,229,99,256"/>
+</map>

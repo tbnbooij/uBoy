@@ -1,6 +1,25 @@
 var searchData=
 [
-  ['oam',['OAM',['../memory_8h.html#a199eddb4cf868e571fd2ed01c7a8a32e',1,'memory.h']]],
-  ['obp0',['OBP0',['../memory_8h.html#a7c04e9a18ac693d6b7ba31764c3ee70e',1,'memory.h']]],
-  ['obp1',['OBP1',['../memory_8h.html#a53b57174a234f73bc93e80bd543d546a',1,'memory.h']]]
+  ['name',['name',['../state_8h.html#af984635a558e22d4669b0f9ee1298779',1,'state.h']]],
+  ['nr10',['NR10',['../memory_8h.html#a8fbb8bb9ef49281d646ef1ed0c204a68',1,'memory.h']]],
+  ['nr11',['NR11',['../memory_8h.html#a01e595f265620d78598813c8653c4f5f',1,'memory.h']]],
+  ['nr12',['NR12',['../memory_8h.html#ae376586495517abdb6b30bcbf3c594ef',1,'memory.h']]],
+  ['nr13',['NR13',['../memory_8h.html#a22afb2aa1974dc6c9f1f16c9b189124e',1,'memory.h']]],
+  ['nr14',['NR14',['../memory_8h.html#a20490b899225cc36d161277515a16e56',1,'memory.h']]],
+  ['nr21',['NR21',['../memory_8h.html#a030a59f26206ac0ac4201a322b5cdd5d',1,'memory.h']]],
+  ['nr22',['NR22',['../memory_8h.html#a84a77945673e816e904657cf55b3e902',1,'memory.h']]],
+  ['nr23',['NR23',['../memory_8h.html#a86f90fa3fd15f1caaee3154f3425ad4f',1,'memory.h']]],
+  ['nr24',['NR24',['../memory_8h.html#a277721eee408eff8e2bf675da59ab0f2',1,'memory.h']]],
+  ['nr30',['NR30',['../memory_8h.html#ab1dc91e1df22fd74272e6af40c9f3e22',1,'memory.h']]],
+  ['nr31',['NR31',['../memory_8h.html#ac27fb79168070f5b8aa58ab030dbc30b',1,'memory.h']]],
+  ['nr32',['NR32',['../memory_8h.html#a012ca99b3d393d9696a57fbedba071eb',1,'memory.h']]],
+  ['nr33',['NR33',['../memory_8h.html#ab183837a14028cb6674aaaadd2ac18db',1,'memory.h']]],
+  ['nr34',['NR34',['../memory_8h.html#aa2b0164adc5f48687ffaf53ac41265b8',1,'memory.h']]],
+  ['nr41',['NR41',['../memory_8h.html#a5bb89968df1cf6d2724a2b10300fd20f',1,'memory.h']]],
+  ['nr42',['NR42',['../memory_8h.html#afa29f9e2924c6adb56e8dc67671ff3ac',1,'memory.h']]],
+  ['nr43',['NR43',['../memory_8h.html#a32e5cc4bcf2df723aeeae24c0c9b3ebe',1,'memory.h']]],
+  ['nr44',['NR44',['../memory_8h.html#a1012d06d3215a8e5833c8e02146b6c33',1,'memory.h']]],
+  ['nr50',['NR50',['../memory_8h.html#a01646acd7c6dcf29e7390e9007b6792d',1,'memory.h']]],
+  ['nr51',['NR51',['../memory_8h.html#ae1d2e83ced05b7401878c591e76def88',1,'memory.h']]],
+  ['nr52',['NR52',['../memory_8h.html#a0fe259dbbb83d897c6f5e47e04b45a78',1,'memory.h']]]
 ];

@@ -1,0 +1,236 @@
+\hypertarget{cpu_8h}{}\section{include/cpu.h File Reference}
+\label{cpu_8h}\index{include/cpu.\+h@{include/cpu.\+h}}
+
+
+The Central Processing Unit of the emulator, which is connected to all other virtual components.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}state.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}instructions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ppu.\+h\char`\"{}}\newline
+Include dependency graph for cpu.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cpu_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{cpu_8h_a03bf14f1f7032b17a570d5aa5363f69c}\label{cpu_8h_a03bf14f1f7032b17a570d5aa5363f69c}} 
+void \hyperlink{cpu_8h_a03bf14f1f7032b17a570d5aa5363f69c}{C\+P\+U\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the C\+PU and link \hyperlink{cpu_8h_aa698eea554f7961d3503e78ceaede042}{C\+P\+U\+\_\+exit()} to the \textquotesingle{}atexit\textquotesingle{} function queue. \end{DoxyCompactList}\item 
+void \hyperlink{cpu_8h_a1d898554c9f4366789d354a3215f5e44}{C\+P\+U\+\_\+input} (char $\ast$filepath)
+\begin{DoxyCompactList}\small\item\em Open the R\+O\+M-\/file at a given relative file path and call \hyperlink{cpu_8h_a454a466a2a93a324af9e31e009989261}{C\+P\+U\+\_\+init\+\_\+modules()} and \hyperlink{cpu_8h_a4ad3f6804b4818bb10d8ae7e94995103}{File\+\_\+load\+\_\+rom()}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cpu_8h_a454a466a2a93a324af9e31e009989261}\label{cpu_8h_a454a466a2a93a324af9e31e009989261}} 
+static void \hyperlink{cpu_8h_a454a466a2a93a324af9e31e009989261}{C\+P\+U\+\_\+init\+\_\+modules} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the external modules of the C\+PU (memory, state, IO, opcodes, P\+PU). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cpu_8h_a961718b73d49be66fe3baa1c68e81a4c}\label{cpu_8h_a961718b73d49be66fe3baa1c68e81a4c}} 
+void \hyperlink{cpu_8h_a961718b73d49be66fe3baa1c68e81a4c}{C\+P\+U\+\_\+start} (void)
+\begin{DoxyCompactList}\small\item\em Start R\+OM execution. Currently returns a command-\/line interface for debugging purposes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cpu_8h_a9704782125d79063f71a95db98e801b7}\label{cpu_8h_a9704782125d79063f71a95db98e801b7}} 
+static void \hyperlink{cpu_8h_a9704782125d79063f71a95db98e801b7}{C\+P\+U\+\_\+next} (void)
+\begin{DoxyCompactList}\small\item\em Execute the opcode at the program counter. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cpu_8h_aa698eea554f7961d3503e78ceaede042}\label{cpu_8h_aa698eea554f7961d3503e78ceaede042}} 
+void \hyperlink{cpu_8h_aa698eea554f7961d3503e78ceaede042}{C\+P\+U\+\_\+exit} (void)
+\begin{DoxyCompactList}\small\item\em Free allocated memory by calling \hyperlink{memory_8h_a3991fe5b320be41916cfa3908915fca2}{Memory\+\_\+exit()} and \hyperlink{ppu_8h_a5a27010930bfdda1697ebeac72eebf3c}{P\+P\+U\+\_\+exit()} and closing all file streams. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \hyperlink{cpu_8h_a292d108e6e59e440798428c7bb78b8a1}{File\+\_\+read\+\_\+byte} (uint16\+\_\+t address)
+\begin{DoxyCompactList}\small\item\em Read a byte from C\+P\+U.\+source (file) at a given 16-\/bit address. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cpu_8h_a4ad3f6804b4818bb10d8ae7e94995103}\label{cpu_8h_a4ad3f6804b4818bb10d8ae7e94995103}} 
+static void \hyperlink{cpu_8h_a4ad3f6804b4818bb10d8ae7e94995103}{File\+\_\+load\+\_\+rom} (void)
+\begin{DoxyCompactList}\small\item\em Copy the contents of the file stream to the allocated memory by the Memory-\/module. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cpu_8h_a5bbd1933564b1630bf25c8948d1771a1}\label{cpu_8h_a5bbd1933564b1630bf25c8948d1771a1}} 
+static void \hyperlink{cpu_8h_a5bbd1933564b1630bf25c8948d1771a1}{File\+\_\+read\+\_\+header} (void)
+\begin{DoxyCompactList}\small\item\em Read the cartridge header and store the results in the Cartridge-\/struct (State-\/module). \end{DoxyCompactList}\item 
+static void \hyperlink{cpu_8h_ab580e6e98d09be5b8a57f8343db85fa4}{C\+P\+U\+\_\+clock\+\_\+update} (int8\+\_\+t delta)
+\begin{DoxyCompactList}\small\item\em Update the C\+PU clock by a given number of \textquotesingle{}ticks\textquotesingle{}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cpu_8h_a97fa529c3385541da7c8ef1731ff8732}\label{cpu_8h_a97fa529c3385541da7c8ef1731ff8732}} 
+static void \hyperlink{cpu_8h_a97fa529c3385541da7c8ef1731ff8732}{Opcodes\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the opcode tables. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \hyperlink{cpu_8h_a7d3ec7836f050d62905a30c53ba20c27}{Opcode\+\_\+fetch} (void)
+\begin{DoxyCompactList}\small\item\em Fetch the opcode at the memory location the program counter is pointing to. \end{DoxyCompactList}\item 
+static void \hyperlink{cpu_8h_a7a163ff12c19e051f4e411ea8103f724}{Opcode\+\_\+decode} (uint8\+\_\+t opcode)
+\begin{DoxyCompactList}\small\item\em Execute the instruction a given opcode describes. \end{DoxyCompactList}\item 
+static void \hyperlink{cpu_8h_a918095de2246ecedddde82456b876e35}{C\+B\+Opcode\+\_\+decode} (uint8\+\_\+t opcode)
+\begin{DoxyCompactList}\small\item\em Execute an instruction that is prefixed by opcode 0x\+CB. \end{DoxyCompactList}\item 
+static void \hyperlink{cpu_8h_a7d53b527cb128290be44bc07b28e9003}{Opcode\+\_\+not\+\_\+implemented} (uint8\+\_\+t opcode)
+\begin{DoxyCompactList}\small\item\em Called by opcodes that haven\textquotesingle{}t been implemented yet; used as a debugging aid. \end{DoxyCompactList}\item 
+static void \hyperlink{cpu_8h_a86c5b7c87481c38434077f58c0614ed6}{C\+B\+Opcode\+\_\+not\+\_\+implemented} (uint8\+\_\+t opcode)
+\begin{DoxyCompactList}\small\item\em Called by 0x\+C\+D-\/prefixed opcodes that haven\textquotesingle{}t been implemented yet; used as a debugging aid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{cpu_8h_a93255e2435913eb63ffcc9db1bae6840}\label{cpu_8h_a93255e2435913eb63ffcc9db1bae6840}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>FILE $\ast$ \hyperlink{cpu_8h_a0c4aa150664a3347db13aeeb47811829}{source}\\
+\>uint64\_t \hyperlink{cpu_8h_a9f98b8e7bb24f1072d2214c113b4a140}{clk}\\
+\} \hyperlink{cpu_8h_a93255e2435913eb63ffcc9db1bae6840}{CPU}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Struct that contains state variables of the C\+PU only to be accessed within C\+P\+U.\+c. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cpu_8h_acf492913aa0d93212c1d64469bf5a913}\label{cpu_8h_acf492913aa0d93212c1d64469bf5a913}} 
+static void($\ast$ \hyperlink{cpu_8h_acf492913aa0d93212c1d64469bf5a913}{Opcodes} \mbox{[}0x\+F\+F+1\mbox{]})(void)
+\begin{DoxyCompactList}\small\item\em The main opcode table, containing pointers to functions for each and every instruction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cpu_8h_ab99c3cea87c39118bfb8f6e3295896f7}\label{cpu_8h_ab99c3cea87c39118bfb8f6e3295896f7}} 
+static void($\ast$ \hyperlink{cpu_8h_ab99c3cea87c39118bfb8f6e3295896f7}{C\+B\+Opcodes} \mbox{[}0x\+F\+F+1\mbox{]})(void)
+\begin{DoxyCompactList}\small\item\em The opcode table used for instructions prefixed by 0x\+CB, containing pointers to functions for each and every instruction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Central Processing Unit of the emulator, which is connected to all other virtual components. 
+
+\begin{DoxyAuthor}{Author}
+tbnbooij 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/08-\/13 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{cpu_8h_a918095de2246ecedddde82456b876e35}\label{cpu_8h_a918095de2246ecedddde82456b876e35}} 
+\index{cpu.\+h@{cpu.\+h}!C\+B\+Opcode\+\_\+decode@{C\+B\+Opcode\+\_\+decode}}
+\index{C\+B\+Opcode\+\_\+decode@{C\+B\+Opcode\+\_\+decode}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{C\+B\+Opcode\+\_\+decode()}{CBOpcode\_decode()}}
+{\footnotesize\ttfamily static void C\+B\+Opcode\+\_\+decode (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{opcode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Execute an instruction that is prefixed by opcode 0x\+CB. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & The read opcode after 0x\+CB. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{cpu_8h_a86c5b7c87481c38434077f58c0614ed6}\label{cpu_8h_a86c5b7c87481c38434077f58c0614ed6}} 
+\index{cpu.\+h@{cpu.\+h}!C\+B\+Opcode\+\_\+not\+\_\+implemented@{C\+B\+Opcode\+\_\+not\+\_\+implemented}}
+\index{C\+B\+Opcode\+\_\+not\+\_\+implemented@{C\+B\+Opcode\+\_\+not\+\_\+implemented}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{C\+B\+Opcode\+\_\+not\+\_\+implemented()}{CBOpcode\_not\_implemented()}}
+{\footnotesize\ttfamily static void C\+B\+Opcode\+\_\+not\+\_\+implemented (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{opcode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Called by 0x\+C\+D-\/prefixed opcodes that haven\textquotesingle{}t been implemented yet; used as a debugging aid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & The opcode for the instruction that has not been implemented yet \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{cpu_8h_ab580e6e98d09be5b8a57f8343db85fa4}\label{cpu_8h_ab580e6e98d09be5b8a57f8343db85fa4}} 
+\index{cpu.\+h@{cpu.\+h}!C\+P\+U\+\_\+clock\+\_\+update@{C\+P\+U\+\_\+clock\+\_\+update}}
+\index{C\+P\+U\+\_\+clock\+\_\+update@{C\+P\+U\+\_\+clock\+\_\+update}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{C\+P\+U\+\_\+clock\+\_\+update()}{CPU\_clock\_update()}}
+{\footnotesize\ttfamily static void C\+P\+U\+\_\+clock\+\_\+update (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{delta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Update the C\+PU clock by a given number of \textquotesingle{}ticks\textquotesingle{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & The number of \textquotesingle{}ticks\textquotesingle{} by which the C\+PU is updated. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{cpu_8h_a1d898554c9f4366789d354a3215f5e44}\label{cpu_8h_a1d898554c9f4366789d354a3215f5e44}} 
+\index{cpu.\+h@{cpu.\+h}!C\+P\+U\+\_\+input@{C\+P\+U\+\_\+input}}
+\index{C\+P\+U\+\_\+input@{C\+P\+U\+\_\+input}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{C\+P\+U\+\_\+input()}{CPU\_input()}}
+{\footnotesize\ttfamily void C\+P\+U\+\_\+input (\begin{DoxyParamCaption}\item[{char $\ast$}]{filepath }\end{DoxyParamCaption})}
+
+
+
+Open the R\+O\+M-\/file at a given relative file path and call \hyperlink{cpu_8h_a454a466a2a93a324af9e31e009989261}{C\+P\+U\+\_\+init\+\_\+modules()} and \hyperlink{cpu_8h_a4ad3f6804b4818bb10d8ae7e94995103}{File\+\_\+load\+\_\+rom()}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & The relative path to a (.gb) R\+O\+M-\/file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{cpu_8h_a292d108e6e59e440798428c7bb78b8a1}\label{cpu_8h_a292d108e6e59e440798428c7bb78b8a1}} 
+\index{cpu.\+h@{cpu.\+h}!File\+\_\+read\+\_\+byte@{File\+\_\+read\+\_\+byte}}
+\index{File\+\_\+read\+\_\+byte@{File\+\_\+read\+\_\+byte}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{File\+\_\+read\+\_\+byte()}{File\_read\_byte()}}
+{\footnotesize\ttfamily static uint8\+\_\+t File\+\_\+read\+\_\+byte (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Read a byte from C\+P\+U.\+source (file) at a given 16-\/bit address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & An unsigned 16-\/bit address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The value at the given address 
+\end{DoxyReturn}
+\mbox{\Hypertarget{cpu_8h_a7a163ff12c19e051f4e411ea8103f724}\label{cpu_8h_a7a163ff12c19e051f4e411ea8103f724}} 
+\index{cpu.\+h@{cpu.\+h}!Opcode\+\_\+decode@{Opcode\+\_\+decode}}
+\index{Opcode\+\_\+decode@{Opcode\+\_\+decode}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{Opcode\+\_\+decode()}{Opcode\_decode()}}
+{\footnotesize\ttfamily static void Opcode\+\_\+decode (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{opcode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Execute the instruction a given opcode describes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & The opcode of the instruction that will be executed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{cpu_8h_a7d3ec7836f050d62905a30c53ba20c27}\label{cpu_8h_a7d3ec7836f050d62905a30c53ba20c27}} 
+\index{cpu.\+h@{cpu.\+h}!Opcode\+\_\+fetch@{Opcode\+\_\+fetch}}
+\index{Opcode\+\_\+fetch@{Opcode\+\_\+fetch}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{Opcode\+\_\+fetch()}{Opcode\_fetch()}}
+{\footnotesize\ttfamily static uint8\+\_\+t Opcode\+\_\+fetch (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Fetch the opcode at the memory location the program counter is pointing to. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The opcode at the program counter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{cpu_8h_a7d53b527cb128290be44bc07b28e9003}\label{cpu_8h_a7d53b527cb128290be44bc07b28e9003}} 
+\index{cpu.\+h@{cpu.\+h}!Opcode\+\_\+not\+\_\+implemented@{Opcode\+\_\+not\+\_\+implemented}}
+\index{Opcode\+\_\+not\+\_\+implemented@{Opcode\+\_\+not\+\_\+implemented}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{Opcode\+\_\+not\+\_\+implemented()}{Opcode\_not\_implemented()}}
+{\footnotesize\ttfamily static void Opcode\+\_\+not\+\_\+implemented (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{opcode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Called by opcodes that haven\textquotesingle{}t been implemented yet; used as a debugging aid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & The opcode for the instruction that has not been implemented yet \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{cpu_8h_a9f98b8e7bb24f1072d2214c113b4a140}\label{cpu_8h_a9f98b8e7bb24f1072d2214c113b4a140}} 
+\index{cpu.\+h@{cpu.\+h}!clk@{clk}}
+\index{clk@{clk}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{clk}{clk}}
+{\footnotesize\ttfamily uint64\+\_\+t clk}
+
+64-\/bit unsigned clock that records the number of passed \textquotesingle{}ticks\textquotesingle{} caused by program execution \mbox{\Hypertarget{cpu_8h_a0c4aa150664a3347db13aeeb47811829}\label{cpu_8h_a0c4aa150664a3347db13aeeb47811829}} 
+\index{cpu.\+h@{cpu.\+h}!source@{source}}
+\index{source@{source}!cpu.\+h@{cpu.\+h}}
+\subsubsection{\texorpdfstring{source}{source}}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ source}
+
+File pointer to the .gb file that is loaded to R\+OM 

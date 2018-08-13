@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['ie',['IE',['../memory_8h.html#ab1ca70da5c3b3a71451a8b582d9c45ee',1,'memory.h']]],
-  ['if',['IF',['../memory_8h.html#ae8ee8fbf58d3aeb61d81bae817be8826',1,'memory.h']]],
-  ['io_5fregisters',['IO_Registers',['../memory_8h.html#a5f9bd6c1e1c61a55c4dfacc0fb2fa160',1,'memory.h']]]
+  ['e',['E',['../state_8h.html#a5866c444a2a78211eef583f48cd36225',1,'state.h']]],
+  ['extram',['EXTRAM',['../memory_8h.html#ab1119300a60f06c45d14b0d9eafcf422',1,'memory.h']]]
 ];

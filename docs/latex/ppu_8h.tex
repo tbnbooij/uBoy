@@ -1,0 +1,204 @@
+\hypertarget{ppu_8h}{}\section{include/ppu.h File Reference}
+\label{ppu_8h}\index{include/ppu.\+h@{include/ppu.\+h}}
+
+
+The Picture Processing Unit of the emulator, responsible for generating the video output.  
+
+
+{\ttfamily \#include \char`\"{}S\+D\+L2/\+S\+D\+L.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for ppu.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{ppu_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{ppu_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ppu_8h_a2cd109632a6dcccaa80b43561b1ab700}{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH}~160
+\item 
+\#define \hyperlink{ppu_8h_a6974d08a74da681b3957b2fead2608b8}{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT}~144
+\item 
+\#define \hyperlink{ppu_8h_a0cbea62f1ce2043dd08108e65ed8de1d}{S\+C\+A\+LE}~3
+\item 
+\#define \hyperlink{ppu_8h_a90abcdde1c0d8892c757abdb248b6d91}{M\+O\+D\+E\+\_\+\+H\+B\+L\+A\+NK}~0
+\item 
+\#define \hyperlink{ppu_8h_a2e4116a7df080b5bab87dbd8d031c145}{M\+O\+D\+E\+\_\+\+V\+B\+L\+A\+NK}~1
+\item 
+\#define \hyperlink{ppu_8h_aa34e41f8868c598e30e5dea50f705002}{M\+O\+D\+E\+\_\+\+O\+AM}~2
+\item 
+\#define \hyperlink{ppu_8h_ab2ba01e739caa9ef208b2ec8964e4b9f}{M\+O\+D\+E\+\_\+\+V\+R\+AM}~3
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ppu_8h_a6c12009d85d50bc91e06b08e20f9d558}\label{ppu_8h_a6c12009d85d50bc91e06b08e20f9d558}} 
+void \hyperlink{ppu_8h_a6c12009d85d50bc91e06b08e20f9d558}{P\+P\+U\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize S\+D\+L2, the window, surface and call \hyperlink{ppu_8h_a8380236ed07b10442228ee1c8c65d5e5}{P\+P\+U\+\_\+init\+\_\+palette()}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ppu_8h_a8380236ed07b10442228ee1c8c65d5e5}\label{ppu_8h_a8380236ed07b10442228ee1c8c65d5e5}} 
+static void \hyperlink{ppu_8h_a8380236ed07b10442228ee1c8c65d5e5}{P\+P\+U\+\_\+init\+\_\+palette} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the palette by setting each array cell to a 32-\/bit A\+R\+GB representation of a color. \end{DoxyCompactList}\item 
+void \hyperlink{ppu_8h_ac414f4b4497755cf939ab936c5adbe9e}{P\+P\+U\+\_\+clock\+\_\+update} (int8\+\_\+t delta)
+\begin{DoxyCompactList}\small\item\em Function called by \hyperlink{cpu_8h_ab580e6e98d09be5b8a57f8343db85fa4}{C\+P\+U\+\_\+clock\+\_\+update()} that keeps the P\+PU and C\+PU in sync, maintains the state machine and calls functions for frame buffer manipulation at the right time. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ppu_8h_ac9fb618d59a40c46c0dcff05e82759ec}\label{ppu_8h_ac9fb618d59a40c46c0dcff05e82759ec}} 
+void \hyperlink{ppu_8h_ac9fb618d59a40c46c0dcff05e82759ec}{P\+P\+U\+\_\+draw} (void)
+\begin{DoxyCompactList}\small\item\em Draw the current frame buffer to the window. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ppu_8h_a706593ec9b35f445e5848f24f04e34df}\label{ppu_8h_a706593ec9b35f445e5848f24f04e34df}} 
+void \hyperlink{ppu_8h_a706593ec9b35f445e5848f24f04e34df}{P\+P\+U\+\_\+randomize} (void)
+\begin{DoxyCompactList}\small\item\em Fill the framebuffer with random values (\mbox{[}0,4\mbox{]}). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ppu_8h_a5a27010930bfdda1697ebeac72eebf3c}\label{ppu_8h_a5a27010930bfdda1697ebeac72eebf3c}} 
+void \hyperlink{ppu_8h_a5a27010930bfdda1697ebeac72eebf3c}{P\+P\+U\+\_\+exit} (void)
+\begin{DoxyCompactList}\small\item\em Free all memory allocated in \hyperlink{ppu_8h_a6c12009d85d50bc91e06b08e20f9d558}{P\+P\+U\+\_\+init()} and quit S\+D\+L2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ppu_8h_a91bf052b130f51c467ea3ea51a2222d8}\label{ppu_8h_a91bf052b130f51c467ea3ea51a2222d8}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint8\_t \hyperlink{ppu_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode}\\
+\>uint16\_t \hyperlink{ppu_8h_aff1100d9f966fc8bfe9836e29fb9fbea}{modeclk}\\
+\>uint8\_t \hyperlink{ppu_8h_a49601971f24dd78db5dc626c92dcd990}{line}\\
+\} \hyperlink{ppu_8h_a91bf052b130f51c467ea3ea51a2222d8}{PPU}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Struct that represents the state of the P\+PU. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \hyperlink{ppu_8h_a738650c7906065ad8b62c4c5aafd6d1d}{framebuffer} \mbox{[}\hyperlink{ppu_8h_a6974d08a74da681b3957b2fead2608b8}{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT} $\ast$\hyperlink{ppu_8h_a2cd109632a6dcccaa80b43561b1ab700}{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH}\mbox{]}
+\item 
+static S\+D\+L\+\_\+\+Window $\ast$ \hyperlink{ppu_8h_aaa8e409e04dcf575ef63fd5fb3db06f9}{window} = N\+U\+LL
+\item 
+static S\+D\+L\+\_\+\+Surface $\ast$ \hyperlink{ppu_8h_a2f5cac12e913bcfcff660305bf88dd3b}{surface} = N\+U\+LL
+\item 
+static uint32\+\_\+t \hyperlink{ppu_8h_a96e240cdb01f5e23c698ecf0aaaca4e6}{palette} \mbox{[}5\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Picture Processing Unit of the emulator, responsible for generating the video output. 
+
+\begin{DoxyAuthor}{Author}
+tbnbooij 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/08-\/13 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ppu_8h_a90abcdde1c0d8892c757abdb248b6d91}\label{ppu_8h_a90abcdde1c0d8892c757abdb248b6d91}} 
+\index{ppu.\+h@{ppu.\+h}!M\+O\+D\+E\+\_\+\+H\+B\+L\+A\+NK@{M\+O\+D\+E\+\_\+\+H\+B\+L\+A\+NK}}
+\index{M\+O\+D\+E\+\_\+\+H\+B\+L\+A\+NK@{M\+O\+D\+E\+\_\+\+H\+B\+L\+A\+NK}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+E\+\_\+\+H\+B\+L\+A\+NK}{MODE\_HBLANK}}
+{\footnotesize\ttfamily \#define M\+O\+D\+E\+\_\+\+H\+B\+L\+A\+NK~0}
+
+The mode in which the P\+PU is done with drawing a line of the image and waiting to draw a new one \mbox{\Hypertarget{ppu_8h_aa34e41f8868c598e30e5dea50f705002}\label{ppu_8h_aa34e41f8868c598e30e5dea50f705002}} 
+\index{ppu.\+h@{ppu.\+h}!M\+O\+D\+E\+\_\+\+O\+AM@{M\+O\+D\+E\+\_\+\+O\+AM}}
+\index{M\+O\+D\+E\+\_\+\+O\+AM@{M\+O\+D\+E\+\_\+\+O\+AM}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+E\+\_\+\+O\+AM}{MODE\_OAM}}
+{\footnotesize\ttfamily \#define M\+O\+D\+E\+\_\+\+O\+AM~2}
+
+The mode in which the P\+PU is obtaining data from the O\+AM \mbox{\Hypertarget{ppu_8h_a2e4116a7df080b5bab87dbd8d031c145}\label{ppu_8h_a2e4116a7df080b5bab87dbd8d031c145}} 
+\index{ppu.\+h@{ppu.\+h}!M\+O\+D\+E\+\_\+\+V\+B\+L\+A\+NK@{M\+O\+D\+E\+\_\+\+V\+B\+L\+A\+NK}}
+\index{M\+O\+D\+E\+\_\+\+V\+B\+L\+A\+NK@{M\+O\+D\+E\+\_\+\+V\+B\+L\+A\+NK}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+E\+\_\+\+V\+B\+L\+A\+NK}{MODE\_VBLANK}}
+{\footnotesize\ttfamily \#define M\+O\+D\+E\+\_\+\+V\+B\+L\+A\+NK~1}
+
+The mode in which the P\+PU is done with drawing all lines of a single frame and waiting to start with the next line \mbox{\Hypertarget{ppu_8h_ab2ba01e739caa9ef208b2ec8964e4b9f}\label{ppu_8h_ab2ba01e739caa9ef208b2ec8964e4b9f}} 
+\index{ppu.\+h@{ppu.\+h}!M\+O\+D\+E\+\_\+\+V\+R\+AM@{M\+O\+D\+E\+\_\+\+V\+R\+AM}}
+\index{M\+O\+D\+E\+\_\+\+V\+R\+AM@{M\+O\+D\+E\+\_\+\+V\+R\+AM}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+E\+\_\+\+V\+R\+AM}{MODE\_VRAM}}
+{\footnotesize\ttfamily \#define M\+O\+D\+E\+\_\+\+V\+R\+AM~3}
+
+The mode in which the P\+PU is obtaining data from V\+R\+AM \mbox{\Hypertarget{ppu_8h_a0cbea62f1ce2043dd08108e65ed8de1d}\label{ppu_8h_a0cbea62f1ce2043dd08108e65ed8de1d}} 
+\index{ppu.\+h@{ppu.\+h}!S\+C\+A\+LE@{S\+C\+A\+LE}}
+\index{S\+C\+A\+LE@{S\+C\+A\+LE}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{S\+C\+A\+LE}{SCALE}}
+{\footnotesize\ttfamily \#define S\+C\+A\+LE~3}
+
+An integer multiplier to scale the original screen dimensions with \mbox{\Hypertarget{ppu_8h_a6974d08a74da681b3957b2fead2608b8}\label{ppu_8h_a6974d08a74da681b3957b2fead2608b8}} 
+\index{ppu.\+h@{ppu.\+h}!S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT@{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT}}
+\index{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT@{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT}{SCREEN\_HEIGHT}}
+{\footnotesize\ttfamily \#define S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT~144}
+
+The number of pixels along the height of the original Game Boy L\+CD \mbox{\Hypertarget{ppu_8h_a2cd109632a6dcccaa80b43561b1ab700}\label{ppu_8h_a2cd109632a6dcccaa80b43561b1ab700}} 
+\index{ppu.\+h@{ppu.\+h}!S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH@{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH}}
+\index{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH@{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH}{SCREEN\_WIDTH}}
+{\footnotesize\ttfamily \#define S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH~160}
+
+The number of pixels along the width of the original Game Boy L\+CD 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ppu_8h_ac414f4b4497755cf939ab936c5adbe9e}\label{ppu_8h_ac414f4b4497755cf939ab936c5adbe9e}} 
+\index{ppu.\+h@{ppu.\+h}!P\+P\+U\+\_\+clock\+\_\+update@{P\+P\+U\+\_\+clock\+\_\+update}}
+\index{P\+P\+U\+\_\+clock\+\_\+update@{P\+P\+U\+\_\+clock\+\_\+update}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{P\+P\+U\+\_\+clock\+\_\+update()}{PPU\_clock\_update()}}
+{\footnotesize\ttfamily void P\+P\+U\+\_\+clock\+\_\+update (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{delta }\end{DoxyParamCaption})}
+
+
+
+Function called by \hyperlink{cpu_8h_ab580e6e98d09be5b8a57f8343db85fa4}{C\+P\+U\+\_\+clock\+\_\+update()} that keeps the P\+PU and C\+PU in sync, maintains the state machine and calls functions for frame buffer manipulation at the right time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & The number of \textquotesingle{}ticks\textquotesingle{} that have expired during the latest C\+PU instruction \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ppu_8h_a738650c7906065ad8b62c4c5aafd6d1d}\label{ppu_8h_a738650c7906065ad8b62c4c5aafd6d1d}} 
+\index{ppu.\+h@{ppu.\+h}!framebuffer@{framebuffer}}
+\index{framebuffer@{framebuffer}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{framebuffer}{framebuffer}}
+{\footnotesize\ttfamily uint8\+\_\+t framebuffer\mbox{[}\hyperlink{ppu_8h_a6974d08a74da681b3957b2fead2608b8}{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT} $\ast$\hyperlink{ppu_8h_a2cd109632a6dcccaa80b43561b1ab700}{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+The buffer that holds for each pixel on the screen which palette value has to be drawn \mbox{\Hypertarget{ppu_8h_a49601971f24dd78db5dc626c92dcd990}\label{ppu_8h_a49601971f24dd78db5dc626c92dcd990}} 
+\index{ppu.\+h@{ppu.\+h}!line@{line}}
+\index{line@{line}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{line}{line}}
+{\footnotesize\ttfamily uint8\+\_\+t line}
+
+The current line the P\+PU is drawing \mbox{\Hypertarget{ppu_8h_a37e90f5e3bd99fac2021fb3a326607d4}\label{ppu_8h_a37e90f5e3bd99fac2021fb3a326607d4}} 
+\index{ppu.\+h@{ppu.\+h}!mode@{mode}}
+\index{mode@{mode}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily uint8\+\_\+t mode}
+
+The mode in which the P\+PU is currently operating \mbox{\Hypertarget{ppu_8h_aff1100d9f966fc8bfe9836e29fb9fbea}\label{ppu_8h_aff1100d9f966fc8bfe9836e29fb9fbea}} 
+\index{ppu.\+h@{ppu.\+h}!modeclk@{modeclk}}
+\index{modeclk@{modeclk}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{modeclk}{modeclk}}
+{\footnotesize\ttfamily uint16\+\_\+t modeclk}
+
+An internal clock used to make mode transitions after certain periods of time expire \mbox{\Hypertarget{ppu_8h_a96e240cdb01f5e23c698ecf0aaaca4e6}\label{ppu_8h_a96e240cdb01f5e23c698ecf0aaaca4e6}} 
+\index{ppu.\+h@{ppu.\+h}!palette@{palette}}
+\index{palette@{palette}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{palette}{palette}}
+{\footnotesize\ttfamily uint32\+\_\+t palette\mbox{[}5\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+The set of colors that are used by the P\+PU, indexed through an array \mbox{\Hypertarget{ppu_8h_a2f5cac12e913bcfcff660305bf88dd3b}\label{ppu_8h_a2f5cac12e913bcfcff660305bf88dd3b}} 
+\index{ppu.\+h@{ppu.\+h}!surface@{surface}}
+\index{surface@{surface}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{surface}{surface}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Surface$\ast$ surface = N\+U\+LL\hspace{0.3cm}{\ttfamily [static]}}
+
+The pointer to the surface S\+D\+L2 extracts from the window \mbox{\Hypertarget{ppu_8h_aaa8e409e04dcf575ef63fd5fb3db06f9}\label{ppu_8h_aaa8e409e04dcf575ef63fd5fb3db06f9}} 
+\index{ppu.\+h@{ppu.\+h}!window@{window}}
+\index{window@{window}!ppu.\+h@{ppu.\+h}}
+\subsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Window$\ast$ window = N\+U\+LL\hspace{0.3cm}{\ttfamily [static]}}
+
+The pointer to the window S\+D\+L2 creates 

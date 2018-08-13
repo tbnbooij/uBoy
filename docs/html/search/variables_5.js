@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['lcdc',['LCDC',['../memory_8h.html#a4fef16b094b310f510df6cacf7fa56c6',1,'memory.h']]],
-  ['ly',['LY',['../memory_8h.html#aac72867167411ab30a371a9d8e8076d1',1,'memory.h']]],
-  ['lyc',['LYC',['../memory_8h.html#a8ae5a3bf622f470d0e5739b3b427e8a7',1,'memory.h']]]
+  ['f',['F',['../state_8h.html#a576f877ccc2837ffe5811406404acad1',1,'state.h']]],
+  ['framebuffer',['framebuffer',['../ppu_8h.html#a738650c7906065ad8b62c4c5aafd6d1d',1,'ppu.h']]]
 ];

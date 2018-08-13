@@ -11,9 +11,21 @@ Representation of the Game Boy\textquotesingle{}s memory model and operations to
 {\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}state.\+h\char`\"{}}\newline
 Include dependency graph for memory.\+h\+:
-% FIG 0
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{memory_8h__incl}
+\end{center}
+\end{figure}
 This graph shows which files directly or indirectly include this file\+:
-% FIG 1
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{memory_8h__dep__incl}
+\end{center}
+\end{figure}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -38,7 +50,11 @@ uint16\+\_\+t \hyperlink{memory_8h_a24f868b3fc7b551487bbd9158aaa510d}{Memory\+\_
 \begin{DoxyCompactList}\small\item\em Load the 16-\/bit word (L\+SB first) at the program counter and increment the program counter accordingly. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{memory_8h_ac1e824237e4a013ed7d7d5f499292eba}\label{memory_8h_ac1e824237e4a013ed7d7d5f499292eba}} 
 void \hyperlink{memory_8h_ac1e824237e4a013ed7d7d5f499292eba}{I\+O\+\_\+init} (void)
-\begin{DoxyCompactList}\small\item\em Initialize the special registers in the I\+O-\/section (0x\+F\+F00-\/0x\+F\+F7F) of the memory model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Initialize the special registers in the I\+O-\/section (0x\+F\+F00-\/0x\+F\+F7F) of the memory model. \end{DoxyCompactList}\item 
+static void \hyperlink{memory_8h_a781c246713c4f94a67a47f960d25427e}{I\+O\+\_\+store\+\_\+byte} (uint16\+\_\+t address, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Store a byte in the I\+O-\/section (0x\+F\+F00-\/0x\+F\+F7F) of the memory model. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \hyperlink{memory_8h_ad381b9cff8b79f16b07eb82abe485e4a}{I\+O\+\_\+load\+\_\+byte} (uint16\+\_\+t address)
+\begin{DoxyCompactList}\small\item\em Load a byte from the I\+O-\/section (0x\+F\+F00-\/0x\+F\+F7F) of the memory model. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -135,6 +151,41 @@ tbnbooij
 Size of a kilobyte in bytes 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{memory_8h_ad381b9cff8b79f16b07eb82abe485e4a}\label{memory_8h_ad381b9cff8b79f16b07eb82abe485e4a}} 
+\index{memory.\+h@{memory.\+h}!I\+O\+\_\+load\+\_\+byte@{I\+O\+\_\+load\+\_\+byte}}
+\index{I\+O\+\_\+load\+\_\+byte@{I\+O\+\_\+load\+\_\+byte}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{I\+O\+\_\+load\+\_\+byte()}{IO\_load\_byte()}}
+{\footnotesize\ttfamily static uint8\+\_\+t I\+O\+\_\+load\+\_\+byte (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load a byte from the I\+O-\/section (0x\+F\+F00-\/0x\+F\+F7F) of the memory model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address of a byte in the I\+O-\/section \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The value at the given address 
+\end{DoxyReturn}
+\mbox{\Hypertarget{memory_8h_a781c246713c4f94a67a47f960d25427e}\label{memory_8h_a781c246713c4f94a67a47f960d25427e}} 
+\index{memory.\+h@{memory.\+h}!I\+O\+\_\+store\+\_\+byte@{I\+O\+\_\+store\+\_\+byte}}
+\index{I\+O\+\_\+store\+\_\+byte@{I\+O\+\_\+store\+\_\+byte}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{I\+O\+\_\+store\+\_\+byte()}{IO\_store\_byte()}}
+{\footnotesize\ttfamily static void I\+O\+\_\+store\+\_\+byte (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{address,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Store a byte in the I\+O-\/section (0x\+F\+F00-\/0x\+F\+F7F) of the memory model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address of a byte in the I\+O-\/section \\
+\hline
+{\em data} & The value to be stored \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{memory_8h_a23132297e97c992f33578fd53ecdcfa4}\label{memory_8h_a23132297e97c992f33578fd53ecdcfa4}} 
 \index{memory.\+h@{memory.\+h}!Memory\+\_\+load\+\_\+byte@{Memory\+\_\+load\+\_\+byte}}
 \index{Memory\+\_\+load\+\_\+byte@{Memory\+\_\+load\+\_\+byte}!memory.\+h@{memory.\+h}}

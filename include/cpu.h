@@ -1,3 +1,11 @@
+/**
+ * @brief The Central Processing Unit of the emulator, which is connected to
+ * all other virtual components. 
+ * 
+ * @file cpu.h
+ * @author tbnbooij
+ * @date 2018-08-13
+ */
 #ifndef CPU_H
 #define CPU_H
 
@@ -11,35 +19,138 @@
 #include "debug.h"
 #include "ppu.h"
 
+/**
+ * @brief Struct that contains state variables of the CPU
+ * only to be accessed within CPU.c
+ * 
+ */
 static struct 
 {
-    FILE *source;
-    uint64_t clk; 
+    FILE *source; /**< File pointer to the .gb file that is loaded to ROM */
+    uint64_t clk; /**< 64-bit unsigned clock that records the number of passed 'ticks' caused by program execution */
 } CPU;
 
+/**
+ * @brief Initialize the CPU and link CPU_exit() to the 'atexit' function queue.
+ * 
+ */
 extern void CPU_init(void);
+
+/**
+ * @brief Open the ROM-file at a given relative file path and call CPU_init_modules() and File_load_rom().
+ * 
+ * @param filepath The relative path to a (.gb) ROM-file
+ */
 extern void CPU_input(char *filepath);
+
+/**
+ * @brief Initialize the external modules of the CPU (memory, state, IO, opcodes, PPU).
+ * 
+ */
 static void CPU_init_modules(void);
+
+/**
+ * @brief Start ROM execution. Currently returns a command-line interface for debugging purposes.
+ * 
+ */
 extern void CPU_start(void);
+
+/**
+ * @brief Execute the opcode at the program counter.
+ * 
+ */
 static void CPU_next(void);
+
+/**
+ * @brief Free allocated memory by calling Memory_exit() and PPU_exit() and closing all file streams.
+ * 
+ */
 extern void CPU_exit(void);
 
+/**
+ * @brief Read a byte from CPU.source (file) at a given 16-bit address.
+ * 
+ * @param address An unsigned 16-bit address
+ * @return uint8_t The value at the given address
+ */
 static uint8_t File_read_byte(uint16_t address);
+
+/**
+ * @brief Copy the contents of the file stream to the allocated memory by the Memory-module.
+ * 
+ */
 static void File_load_rom(void);
+
+/**
+ * @brief Read the cartridge header and store the results in the Cartridge-struct (State-module).
+ * 
+ */
 static void File_read_header(void);
 
+/**
+ * @brief Update the CPU clock by a given number of 'ticks'.
+ * 
+ * @param delta The number of 'ticks' by which the CPU is updated.
+ */
 static void CPU_clock_update(int8_t delta);
 
+/**
+ * @brief Initialize the opcode tables. 
+ * 
+ */
 static void Opcodes_init(void);
 
+/**
+ * @brief Fetch the opcode at the memory location the program counter is pointing to.
+ * 
+ * @return uint8_t The opcode at the program counter
+ */
 static uint8_t Opcode_fetch(void);
+
+/**
+ * @brief Execute the instruction a given opcode describes.
+ * 
+ * @param opcode The opcode of the instruction that will be executed
+ */
 static void Opcode_decode(uint8_t opcode);
+
+/**
+ * @brief Execute an instruction that is prefixed by opcode 0xCB.
+ * 
+ * @param opcode The read opcode after 0xCB.
+ */
 static void CBOpcode_decode(uint8_t opcode);
 
+/**
+ * @brief The main opcode table, containing pointers to functions for each and every instruction.
+ * 
+ */
 static void (*Opcodes[0xFF + 1])(void);
+
+/**
+ * @brief The opcode table used for instructions prefixed by 0xCB, 
+ * containing pointers to functions for each and every instruction.
+ * 
+ */
 static void (*CBOpcodes[0xFF + 1])(void);
+
+/**
+ * @brief Called by opcodes that haven't been implemented yet; used as a debugging aid.
+ * 
+ * @param opcode The opcode for the instruction that has not been implemented yet
+ */
 static void Opcode_not_implemented(uint8_t opcode);
+
+/**
+ * @brief Called by 0xCD-prefixed opcodes that haven't been implemented yet; used as a debugging aid.
+ * 
+ * @param opcode The opcode for the instruction that has not been implemented yet
+ */
 static void CBOpcode_not_implemented(uint8_t opcode);
+
+
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 
 static void Opcode_0x00(void);
 static void Opcode_0x01(void);
@@ -554,5 +665,7 @@ static void CBOpcode_0xFC(void);
 static void CBOpcode_0xFD(void);
 static void CBOpcode_0xFE(void);
 static void CBOpcode_0xFF(void);
+
+#endif // DOXYGEN_SHOULD_SKIP_THIS
 
 #endif // CPU_H

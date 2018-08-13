@@ -1,0 +1,6 @@
+<map id="include/state.h" name="include/state.h">
+<area shape="rect" id="node2" href="$cpu_8h.html" title="The Central Processing Unit of the emulator, which is connected to all other virtual components..." alt="" coords="5,229,104,256"/>
+<area shape="rect" id="node3" href="$memory_8h.html" title="Representation of the Game Boy&#39;s memory model and operations to read and write to this memory..." alt="" coords="40,80,165,107"/>
+<area shape="rect" id="node5" href="$instructions_8h.html" title="A set of reusable instructions that are called by the opcode functions. " alt="" coords="183,155,329,181"/>
+<area shape="rect" id="node4" href="$debug_8h.html" title="A set of debugging functions for testing the emulator. " alt="" coords="46,155,159,181"/>
+</map>

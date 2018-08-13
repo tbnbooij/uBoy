@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['sb',['SB',['../memory_8h.html#af6e25191020f32790ed358bdb7152678',1,'memory.h']]],
-  ['sc',['SC',['../memory_8h.html#a994283cb179a11ded2d18c30c3710802',1,'memory.h']]],
-  ['scx',['SCX',['../memory_8h.html#a4ec9bb2eafba7556ff7bd8a2ec8cf1b5',1,'memory.h']]],
-  ['scy',['SCY',['../memory_8h.html#a9a7b9c16aeab96019096b5d9f509b57f',1,'memory.h']]],
-  ['stat',['STAT',['../memory_8h.html#a29552ccb0992dbc97b7cf8259c0c43fe',1,'memory.h']]],
-  ['state_2eh',['state.h',['../state_8h.html',1,'']]],
-  ['state_5finit',['State_init',['../state_8h.html#a8aac6477340919fc5e0dcd7ec8efa049',1,'state.h']]]
+  ['ram',['RAM',['../memory_8h.html#a792844e460865e8247b08da318142555',1,'memory.h']]],
+  ['ram_5fsize',['RAM_size',['../state_8h.html#a200beecf76d43fb8dded424af571a0ee',1,'state.h']]],
+  ['registers',['Registers',['../state_8h.html#a9418de733657f6fb1dc6fcc5c774abf8',1,'state.h']]],
+  ['registers_5finit',['Registers_init',['../state_8h.html#a7b158fb74f4b38a7661d9d325d8f7d11',1,'state.h']]],
+  ['rom',['ROM',['../memory_8h.html#a66b23f4199eb5bd14f052087bf83b770',1,'memory.h']]],
+  ['rom_5fsize',['ROM_size',['../state_8h.html#ad4bba274c31c57713318a5de8e18b0d2',1,'state.h']]]
 ];

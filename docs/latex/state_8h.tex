@@ -8,20 +8,29 @@ Representation of the state of the emulator (registers, C\+PU mode, flags) and a
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 Include dependency graph for state.\+h\+:
-% FIG 0
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{state_8h__incl}
+\end{center}
+\end{figure}
 This graph shows which files directly or indirectly include this file\+:
-% FIG 1
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{state_8h__dep__incl}
+\end{center}
+\end{figure}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{state_8h_a3e2525931bbdb2a18120b22f99c58fa0}\label{state_8h_a3e2525931bbdb2a18120b22f99c58fa0}} 
-\#define {\bfseries M\+O\+D\+E\+\_\+\+R\+UN}~0
+\#define \hyperlink{state_8h_a3e2525931bbdb2a18120b22f99c58fa0}{M\+O\+D\+E\+\_\+\+R\+UN}~0
 \item 
-\mbox{\Hypertarget{state_8h_a9c2557a2d56dadc57824c046b0238a8d}\label{state_8h_a9c2557a2d56dadc57824c046b0238a8d}} 
-\#define {\bfseries M\+O\+D\+E\+\_\+\+H\+A\+LT}~1
+\#define \hyperlink{state_8h_a9c2557a2d56dadc57824c046b0238a8d}{M\+O\+D\+E\+\_\+\+H\+A\+LT}~1
 \item 
-\mbox{\Hypertarget{state_8h_a29a7dfd4fec0d672f9690159d70abc0d}\label{state_8h_a29a7dfd4fec0d672f9690159d70abc0d}} 
-\#define {\bfseries M\+O\+D\+E\+\_\+\+S\+T\+OP}~2
+\#define \hyperlink{state_8h_a29a7dfd4fec0d672f9690159d70abc0d}{M\+O\+D\+E\+\_\+\+S\+T\+OP}~2
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -46,7 +55,7 @@ void \hyperlink{state_8h_a34ac5640d5e81eb53acebbc77da56a42}{Flag\+\_\+set\+\_\+H
 \begin{DoxyCompactList}\small\item\em Set the H-\/flag to a given value (0 or 1). \end{DoxyCompactList}\item 
 void \hyperlink{state_8h_ac0e31fc044bf31edeb5d9c86a51f21c1}{Flag\+\_\+set\+\_\+C} (uint8\+\_\+t state)
 \begin{DoxyCompactList}\small\item\em Set the C-\/flag to a given value (0 or 1). \end{DoxyCompactList}\item 
-void \hyperlink{state_8h_afa8b8ce9d52e0f0efe0bac091698c4ef}{Flags\+\_\+set} (uint8\+\_\+t Z, uint8\+\_\+t N, uint8\+\_\+t H, uint8\+\_\+t C)
+void \hyperlink{state_8h_afa8b8ce9d52e0f0efe0bac091698c4ef}{Flags\+\_\+set} (uint8\+\_\+t Z, uint8\+\_\+t N, uint8\+\_\+t \hyperlink{state_8h_ad1ee63aa0c7c876954eb9f5de083019e}{H}, uint8\+\_\+t \hyperlink{state_8h_a6f32a714c227b07e27db3e599edb419a}{C})
 \begin{DoxyCompactList}\small\item\em Set the flags in the F-\/register to given values (0 = reset, 1 = set, -\/1 = don\textquotesingle{}t care). \end{DoxyCompactList}\item 
 uint8\+\_\+t \hyperlink{state_8h_a0cce733f8bea02487ba45b18819ba948}{Flag\+\_\+test\+\_\+\+H\+\_\+\+U8\+\_\+\+U8} (uint8\+\_\+t a, uint8\+\_\+t b, uint8\+\_\+t add)
 \begin{DoxyCompactList}\small\item\em Test for a halfcarry in the addition or substraction of two unsigned 8-\/bit constants. \end{DoxyCompactList}\item 
@@ -75,24 +84,24 @@ uint8\+\_\+t \hyperlink{state_8h_a19a5d12cc5cc96fe31eecc5083ded92b}{Flag\+\_\+ge
 \begin{tabbing}
 xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
 struct \{\\
-\>uint8\_t {\bfseries mode}\\
-\>uint8\_t {\bfseries IME}\\
-\} {\bfseries State}\\
+\>uint8\_t \hyperlink{state_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode}\\
+\>uint8\_t \hyperlink{state_8h_a3f404c2042eccd597794adcd3ed49b71}{IME}\\
+\} \hyperlink{state_8h_ad6091a0e38f03b2c6c12aabb4b6cc59c}{State}\\
 
-\end{tabbing}\item 
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Struct that represents the state of the C\+PU. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{state_8h_a95fb456db5026d0f69e7e5698315fb9b}\label{state_8h_a95fb456db5026d0f69e7e5698315fb9b}} 
 \begin{tabbing}
 xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
 struct \{\\
-\>char {\bfseries name} \mbox{[}17\mbox{]}\\
-\>uint8\_t {\bfseries CGB\_flag}\\
-\>uint8\_t {\bfseries cartridge\_type}\\
-\>uint8\_t {\bfseries ROM\_size}\\
-\>uint8\_t {\bfseries RAM\_size}\\
-\>uint8\_t {\bfseries destination}\\
-\} {\bfseries Cartridge}\\
+\>char \hyperlink{state_8h_af984635a558e22d4669b0f9ee1298779}{name} \mbox{[}17\mbox{]}\\
+\>uint8\_t \hyperlink{state_8h_a08ba47209d827a8cf708f2e7679fd020}{CGB\_flag}\\
+\>uint8\_t \hyperlink{state_8h_ac56c83510a89c5469ffee4badabd2224}{cartridge\_type}\\
+\>uint8\_t \hyperlink{state_8h_ad4bba274c31c57713318a5de8e18b0d2}{ROM\_size}\\
+\>uint8\_t \hyperlink{state_8h_a200beecf76d43fb8dded424af571a0ee}{RAM\_size}\\
+\>uint8\_t \hyperlink{state_8h_a42676c2cae17bc2fa151feea9e192342}{destination}\\
+\} \hyperlink{state_8h_a95fb456db5026d0f69e7e5698315fb9b}{Cartridge}\\
 
-\end{tabbing}\item 
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Struct that holds data from the cartridge header. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{state_8h_a9418de733657f6fb1dc6fcc5c774abf8}\label{state_8h_a9418de733657f6fb1dc6fcc5c774abf8}} 
 \begin{tabbing}
 xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
@@ -101,43 +110,43 @@ struct \{\\
 \>union \{\\
 \mbox{\Hypertarget{union_0D8_1_1_0D9_a8c3b21f1b7099b4b36bc1c9643f78716}\label{union_0D8_1_1_0D9_a8c3b21f1b7099b4b36bc1c9643f78716}} 
 \>\>struct \{\\
-\>\>\>uint8\_t {\bfseries F}\\
-\>\>\>uint8\_t {\bfseries A}\\
+\>\>\>uint8\_t \hyperlink{state_8h_a576f877ccc2837ffe5811406404acad1}{F}\\
+\>\>\>uint8\_t \hyperlink{state_8h_aa99de428bd3e7715b73b335a5af9e900}{A}\\
 \>\>\} \\
-\>\>uint16\_t {\bfseries AF}\\
+\>\>uint16\_t \hyperlink{state_8h_a6e982288432855089a4873f7e10782c6}{AF}\\
 \>\} \\
 \mbox{\Hypertarget{struct_0D8_a037238800153f3a46b4cfbacb33285dd}\label{struct_0D8_a037238800153f3a46b4cfbacb33285dd}} 
 \>union \{\\
 \mbox{\Hypertarget{union_0D8_1_1_0D11_a8db5ad1450b4a3c4e4dacec2f2b2f946}\label{union_0D8_1_1_0D11_a8db5ad1450b4a3c4e4dacec2f2b2f946}} 
 \>\>struct \{\\
-\>\>\>uint8\_t {\bfseries C}\\
-\>\>\>uint8\_t {\bfseries B}\\
+\>\>\>uint8\_t \hyperlink{state_8h_a6f32a714c227b07e27db3e599edb419a}{C}\\
+\>\>\>uint8\_t \hyperlink{state_8h_a7c7fb36d372d349a62c14f1e6c7337ea}{B}\\
 \>\>\} \\
-\>\>uint16\_t {\bfseries BC}\\
+\>\>uint16\_t \hyperlink{state_8h_ad14ee14a830760900b01ab060e27761e}{BC}\\
 \>\} \\
 \mbox{\Hypertarget{struct_0D8_aeca95e7985fa62bbffe170f0ae8794e5}\label{struct_0D8_aeca95e7985fa62bbffe170f0ae8794e5}} 
 \>union \{\\
 \mbox{\Hypertarget{union_0D8_1_1_0D13_a4441399b81a9eae47fcef9a23b467a21}\label{union_0D8_1_1_0D13_a4441399b81a9eae47fcef9a23b467a21}} 
 \>\>struct \{\\
-\>\>\>uint8\_t {\bfseries E}\\
-\>\>\>uint8\_t {\bfseries D}\\
+\>\>\>uint8\_t \hyperlink{state_8h_a5866c444a2a78211eef583f48cd36225}{E}\\
+\>\>\>uint8\_t \hyperlink{state_8h_a42ede28e876dcdb2ce2ddd730de0401e}{D}\\
 \>\>\} \\
-\>\>uint16\_t {\bfseries DE}\\
+\>\>uint16\_t \hyperlink{state_8h_a076d7e0a7cd08a42568444b2fe643107}{DE}\\
 \>\} \\
 \mbox{\Hypertarget{struct_0D8_a4b95f08895d6e47dfdbd463eb889fcdf}\label{struct_0D8_a4b95f08895d6e47dfdbd463eb889fcdf}} 
 \>union \{\\
 \mbox{\Hypertarget{union_0D8_1_1_0D15_a3b3b3445a872750cd39aa42e608391a5}\label{union_0D8_1_1_0D15_a3b3b3445a872750cd39aa42e608391a5}} 
 \>\>struct \{\\
-\>\>\>uint8\_t {\bfseries L}\\
-\>\>\>uint8\_t {\bfseries H}\\
+\>\>\>uint8\_t \hyperlink{state_8h_aee73cc056696e504430c53eaa9c58cf0}{L}\\
+\>\>\>uint8\_t \hyperlink{state_8h_ad1ee63aa0c7c876954eb9f5de083019e}{H}\\
 \>\>\} \\
-\>\>uint16\_t {\bfseries HL}\\
+\>\>uint16\_t \hyperlink{state_8h_a35a5e2db4cabdc4c4d67d20b6d5169cf}{HL}\\
 \>\} \\
-\>uint16\_t {\bfseries SP}\\
-\>uint16\_t {\bfseries PC}\\
-\} {\bfseries Registers}\\
+\>uint16\_t \hyperlink{state_8h_a6381d5cc0641c44d5f9510e29a74fa16}{SP}\\
+\>uint16\_t \hyperlink{state_8h_afa06037aaac5044b97dde7b9f8771ce6}{PC}\\
+\} \hyperlink{state_8h_a9418de733657f6fb1dc6fcc5c774abf8}{Registers}\\
 
-\end{tabbing}\end{DoxyCompactItemize}
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Struct that holds the C\+PU registers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -150,6 +159,27 @@ tbnbooij
 2018-\/08-\/13 
 \end{DoxyDate}
 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{state_8h_a9c2557a2d56dadc57824c046b0238a8d}\label{state_8h_a9c2557a2d56dadc57824c046b0238a8d}} 
+\index{state.\+h@{state.\+h}!M\+O\+D\+E\+\_\+\+H\+A\+LT@{M\+O\+D\+E\+\_\+\+H\+A\+LT}}
+\index{M\+O\+D\+E\+\_\+\+H\+A\+LT@{M\+O\+D\+E\+\_\+\+H\+A\+LT}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+E\+\_\+\+H\+A\+LT}{MODE\_HALT}}
+{\footnotesize\ttfamily \#define M\+O\+D\+E\+\_\+\+H\+A\+LT~1}
+
+C\+PU mode 1\+: Halt; Power down C\+PU until an interrupt occurs (reduce power consumption) \mbox{\Hypertarget{state_8h_a3e2525931bbdb2a18120b22f99c58fa0}\label{state_8h_a3e2525931bbdb2a18120b22f99c58fa0}} 
+\index{state.\+h@{state.\+h}!M\+O\+D\+E\+\_\+\+R\+UN@{M\+O\+D\+E\+\_\+\+R\+UN}}
+\index{M\+O\+D\+E\+\_\+\+R\+UN@{M\+O\+D\+E\+\_\+\+R\+UN}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+E\+\_\+\+R\+UN}{MODE\_RUN}}
+{\footnotesize\ttfamily \#define M\+O\+D\+E\+\_\+\+R\+UN~0}
+
+C\+PU mode 0\+: Running \mbox{\Hypertarget{state_8h_a29a7dfd4fec0d672f9690159d70abc0d}\label{state_8h_a29a7dfd4fec0d672f9690159d70abc0d}} 
+\index{state.\+h@{state.\+h}!M\+O\+D\+E\+\_\+\+S\+T\+OP@{M\+O\+D\+E\+\_\+\+S\+T\+OP}}
+\index{M\+O\+D\+E\+\_\+\+S\+T\+OP@{M\+O\+D\+E\+\_\+\+S\+T\+OP}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+E\+\_\+\+S\+T\+OP}{MODE\_STOP}}
+{\footnotesize\ttfamily \#define M\+O\+D\+E\+\_\+\+S\+T\+OP~2}
+
+C\+PU mode 2\+: Stop; Halt C\+PU and L\+CD display until a button is pressed 
 
 \subsection{Function Documentation}
 \mbox{\Hypertarget{state_8h_ab085e353d471dd986e66ac71c78b51cb}\label{state_8h_ab085e353d471dd986e66ac71c78b51cb}} 
@@ -465,3 +495,139 @@ Set the flags in the F-\/register to given values (0 = reset, 1 = set, -\/1 = do
 {\em C} & The state (0/1/-\/1) that the C-\/flag is set to \\
 \hline
 \end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{state_8h_aa99de428bd3e7715b73b335a5af9e900}\label{state_8h_aa99de428bd3e7715b73b335a5af9e900}} 
+\index{state.\+h@{state.\+h}!A@{A}}
+\index{A@{A}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily uint8\+\_\+t A}
+
+8-\/bit accumulator register \mbox{\Hypertarget{state_8h_a6e982288432855089a4873f7e10782c6}\label{state_8h_a6e982288432855089a4873f7e10782c6}} 
+\index{state.\+h@{state.\+h}!AF@{AF}}
+\index{AF@{AF}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{AF}{AF}}
+{\footnotesize\ttfamily uint16\+\_\+t AF}
+
+16-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_a7c7fb36d372d349a62c14f1e6c7337ea}\label{state_8h_a7c7fb36d372d349a62c14f1e6c7337ea}} 
+\index{state.\+h@{state.\+h}!B@{B}}
+\index{B@{B}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{B}{B}}
+{\footnotesize\ttfamily uint8\+\_\+t B}
+
+8-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_ad14ee14a830760900b01ab060e27761e}\label{state_8h_ad14ee14a830760900b01ab060e27761e}} 
+\index{state.\+h@{state.\+h}!BC@{BC}}
+\index{BC@{BC}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{BC}{BC}}
+{\footnotesize\ttfamily uint16\+\_\+t BC}
+
+16-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_a6f32a714c227b07e27db3e599edb419a}\label{state_8h_a6f32a714c227b07e27db3e599edb419a}} 
+\index{state.\+h@{state.\+h}!C@{C}}
+\index{C@{C}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{C}{C}}
+{\footnotesize\ttfamily uint8\+\_\+t C}
+
+8-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_ac56c83510a89c5469ffee4badabd2224}\label{state_8h_ac56c83510a89c5469ffee4badabd2224}} 
+\index{state.\+h@{state.\+h}!cartridge\+\_\+type@{cartridge\+\_\+type}}
+\index{cartridge\+\_\+type@{cartridge\+\_\+type}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{cartridge\+\_\+type}{cartridge\_type}}
+{\footnotesize\ttfamily uint8\+\_\+t cartridge\+\_\+type}
+
+Flag that indicates the type of catridge (R\+OM, R\+AM, M\+BC, auxiliary hardware) \mbox{\Hypertarget{state_8h_a08ba47209d827a8cf708f2e7679fd020}\label{state_8h_a08ba47209d827a8cf708f2e7679fd020}} 
+\index{state.\+h@{state.\+h}!C\+G\+B\+\_\+flag@{C\+G\+B\+\_\+flag}}
+\index{C\+G\+B\+\_\+flag@{C\+G\+B\+\_\+flag}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{C\+G\+B\+\_\+flag}{CGB\_flag}}
+{\footnotesize\ttfamily uint8\+\_\+t C\+G\+B\+\_\+flag}
+
+Flag that indicates whether the cartridge was made for C\+GB (0x80) or D\+MG (0x00) \mbox{\Hypertarget{state_8h_a42ede28e876dcdb2ce2ddd730de0401e}\label{state_8h_a42ede28e876dcdb2ce2ddd730de0401e}} 
+\index{state.\+h@{state.\+h}!D@{D}}
+\index{D@{D}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{D}{D}}
+{\footnotesize\ttfamily uint8\+\_\+t D}
+
+8-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_a076d7e0a7cd08a42568444b2fe643107}\label{state_8h_a076d7e0a7cd08a42568444b2fe643107}} 
+\index{state.\+h@{state.\+h}!DE@{DE}}
+\index{DE@{DE}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{DE}{DE}}
+{\footnotesize\ttfamily uint16\+\_\+t DE}
+
+16-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_a42676c2cae17bc2fa151feea9e192342}\label{state_8h_a42676c2cae17bc2fa151feea9e192342}} 
+\index{state.\+h@{state.\+h}!destination@{destination}}
+\index{destination@{destination}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{destination}{destination}}
+{\footnotesize\ttfamily uint8\+\_\+t destination}
+
+Flag that indicates the destination the R\+OM was distributed to (0 = Japan, 1 = Outside of Japan) \mbox{\Hypertarget{state_8h_a5866c444a2a78211eef583f48cd36225}\label{state_8h_a5866c444a2a78211eef583f48cd36225}} 
+\index{state.\+h@{state.\+h}!E@{E}}
+\index{E@{E}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{E}{E}}
+{\footnotesize\ttfamily uint8\+\_\+t E}
+
+8-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_a576f877ccc2837ffe5811406404acad1}\label{state_8h_a576f877ccc2837ffe5811406404acad1}} 
+\index{state.\+h@{state.\+h}!F@{F}}
+\index{F@{F}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{F}{F}}
+{\footnotesize\ttfamily uint8\+\_\+t F}
+
+8-\/bit flags register \mbox{\Hypertarget{state_8h_ad1ee63aa0c7c876954eb9f5de083019e}\label{state_8h_ad1ee63aa0c7c876954eb9f5de083019e}} 
+\index{state.\+h@{state.\+h}!H@{H}}
+\index{H@{H}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily uint8\+\_\+t H}
+
+8-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_a35a5e2db4cabdc4c4d67d20b6d5169cf}\label{state_8h_a35a5e2db4cabdc4c4d67d20b6d5169cf}} 
+\index{state.\+h@{state.\+h}!HL@{HL}}
+\index{HL@{HL}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{HL}{HL}}
+{\footnotesize\ttfamily uint16\+\_\+t HL}
+
+16-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_a3f404c2042eccd597794adcd3ed49b71}\label{state_8h_a3f404c2042eccd597794adcd3ed49b71}} 
+\index{state.\+h@{state.\+h}!I\+ME@{I\+ME}}
+\index{I\+ME@{I\+ME}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{I\+ME}{IME}}
+{\footnotesize\ttfamily uint8\+\_\+t I\+ME}
+
+Interrupt master enable (not to be confused with the interrupt enable register) \mbox{\Hypertarget{state_8h_aee73cc056696e504430c53eaa9c58cf0}\label{state_8h_aee73cc056696e504430c53eaa9c58cf0}} 
+\index{state.\+h@{state.\+h}!L@{L}}
+\index{L@{L}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily uint8\+\_\+t L}
+
+8-\/bit general-\/purpose register \mbox{\Hypertarget{state_8h_a37e90f5e3bd99fac2021fb3a326607d4}\label{state_8h_a37e90f5e3bd99fac2021fb3a326607d4}} 
+\index{state.\+h@{state.\+h}!mode@{mode}}
+\index{mode@{mode}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily uint8\+\_\+t mode}
+
+The mode in which the C\+PU is currently operating (run, halt, stop) \mbox{\Hypertarget{state_8h_af984635a558e22d4669b0f9ee1298779}\label{state_8h_af984635a558e22d4669b0f9ee1298779}} 
+\index{state.\+h@{state.\+h}!name@{name}}
+\index{name@{name}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily char name\mbox{[}17\mbox{]}}
+
+The name of the cartridge in upper case A\+S\+C\+II \mbox{\Hypertarget{state_8h_afa06037aaac5044b97dde7b9f8771ce6}\label{state_8h_afa06037aaac5044b97dde7b9f8771ce6}} 
+\index{state.\+h@{state.\+h}!PC@{PC}}
+\index{PC@{PC}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{PC}{PC}}
+{\footnotesize\ttfamily uint16\+\_\+t PC}
+
+16-\/bit program counter \mbox{\Hypertarget{state_8h_a200beecf76d43fb8dded424af571a0ee}\label{state_8h_a200beecf76d43fb8dded424af571a0ee}} 
+\index{state.\+h@{state.\+h}!R\+A\+M\+\_\+size@{R\+A\+M\+\_\+size}}
+\index{R\+A\+M\+\_\+size@{R\+A\+M\+\_\+size}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{R\+A\+M\+\_\+size}{RAM\_size}}
+{\footnotesize\ttfamily uint8\+\_\+t R\+A\+M\+\_\+size}
+
+Flag that indicates the size of the additional R\+AM the cartridge contains \mbox{\Hypertarget{state_8h_ad4bba274c31c57713318a5de8e18b0d2}\label{state_8h_ad4bba274c31c57713318a5de8e18b0d2}} 
+\index{state.\+h@{state.\+h}!R\+O\+M\+\_\+size@{R\+O\+M\+\_\+size}}
+\index{R\+O\+M\+\_\+size@{R\+O\+M\+\_\+size}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{R\+O\+M\+\_\+size}{ROM\_size}}
+{\footnotesize\ttfamily uint8\+\_\+t R\+O\+M\+\_\+size}
+
+Flag that indicates the size of the R\+OM the cartridge holds \mbox{\Hypertarget{state_8h_a6381d5cc0641c44d5f9510e29a74fa16}\label{state_8h_a6381d5cc0641c44d5f9510e29a74fa16}} 
+\index{state.\+h@{state.\+h}!SP@{SP}}
+\index{SP@{SP}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{SP}{SP}}
+{\footnotesize\ttfamily uint16\+\_\+t SP}
+
+16-\/bit stack pointer 

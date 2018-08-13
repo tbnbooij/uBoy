@@ -1,5 +1,21 @@
 var searchData=
 [
-  ['div',['DIV',['../memory_8h.html#aa2c865a3453e463499b654276a70e572',1,'memory.h']]],
-  ['dma',['DMA',['../memory_8h.html#a6701d95da5fe992e672fbf3925ca2fa4',1,'memory.h']]]
+  ['c',['C',['../state_8h.html#a6f32a714c227b07e27db3e599edb419a',1,'state.h']]],
+  ['cartridge',['Cartridge',['../state_8h.html#a95fb456db5026d0f69e7e5698315fb9b',1,'state.h']]],
+  ['cartridge_5ftype',['cartridge_type',['../state_8h.html#ac56c83510a89c5469ffee4badabd2224',1,'state.h']]],
+  ['cbopcode_5fdecode',['CBOpcode_decode',['../cpu_8h.html#a918095de2246ecedddde82456b876e35',1,'cpu.h']]],
+  ['cbopcode_5fnot_5fimplemented',['CBOpcode_not_implemented',['../cpu_8h.html#a86c5b7c87481c38434077f58c0614ed6',1,'cpu.h']]],
+  ['cbopcodes',['CBOpcodes',['../cpu_8h.html#ab99c3cea87c39118bfb8f6e3295896f7',1,'cpu.h']]],
+  ['cgb_5fflag',['CGB_flag',['../state_8h.html#a08ba47209d827a8cf708f2e7679fd020',1,'state.h']]],
+  ['clk',['clk',['../cpu_8h.html#a9f98b8e7bb24f1072d2214c113b4a140',1,'cpu.h']]],
+  ['combine_5fmsb_5flsb',['Combine_MSB_LSB',['../state_8h.html#ab085e353d471dd986e66ac71c78b51cb',1,'state.h']]],
+  ['cpu',['CPU',['../cpu_8h.html#a93255e2435913eb63ffcc9db1bae6840',1,'cpu.h']]],
+  ['cpu_2eh',['cpu.h',['../cpu_8h.html',1,'']]],
+  ['cpu_5fclock_5fupdate',['CPU_clock_update',['../cpu_8h.html#ab580e6e98d09be5b8a57f8343db85fa4',1,'cpu.h']]],
+  ['cpu_5fexit',['CPU_exit',['../cpu_8h.html#aa698eea554f7961d3503e78ceaede042',1,'cpu.h']]],
+  ['cpu_5finit',['CPU_init',['../cpu_8h.html#a03bf14f1f7032b17a570d5aa5363f69c',1,'cpu.h']]],
+  ['cpu_5finit_5fmodules',['CPU_init_modules',['../cpu_8h.html#a454a466a2a93a324af9e31e009989261',1,'cpu.h']]],
+  ['cpu_5finput',['CPU_input',['../cpu_8h.html#a1d898554c9f4366789d354a3215f5e44',1,'cpu.h']]],
+  ['cpu_5fnext',['CPU_next',['../cpu_8h.html#a9704782125d79063f71a95db98e801b7',1,'cpu.h']]],
+  ['cpu_5fstart',['CPU_start',['../cpu_8h.html#a961718b73d49be66fe3baa1c68e81a4c',1,'cpu.h']]]
 ];

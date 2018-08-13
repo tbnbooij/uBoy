@@ -10,66 +10,78 @@
 #define STATE_H
 #include <stdint.h>
 #include <stdlib.h>
-#define MODE_RUN 0
-#define MODE_HALT 1
-#define MODE_STOP 2
+#define MODE_RUN 0 /**< CPU mode 0: Running */
+#define MODE_HALT 1 /**< CPU mode 1: Halt; Power down CPU until an interrupt occurs (reduce power consumption) */
+#define MODE_STOP 2 /**< CPU mode 2: Stop; Halt CPU and LCD display until a button is pressed */
 
+/**
+ * @brief Struct that represents the state of the CPU
+ * 
+ */
 struct
 {
-	uint8_t mode;
-	uint8_t IME;
+	uint8_t mode; /**< The mode in which the CPU is currently operating (run, halt, stop) */
+	uint8_t IME; /**< Interrupt master enable (not to be confused with the interrupt enable register) */
 } State;
 
+/**
+ * @brief Struct that holds data from the cartridge header
+ * 
+ */
 struct
 {
-	char name[17];
-	uint8_t CGB_flag;
-	uint8_t cartridge_type;
-	uint8_t ROM_size;
-	uint8_t RAM_size;
-	uint8_t destination;
+	char name[17]; /**< The name of the cartridge in upper case ASCII */
+	uint8_t CGB_flag; /**< Flag that indicates whether the cartridge was made for CGB (0x80) or DMG (0x00) */
+	uint8_t cartridge_type; /**< Flag that indicates the type of catridge (ROM, RAM, MBC, auxiliary hardware) */
+	uint8_t ROM_size; /**< Flag that indicates the size of the ROM the cartridge holds */
+	uint8_t RAM_size; /**< Flag that indicates the size of the additional RAM the cartridge contains */
+	uint8_t destination; /**< Flag that indicates the destination the ROM was distributed to (0 = Japan, 1 = Outside of Japan) */
 } Cartridge;
 
+/**
+ * @brief Struct that holds the CPU registers
+ * 
+ */
 struct
 {
 	union {
 		struct
 		{
-			uint8_t F;
-			uint8_t A;
+			uint8_t F; /**< 8-bit flags register */
+			uint8_t A; /**< 8-bit accumulator register */
 		};
-		uint16_t AF;
+		uint16_t AF; /**< 16-bit general-purpose register */
 	};
 
 	union {
 		struct
 		{
-			uint8_t C;
-			uint8_t B;
+			uint8_t C; /**< 8-bit general-purpose register */
+			uint8_t B; /**< 8-bit general-purpose register */
 		};
-		uint16_t BC;
+		uint16_t BC; /**< 16-bit general-purpose register */
 	};
 
 	union {
 		struct
 		{
-			uint8_t E;
-			uint8_t D;
+			uint8_t E; /**< 8-bit general-purpose register */
+			uint8_t D; /**< 8-bit general-purpose register */
 		};
-		uint16_t DE;
+		uint16_t DE; /**< 16-bit general-purpose register */
 	};
 
 	union {
 		struct
 		{
-			uint8_t L;
-			uint8_t H;
+			uint8_t L; /**< 8-bit general-purpose register */
+			uint8_t H; /**< 8-bit general-purpose register */
 		};
-		uint16_t HL;
+		uint16_t HL; /**< 16-bit general-purpose register */
 	};
 
-	uint16_t SP;
-	uint16_t PC;
+	uint16_t SP; /**< 16-bit stack pointer */
+	uint16_t PC; /**< 16-bit program counter */
 } Registers;
 
 /**

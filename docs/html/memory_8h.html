@@ -78,19 +78,26 @@ $(function() {
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &quot;debug.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="debug_8h_source.html">debug.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="state_8h_source.html">state.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for memory.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="memory_8h__incl.png" border="0" usemap="#include_2memory_8h" alt=""/></div>
-<!-- MAP 0 -->
+<map name="include_2memory_8h" id="include_2memory_8h">
+<area shape="rect" id="node5" href="debug_8h.html" title="A set of debugging functions for testing the emulator. " alt="" coords="33,80,101,107"/>
+<area shape="rect" id="node6" href="state_8h.html" title="Representation of the state of the emulator (registers, CPU mode, flags) and a set of utility functio..." alt="" coords="177,80,239,107"/>
+</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="memory_8h__dep__incl.png" border="0" usemap="#include_2memory_8hdep" alt=""/></div>
-<!-- MAP 1 -->
+<map name="include_2memory_8hdep" id="include_2memory_8hdep">
+<area shape="rect" id="node2" href="cpu_8h.html" title="The Central Processing Unit of the emulator, which is connected to all other virtual components..." alt="" coords="29,155,128,181"/>
+<area shape="rect" id="node3" href="debug_8h.html" title="A set of debugging functions for testing the emulator. " alt="" coords="22,80,135,107"/>
+<area shape="rect" id="node4" href="instructions_8h.html" title="A set of reusable instructions that are called by the opcode functions. " alt="" coords="159,80,304,107"/>
+</map>
 </div>
 </div>
 <p><a href="memory_8h_source.html">Go to the source code of this file.</a></p>
@@ -126,6 +133,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memo
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8h.html#ac1e824237e4a013ed7d7d5f499292eba">IO_init</a> (void)</td></tr>
 <tr class="memdesc:ac1e824237e4a013ed7d7d5f499292eba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the special registers in the IO-section (0xFF00-0xFF7F) of the memory model. <br /></td></tr>
 <tr class="separator:ac1e824237e4a013ed7d7d5f499292eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a781c246713c4f94a67a47f960d25427e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8h.html#a781c246713c4f94a67a47f960d25427e">IO_store_byte</a> (uint16_t address, uint8_t data)</td></tr>
+<tr class="memdesc:a781c246713c4f94a67a47f960d25427e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store a byte in the IO-section (0xFF00-0xFF7F) of the memory model.  <a href="#a781c246713c4f94a67a47f960d25427e">More...</a><br /></td></tr>
+<tr class="separator:a781c246713c4f94a67a47f960d25427e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad381b9cff8b79f16b07eb82abe485e4a"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8h.html#ad381b9cff8b79f16b07eb82abe485e4a">IO_load_byte</a> (uint16_t address)</td></tr>
+<tr class="memdesc:ad381b9cff8b79f16b07eb82abe485e4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a byte from the IO-section (0xFF00-0xFF7F) of the memory model.  <a href="#ad381b9cff8b79f16b07eb82abe485e4a">More...</a><br /></td></tr>
+<tr class="separator:ad381b9cff8b79f16b07eb82abe485e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -271,6 +284,86 @@ struct {</td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ad381b9cff8b79f16b07eb82abe485e4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad381b9cff8b79f16b07eb82abe485e4a">&#9670;&nbsp;</a></span>IO_load_byte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t IO_load_byte </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>address</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Load a byte from the IO-section (0xFF00-0xFF7F) of the memory model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>The address of a byte in the IO-section </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>uint8_t The value at the given address </dd></dl>
+
+</div>
+</div>
+<a id="a781c246713c4f94a67a47f960d25427e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a781c246713c4f94a67a47f960d25427e">&#9670;&nbsp;</a></span>IO_store_byte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void IO_store_byte </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Store a byte in the IO-section (0xFF00-0xFF7F) of the memory model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>The address of a byte in the IO-section </td></tr>
+    <tr><td class="paramname">data</td><td>The value to be stored </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a23132297e97c992f33578fd53ecdcfa4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a23132297e97c992f33578fd53ecdcfa4">&#9670;&nbsp;</a></span>Memory_load_byte()</h2>
 

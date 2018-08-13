@@ -1,0 +1,5 @@
+<map id="include/debug.h" name="include/debug.h">
+<area shape="rect" id="node2" href="$memory_8h.html" title="Representation of the Game Boy&#39;s memory model and operations to read and write to this memory..." alt="" coords="32,80,157,107"/>
+<area shape="rect" id="node3" href="$cpu_8h.html" title="The Central Processing Unit of the emulator, which is connected to all other virtual components..." alt="" coords="45,229,144,256"/>
+<area shape="rect" id="node4" href="$instructions_8h.html" title="A set of reusable instructions that are called by the opcode functions. " alt="" coords="22,155,167,181"/>
+</map>

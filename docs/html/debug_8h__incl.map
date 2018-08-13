@@ -1,0 +1,4 @@
+<map id="include/debug.h" name="include/debug.h">
+<area shape="rect" id="node3" href="$memory_8h.html" title="Representation of the Game Boy&#39;s memory model and operations to read and write to this memory..." alt="" coords="73,80,153,107"/>
+<area shape="rect" id="node6" href="$state_8h.html" title="Representation of the state of the emulator (registers, CPU mode, flags) and a set of utility functio..." alt="" coords="142,155,205,181"/>
+</map>

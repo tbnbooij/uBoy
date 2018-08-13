@@ -1,0 +1,5 @@
+<map id="include/memory.h" name="include/memory.h">
+<area shape="rect" id="node2" href="$cpu_8h.html" title="The Central Processing Unit of the emulator, which is connected to all other virtual components..." alt="" coords="29,155,128,181"/>
+<area shape="rect" id="node3" href="$debug_8h.html" title="A set of debugging functions for testing the emulator. " alt="" coords="22,80,135,107"/>
+<area shape="rect" id="node4" href="$instructions_8h.html" title="A set of reusable instructions that are called by the opcode functions. " alt="" coords="159,80,304,107"/>
+</map>
