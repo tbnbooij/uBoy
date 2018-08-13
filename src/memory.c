@@ -81,7 +81,7 @@ uint8_t Memory_load_byte(uint16_t address)
     }
     else if (address <= 0xFF7F || address == 0xFFFF)
     {
-        return IO_read_byte(address);
+        return IO_load_byte(address);
     }
     else
     {
@@ -375,7 +375,7 @@ void IO_store_byte(uint16_t address, uint8_t data)
     }
 }
 
-uint8_t IO_read_byte(uint16_t address)
+uint8_t IO_load_byte(uint16_t address)
 {
     switch (address)
     {

@@ -804,7 +804,7 @@ void Opcode_0x08(void)
 void Opcode_0x09(void)
 {
 	// ADD HL, BC
-	Instruction_ADD_HL_N(Registers.BC);
+	Instruction_ADD_HL_NN(Registers.BC);
 	CPU_clock_update(8);
 }
 
@@ -937,7 +937,7 @@ void Opcode_0x18(void)
 void Opcode_0x19(void)
 {
 	// ADD HL, DE
-	Instruction_ADD_HL_N(Registers.DE);
+	Instruction_ADD_HL_NN(Registers.DE);
 	CPU_clock_update(8);
 }
 
@@ -1074,7 +1074,7 @@ void Opcode_0x28(void)
 void Opcode_0x29(void)
 {
 	// ADD HL, HL
-	Instruction_ADD_HL_N(Registers.HL);
+	Instruction_ADD_HL_NN(Registers.HL);
 	CPU_clock_update(8);
 }
 
@@ -1215,7 +1215,7 @@ void Opcode_0x38(void)
 void Opcode_0x39(void)
 {
 	// ADD HL, SP
-	Instruction_ADD_HL_N(Registers.SP);
+	Instruction_ADD_HL_NN(Registers.SP);
 	CPU_clock_update(8);
 }
 
@@ -1719,112 +1719,112 @@ void Opcode_0x7F(void)
 void Opcode_0x80(void)
 {
 	// ADD A, B
-	Instruction_ADD_A_N(Registers.B);
+	Instruction_ADD_N(Registers.B);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x81(void)
 {
 	// ADD A, C
-	Instruction_ADD_A_N(Registers.C);
+	Instruction_ADD_N(Registers.C);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x82(void)
 {
 	// ADD A, D
-	Instruction_ADD_A_N(Registers.D);
+	Instruction_ADD_N(Registers.D);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x83(void)
 {
 	// ADD A, E
-	Instruction_ADD_A_N(Registers.E);
+	Instruction_ADD_N(Registers.E);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x84(void)
 {
 	// ADD A, H
-	Instruction_ADD_A_N(Registers.H);
+	Instruction_ADD_N(Registers.H);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x85(void)
 {
 	// ADD A, L
-	Instruction_ADD_A_N(Registers.L);
+	Instruction_ADD_N(Registers.L);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x86(void)
 {
 	// ADD A, (HL)
-	Instruction_ADD_A_N(Memory_load_byte(Registers.HL));
+	Instruction_ADD_N(Memory_load_byte(Registers.HL));
 	CPU_clock_update(8);
 }
 
 void Opcode_0x87(void)
 {
 	// ADD A, A
-	Instruction_ADD_A_N(Registers.A);
+	Instruction_ADD_N(Registers.A);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x88(void)
 {
 	// ADC A, B
-	Instruction_ADC_A_N(Registers.B);
+	Instruction_ADC_N(Registers.B);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x89(void)
 {
 	// ADC A, C
-	Instruction_ADC_A_N(Registers.C);
+	Instruction_ADC_N(Registers.C);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x8A(void)
 {
 	// ADC A, D
-	Instruction_ADC_A_N(Registers.D);
+	Instruction_ADC_N(Registers.D);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x8B(void)
 {
 	// ADC A, E
-	Instruction_ADC_A_N(Registers.E);
+	Instruction_ADC_N(Registers.E);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x8C(void)
 {
 	// ADC A, H
-	Instruction_ADC_A_N(Registers.H);
+	Instruction_ADC_N(Registers.H);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x8D(void)
 {
 	// ADC A, L
-	Instruction_ADC_A_N(Registers.L);
+	Instruction_ADC_N(Registers.L);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x8E(void)
 {
 	// ADC A, (HL)
-	Instruction_ADC_A_N(Memory_load_byte(Registers.HL));
+	Instruction_ADC_N(Memory_load_byte(Registers.HL));
 	CPU_clock_update(8);
 }
 
 void Opcode_0x8F(void)
 {
 	// ADC A, A
-	Instruction_ADC_A_N(Registers.A);
+	Instruction_ADC_N(Registers.A);
 	CPU_clock_update(4);
 }
 
@@ -1887,56 +1887,56 @@ void Opcode_0x97(void)
 void Opcode_0x98(void)
 {
 	// SBC A, B
-	Instruction_SBC_A_N(Registers.B);
+	Instruction_SBC_N(Registers.B);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x99(void)
 {
 	// SBC A, C
-	Instruction_SBC_A_N(Registers.C);
+	Instruction_SBC_N(Registers.C);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x9A(void)
 {
 	// SBC A, D
-	Instruction_SBC_A_N(Registers.D);
+	Instruction_SBC_N(Registers.D);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x9B(void)
 {
 	// SBC A, E
-	Instruction_SBC_A_N(Registers.E);
+	Instruction_SBC_N(Registers.E);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x9C(void)
 {
 	// SBC A, H
-	Instruction_SBC_A_N(Registers.H);
+	Instruction_SBC_N(Registers.H);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x9D(void)
 {
 	// SBC A, L
-	Instruction_SBC_A_N(Registers.L);
+	Instruction_SBC_N(Registers.L);
 	CPU_clock_update(4);
 }
 
 void Opcode_0x9E(void)
 {
 	// SBC A, (HL)
-	Instruction_SBC_A_N(Memory_load_byte(Registers.HL));
+	Instruction_SBC_N(Memory_load_byte(Registers.HL));
 	CPU_clock_update(8);
 }
 
 void Opcode_0x9F(void)
 {
 	// SBC A, A
-	Instruction_SBC_A_N(Registers.A);
+	Instruction_SBC_N(Registers.A);
 	CPU_clock_update(4);
 }
 
@@ -2239,7 +2239,7 @@ void Opcode_0xC5(void)
 void Opcode_0xC6(void)
 {
 	// ADD A, n
-	Instruction_ADD_A_N(Memory_load_byte_PC());
+	Instruction_ADD_N(Memory_load_byte_PC());
 	CPU_clock_update(8);
 }
 
@@ -2320,7 +2320,7 @@ void Opcode_0xCD(void)
 void Opcode_0xCE(void)
 {
 	// ADC A, n
-	Instruction_ADC_A_N(Memory_load_byte_PC());
+	Instruction_ADC_N(Memory_load_byte_PC());
 	CPU_clock_update(8);
 }
 
@@ -2486,7 +2486,7 @@ void Opcode_0xDD(void)
 void Opcode_0xDE(void)
 {
 	// SBC A, n
-	Instruction_SBC_A_N(Memory_load_byte_PC());
+	Instruction_SBC_N(Memory_load_byte_PC());
 	CPU_clock_update(8);
 }
 

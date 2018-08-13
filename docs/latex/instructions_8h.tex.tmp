@@ -1,0 +1,640 @@
+\hypertarget{instructions_8h}{}\section{include/instructions.h File Reference}
+\label{instructions_8h}\index{include/instructions.\+h@{include/instructions.\+h}}
+
+
+A set of reusable instructions that are called by the opcode functions.  
+
+
+{\ttfamily \#include \char`\"{}memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}state.\+h\char`\"{}}\newline
+Include dependency graph for instructions.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{instructions_8h_a53810b54e095653d325cc4a05ab33ed5}{Instruction\+\_\+\+A\+D\+D\+\_\+N} (uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Add unsigned 8-\/bit constant to register A. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_aecd21031952e16551c4f1f1f40d9d3f7}{Instruction\+\_\+\+A\+D\+C\+\_\+N} (uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Add unsigned 8-\/bit constant and carry flag to register A. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a23af2d18c12397dd80baa0108966fb81}{Instruction\+\_\+\+S\+U\+B\+\_\+N} (uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Subtract unsigned 8-\/bit constant from register A. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_adb0e3134fb0874a20dd9fbe27431165d}{Instruction\+\_\+\+S\+B\+C\+\_\+N} (uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Subtract unsigned 8-\/bit constant and carry flag from register A. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a5cf6516a2fe8d40c4bad2014435a986b}{Instruction\+\_\+\+A\+N\+D\+\_\+N} (uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Apply bitwise A\+ND operation on register A and an unsigned 8-\/bit constant. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_ad82fd3f5e54acda061336b4b7d24796b}{Instruction\+\_\+\+O\+R\+\_\+N} (uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Apply bitwise OR operation on register A and an unsigned 8-\/bit constant. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a16a374675ed22b20f8234e533a820ffd}{Instruction\+\_\+\+X\+O\+R\+\_\+N} (uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Apply bitwise X\+OR operation on register A and an unsigned 8-\/bit constant. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a283ba06d0e951780848b47c248c32c28}{Instruction\+\_\+\+C\+P\+\_\+N} (uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Compare the value in register A with an unsigned 8-\/bit constant. Essentially, this function subtracts the constant from the register value, sets the flags accordingly and throws away the result of the substraction. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_afd959af095696914d74c68e9a95295f7}{Instruction\+\_\+\+I\+N\+C\+\_\+N} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Increment the value in a given register. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_acc69a782eb9f5a070a62013abde81fa8}{Instruction\+\_\+\+D\+E\+C\+\_\+N} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Decrement the value in a given register. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_adc5ceb5389c6a4caa364b261d714536f}{Instruction\+\_\+\+A\+D\+D\+\_\+\+H\+L\+\_\+\+NN} (uint16\+\_\+t nn)
+\begin{DoxyCompactList}\small\item\em Add an unsigned 16-\/bit constant to register HL. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a2364a4fdad07ba894b911061b1a8cb5c}{Instruction\+\_\+\+C\+A\+L\+L\+\_\+\+NN} (uint16\+\_\+t nn)
+\begin{DoxyCompactList}\small\item\em Push the current program counter on the stack and set the program counter to an unsigned 16-\/bit constant (address). \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a27f54c92e32ca954fc39a52f557c1ccd}{Instruction\+\_\+\+R\+S\+T\+\_\+N} (uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Push the current program counter on the stack and set the program counter to an unsigned 8-\/bit constant (address). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{instructions_8h_a5cb5475b8784a50018e7271557c2e868}\label{instructions_8h_a5cb5475b8784a50018e7271557c2e868}} 
+void \hyperlink{instructions_8h_a5cb5475b8784a50018e7271557c2e868}{Instruction\+\_\+\+R\+ET} (void)
+\begin{DoxyCompactList}\small\item\em Pop two bytes from the stack and set the program counter to the 16-\/bit address these bytes form. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a013e0f73f245066aca203b657fad414c}{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+R} (uint8\+\_\+t n, uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Set the nth bit of a given register. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a42a033ef02c7a4f9fc4e4de62610c538}{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+M} (uint8\+\_\+t n, uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Set the nth bit of a byte in memory. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a4871f18b19b6ebb9add69b5a1ddb5d37}{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+R} (uint8\+\_\+t n, uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Reset the nth bit of a given register. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_afae47874f6a2e9407092d2b7002f7d7e}{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+M} (uint8\+\_\+t n, uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Reset the nth bit of a byte in memory. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a50f25c42aae5d9f8423e3214e949e2ce}{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+R} (uint8\+\_\+t n, uint8\+\_\+t r)
+\begin{DoxyCompactList}\small\item\em Test the nth bit of an unsigned 8-\/bit register (set flags accordingly). \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a31d1bb1052756ef7694f58da1a0ce622}{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+M} (uint8\+\_\+t n, uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Test the nth bit of a byte in memory (set flags accordingly). \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a4712224a421ff429dbbda237d505493b}{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+R} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Swap the order of the two nibbles in an unsigned 8-\/bit register. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_aeed3d4f7f6615285a147e71704ee8f2d}{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+M} (uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Swap the order of the two nibbles of a byte in memory. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_abe04d911de4baebc972d22d0e21d5d9c}{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+R} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Shift an unsigned 8-\/bit register to the right. The L\+SB is pushed into the carry flag and the M\+SB is set to 0. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a58d942db75699e8e6849f89e51794adb}{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+M} (uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Shift a byte in memory to the right. The L\+SB is pushed into the carry flag and the M\+SB is set to 0. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a11968a23b64c558ca28d225c9a9d3e66}{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+R} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Shift an unsigned 8-\/bit register to the left. The M\+SB is pushed into the carry flag and the L\+SB is set to 0. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a90e53de8050b506e214c5ffba1907700}{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+M} (uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Shift a byte in memory to the left. The M\+SB is pushed into the carry flag and the L\+SB is set to 0. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_af68fa257074f039dabc5458327cd818c}{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+R} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Shift an unsigned 8-\/bit register to the right. The L\+SB is pushed into the carry flag and the M\+SB remains the value it had before the shift. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_ac12ec42750fabe5740636cea3b33b865}{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+M} (uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Shift a byte in memory to the right. The L\+SB is pushed into the carry flag and the M\+SB remains the value it has before the shift. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a37420f7031217dc8504d3df5230e7e6b}{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+R} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Rotate an unsigned 8-\/bit register to the left through the carry flag. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a5901146f06a4aca964560e38d9e6431d}{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+M} (uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Rotate a byte in memory to the left through the carry flag. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a8409550d3a3c830689806133a48894b6}{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+R} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Rotate an unsigned 8-\/bit register to the right through the carry flag. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a591febd710ace13bd8c988f91b07fd3c}{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+M} (uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Rotate a byte in memory to the right through the carry flag. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a5d8d8838f46f9a451f6e86cfd8a493e3}{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+R} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Rotate an unsigned 8-\/bit register to the left and store the former M\+SB in the carry flag. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a82407a01bfcdd76a41f29fe7c65e4b0c}{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+M} (uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Rotate a byte in memory to the left and store the former M\+SB in the carry flag. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_acbebe19a94499a25f7565d30968a1c10}{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+R} (uint8\+\_\+t $\ast$r)
+\begin{DoxyCompactList}\small\item\em Rotate an unsigned 8-\/bit register to the right and store the former L\+SB in the carry flag. \end{DoxyCompactList}\item 
+void \hyperlink{instructions_8h_a2aec819714543a7b7ccc02dc76943462}{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+M} (uint16\+\_\+t m)
+\begin{DoxyCompactList}\small\item\em Rotate a byte in memory to the right and store the former L\+SB in the carry flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A set of reusable instructions that are called by the opcode functions. 
+
+\begin{DoxyAuthor}{Author}
+tbnbooij 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/08-\/13 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{instructions_8h_aecd21031952e16551c4f1f1f40d9d3f7}\label{instructions_8h_aecd21031952e16551c4f1f1f40d9d3f7}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+A\+D\+C\+\_\+N@{Instruction\+\_\+\+A\+D\+C\+\_\+N}}
+\index{Instruction\+\_\+\+A\+D\+C\+\_\+N@{Instruction\+\_\+\+A\+D\+C\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+A\+D\+C\+\_\+\+N()}{Instruction\_ADC\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+A\+D\+C\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Add unsigned 8-\/bit constant and carry flag to register A. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Unsigned 8-\/bit constant \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_adc5ceb5389c6a4caa364b261d714536f}\label{instructions_8h_adc5ceb5389c6a4caa364b261d714536f}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+A\+D\+D\+\_\+\+H\+L\+\_\+\+NN@{Instruction\+\_\+\+A\+D\+D\+\_\+\+H\+L\+\_\+\+NN}}
+\index{Instruction\+\_\+\+A\+D\+D\+\_\+\+H\+L\+\_\+\+NN@{Instruction\+\_\+\+A\+D\+D\+\_\+\+H\+L\+\_\+\+NN}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+A\+D\+D\+\_\+\+H\+L\+\_\+\+N\+N()}{Instruction\_ADD\_HL\_NN()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+A\+D\+D\+\_\+\+H\+L\+\_\+\+NN (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{nn }\end{DoxyParamCaption})}
+
+
+
+Add an unsigned 16-\/bit constant to register HL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nn} & Unsigned 16-\/bit constant \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a53810b54e095653d325cc4a05ab33ed5}\label{instructions_8h_a53810b54e095653d325cc4a05ab33ed5}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+A\+D\+D\+\_\+N@{Instruction\+\_\+\+A\+D\+D\+\_\+N}}
+\index{Instruction\+\_\+\+A\+D\+D\+\_\+N@{Instruction\+\_\+\+A\+D\+D\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+A\+D\+D\+\_\+\+N()}{Instruction\_ADD\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+A\+D\+D\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Add unsigned 8-\/bit constant to register A. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Unsigned 8-\/bit constant \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a5cf6516a2fe8d40c4bad2014435a986b}\label{instructions_8h_a5cf6516a2fe8d40c4bad2014435a986b}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+A\+N\+D\+\_\+N@{Instruction\+\_\+\+A\+N\+D\+\_\+N}}
+\index{Instruction\+\_\+\+A\+N\+D\+\_\+N@{Instruction\+\_\+\+A\+N\+D\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+A\+N\+D\+\_\+\+N()}{Instruction\_AND\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+A\+N\+D\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Apply bitwise A\+ND operation on register A and an unsigned 8-\/bit constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Unsigned 8-\/bit constant \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a31d1bb1052756ef7694f58da1a0ce622}\label{instructions_8h_a31d1bb1052756ef7694f58da1a0ce622}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+\+M()}{Instruction\_BIT\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n,  }\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Test the nth bit of a byte in memory (set flags accordingly). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The index of the bit that will be tested (little-\/endian, indexed from 0) \\
+\hline
+{\em m} & The 16-\/bit address of the tested byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a50f25c42aae5d9f8423e3214e949e2ce}\label{instructions_8h_a50f25c42aae5d9f8423e3214e949e2ce}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+\+R()}{Instruction\_BIT\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+B\+I\+T\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n,  }\item[{uint8\+\_\+t}]{r }\end{DoxyParamCaption})}
+
+
+
+Test the nth bit of an unsigned 8-\/bit register (set flags accordingly). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The index of the bit that will be tested (little-\/endian, indexed from 0) \\
+\hline
+{\em r} & The value in an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a2364a4fdad07ba894b911061b1a8cb5c}\label{instructions_8h_a2364a4fdad07ba894b911061b1a8cb5c}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+C\+A\+L\+L\+\_\+\+NN@{Instruction\+\_\+\+C\+A\+L\+L\+\_\+\+NN}}
+\index{Instruction\+\_\+\+C\+A\+L\+L\+\_\+\+NN@{Instruction\+\_\+\+C\+A\+L\+L\+\_\+\+NN}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+C\+A\+L\+L\+\_\+\+N\+N()}{Instruction\_CALL\_NN()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+C\+A\+L\+L\+\_\+\+NN (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{nn }\end{DoxyParamCaption})}
+
+
+
+Push the current program counter on the stack and set the program counter to an unsigned 16-\/bit constant (address). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nn} & 16-\/bit address the PC is set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a283ba06d0e951780848b47c248c32c28}\label{instructions_8h_a283ba06d0e951780848b47c248c32c28}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+C\+P\+\_\+N@{Instruction\+\_\+\+C\+P\+\_\+N}}
+\index{Instruction\+\_\+\+C\+P\+\_\+N@{Instruction\+\_\+\+C\+P\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+C\+P\+\_\+\+N()}{Instruction\_CP\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+C\+P\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Compare the value in register A with an unsigned 8-\/bit constant. Essentially, this function subtracts the constant from the register value, sets the flags accordingly and throws away the result of the substraction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Unsigned 8-\/bit constant \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_acc69a782eb9f5a070a62013abde81fa8}\label{instructions_8h_acc69a782eb9f5a070a62013abde81fa8}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+D\+E\+C\+\_\+N@{Instruction\+\_\+\+D\+E\+C\+\_\+N}}
+\index{Instruction\+\_\+\+D\+E\+C\+\_\+N@{Instruction\+\_\+\+D\+E\+C\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+D\+E\+C\+\_\+\+N()}{Instruction\_DEC\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+D\+E\+C\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Decrement the value in a given register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_afd959af095696914d74c68e9a95295f7}\label{instructions_8h_afd959af095696914d74c68e9a95295f7}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+I\+N\+C\+\_\+N@{Instruction\+\_\+\+I\+N\+C\+\_\+N}}
+\index{Instruction\+\_\+\+I\+N\+C\+\_\+N@{Instruction\+\_\+\+I\+N\+C\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+I\+N\+C\+\_\+\+N()}{Instruction\_INC\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+I\+N\+C\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Increment the value in a given register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_ad82fd3f5e54acda061336b4b7d24796b}\label{instructions_8h_ad82fd3f5e54acda061336b4b7d24796b}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+O\+R\+\_\+N@{Instruction\+\_\+\+O\+R\+\_\+N}}
+\index{Instruction\+\_\+\+O\+R\+\_\+N@{Instruction\+\_\+\+O\+R\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+O\+R\+\_\+\+N()}{Instruction\_OR\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+O\+R\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Apply bitwise OR operation on register A and an unsigned 8-\/bit constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Unsigned 8-\/bit constant \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_afae47874f6a2e9407092d2b7002f7d7e}\label{instructions_8h_afae47874f6a2e9407092d2b7002f7d7e}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+\+M()}{Instruction\_RES\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n,  }\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Reset the nth bit of a byte in memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The index of the bit that will be reset (little-\/endian, indexed from 0) \\
+\hline
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a4871f18b19b6ebb9add69b5a1ddb5d37}\label{instructions_8h_a4871f18b19b6ebb9add69b5a1ddb5d37}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+\+R()}{Instruction\_RES\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+E\+S\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n,  }\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Reset the nth bit of a given register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The index of the bit that will be reset (little-\/endian, indexed from 0) \\
+\hline
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a5901146f06a4aca964560e38d9e6431d}\label{instructions_8h_a5901146f06a4aca964560e38d9e6431d}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+\+M()}{Instruction\_RL\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Rotate a byte in memory to the left through the carry flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a37420f7031217dc8504d3df5230e7e6b}\label{instructions_8h_a37420f7031217dc8504d3df5230e7e6b}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+\+R()}{Instruction\_RL\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+L\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Rotate an unsigned 8-\/bit register to the left through the carry flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a82407a01bfcdd76a41f29fe7c65e4b0c}\label{instructions_8h_a82407a01bfcdd76a41f29fe7c65e4b0c}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+\+M()}{Instruction\_RLC\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Rotate a byte in memory to the left and store the former M\+SB in the carry flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a5d8d8838f46f9a451f6e86cfd8a493e3}\label{instructions_8h_a5d8d8838f46f9a451f6e86cfd8a493e3}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+\+R()}{Instruction\_RLC\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+L\+C\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Rotate an unsigned 8-\/bit register to the left and store the former M\+SB in the carry flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a591febd710ace13bd8c988f91b07fd3c}\label{instructions_8h_a591febd710ace13bd8c988f91b07fd3c}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+\+M()}{Instruction\_RR\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Rotate a byte in memory to the right through the carry flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a8409550d3a3c830689806133a48894b6}\label{instructions_8h_a8409550d3a3c830689806133a48894b6}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+\+R()}{Instruction\_RR\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+R\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Rotate an unsigned 8-\/bit register to the right through the carry flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a2aec819714543a7b7ccc02dc76943462}\label{instructions_8h_a2aec819714543a7b7ccc02dc76943462}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+\+M()}{Instruction\_RRC\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Rotate a byte in memory to the right and store the former L\+SB in the carry flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_acbebe19a94499a25f7565d30968a1c10}\label{instructions_8h_acbebe19a94499a25f7565d30968a1c10}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+\+R()}{Instruction\_RRC\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+R\+C\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Rotate an unsigned 8-\/bit register to the right and store the former L\+SB in the carry flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a27f54c92e32ca954fc39a52f557c1ccd}\label{instructions_8h_a27f54c92e32ca954fc39a52f557c1ccd}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+R\+S\+T\+\_\+N@{Instruction\+\_\+\+R\+S\+T\+\_\+N}}
+\index{Instruction\+\_\+\+R\+S\+T\+\_\+N@{Instruction\+\_\+\+R\+S\+T\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+R\+S\+T\+\_\+\+N()}{Instruction\_RST\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+R\+S\+T\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Push the current program counter on the stack and set the program counter to an unsigned 8-\/bit constant (address). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & 8-\/bit address the PC is set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_adb0e3134fb0874a20dd9fbe27431165d}\label{instructions_8h_adb0e3134fb0874a20dd9fbe27431165d}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+B\+C\+\_\+N@{Instruction\+\_\+\+S\+B\+C\+\_\+N}}
+\index{Instruction\+\_\+\+S\+B\+C\+\_\+N@{Instruction\+\_\+\+S\+B\+C\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+B\+C\+\_\+\+N()}{Instruction\_SBC\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+B\+C\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Subtract unsigned 8-\/bit constant and carry flag from register A. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Unsigned 8-\/bit constant \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a42a033ef02c7a4f9fc4e4de62610c538}\label{instructions_8h_a42a033ef02c7a4f9fc4e4de62610c538}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+\+M()}{Instruction\_SET\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n,  }\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Set the nth bit of a byte in memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The index of the bit that will be set (little-\/endian, indexed from 0) \\
+\hline
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a013e0f73f245066aca203b657fad414c}\label{instructions_8h_a013e0f73f245066aca203b657fad414c}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+\+R()}{Instruction\_SET\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+E\+T\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n,  }\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Set the nth bit of a given register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The index of the bit that will be set (little-\/endian, indexed from 0) \\
+\hline
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a90e53de8050b506e214c5ffba1907700}\label{instructions_8h_a90e53de8050b506e214c5ffba1907700}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+\+M()}{Instruction\_SLA\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Shift a byte in memory to the left. The M\+SB is pushed into the carry flag and the L\+SB is set to 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a11968a23b64c558ca28d225c9a9d3e66}\label{instructions_8h_a11968a23b64c558ca28d225c9a9d3e66}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+\+R()}{Instruction\_SLA\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+L\+A\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Shift an unsigned 8-\/bit register to the left. The M\+SB is pushed into the carry flag and the L\+SB is set to 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_ac12ec42750fabe5740636cea3b33b865}\label{instructions_8h_ac12ec42750fabe5740636cea3b33b865}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+\+M()}{Instruction\_SRA\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Shift a byte in memory to the right. The L\+SB is pushed into the carry flag and the M\+SB remains the value it has before the shift. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_af68fa257074f039dabc5458327cd818c}\label{instructions_8h_af68fa257074f039dabc5458327cd818c}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+\+R()}{Instruction\_SRA\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+R\+A\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Shift an unsigned 8-\/bit register to the right. The L\+SB is pushed into the carry flag and the M\+SB remains the value it had before the shift. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a58d942db75699e8e6849f89e51794adb}\label{instructions_8h_a58d942db75699e8e6849f89e51794adb}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+\+M()}{Instruction\_SRL\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Shift a byte in memory to the right. The L\+SB is pushed into the carry flag and the M\+SB is set to 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_abe04d911de4baebc972d22d0e21d5d9c}\label{instructions_8h_abe04d911de4baebc972d22d0e21d5d9c}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+\+R()}{Instruction\_SRL\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+R\+L\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Shift an unsigned 8-\/bit register to the right. The L\+SB is pushed into the carry flag and the M\+SB is set to 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a23af2d18c12397dd80baa0108966fb81}\label{instructions_8h_a23af2d18c12397dd80baa0108966fb81}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+U\+B\+\_\+N@{Instruction\+\_\+\+S\+U\+B\+\_\+N}}
+\index{Instruction\+\_\+\+S\+U\+B\+\_\+N@{Instruction\+\_\+\+S\+U\+B\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+U\+B\+\_\+\+N()}{Instruction\_SUB\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+U\+B\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Subtract unsigned 8-\/bit constant from register A. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Unsigned 8-\/bit constant \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_aeed3d4f7f6615285a147e71704ee8f2d}\label{instructions_8h_aeed3d4f7f6615285a147e71704ee8f2d}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+M}}
+\index{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+M@{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+M}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+\+M()}{Instruction\_SWAP\_N\_M()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+M (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+
+
+Swap the order of the two nibbles of a byte in memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The 16-\/bit address of the modified byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a4712224a421ff429dbbda237d505493b}\label{instructions_8h_a4712224a421ff429dbbda237d505493b}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+R}}
+\index{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+R@{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+R}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+\+R()}{Instruction\_SWAP\_N\_R()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+S\+W\+A\+P\+\_\+\+N\+\_\+R (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Swap the order of the two nibbles in an unsigned 8-\/bit register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$r} & Pointer to an unsigned 8-\/bit register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{instructions_8h_a16a374675ed22b20f8234e533a820ffd}\label{instructions_8h_a16a374675ed22b20f8234e533a820ffd}} 
+\index{instructions.\+h@{instructions.\+h}!Instruction\+\_\+\+X\+O\+R\+\_\+N@{Instruction\+\_\+\+X\+O\+R\+\_\+N}}
+\index{Instruction\+\_\+\+X\+O\+R\+\_\+N@{Instruction\+\_\+\+X\+O\+R\+\_\+N}!instructions.\+h@{instructions.\+h}}
+\subsubsection{\texorpdfstring{Instruction\+\_\+\+X\+O\+R\+\_\+\+N()}{Instruction\_XOR\_N()}}
+{\footnotesize\ttfamily void Instruction\+\_\+\+X\+O\+R\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Apply bitwise X\+OR operation on register A and an unsigned 8-\/bit constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Unsigned 8-\/bit constant \\
+\hline
+\end{DoxyParams}

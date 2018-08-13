@@ -1,0 +1,514 @@
+\hypertarget{memory_8h}{}\section{include/memory.h File Reference}
+\label{memory_8h}\index{include/memory.\+h@{include/memory.\+h}}
+
+
+Representation of the Game Boy\textquotesingle{}s memory model and operations to read and write to this memory.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}state.\+h\char`\"{}}\newline
+Include dependency graph for memory.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{memory_8h_a68419cc4f6bc752ecab770a4da751448}{K\+I\+L\+O\+\_\+\+B\+Y\+TE}~1024
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{memory_8h_ac2cbc1f5e1ab43a1458cdf1bbc79dcb8}\label{memory_8h_ac2cbc1f5e1ab43a1458cdf1bbc79dcb8}} 
+void \hyperlink{memory_8h_ac2cbc1f5e1ab43a1458cdf1bbc79dcb8}{Memory\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Allocate the emulator\textquotesingle{}s memory and initialize special registers. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_a3991fe5b320be41916cfa3908915fca2}\label{memory_8h_a3991fe5b320be41916cfa3908915fca2}} 
+void \hyperlink{memory_8h_a3991fe5b320be41916cfa3908915fca2}{Memory\+\_\+exit} (void)
+\begin{DoxyCompactList}\small\item\em Free the allocated memory. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{memory_8h_a23132297e97c992f33578fd53ecdcfa4}{Memory\+\_\+load\+\_\+byte} (uint16\+\_\+t address)
+\begin{DoxyCompactList}\small\item\em Load a byte from the emulator\textquotesingle{}s memory. \end{DoxyCompactList}\item 
+void \hyperlink{memory_8h_aee6c781b8a3f54504854cc852314200d}{Memory\+\_\+store\+\_\+byte} (uint16\+\_\+t address, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Store a byte in the emulator\textquotesingle{}s memory. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{memory_8h_a25c828bd52fda6442011b6ae3d68a67f}{Memory\+\_\+load\+\_\+byte\+\_\+\+PC} (void)
+\begin{DoxyCompactList}\small\item\em Load the byte at the program counter and increment the program counter. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{memory_8h_a24f868b3fc7b551487bbd9158aaa510d}{Memory\+\_\+load\+\_\+word\+\_\+\+PC} (void)
+\begin{DoxyCompactList}\small\item\em Load the 16-\/bit word (L\+SB first) at the program counter and increment the program counter accordingly. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_ac1e824237e4a013ed7d7d5f499292eba}\label{memory_8h_ac1e824237e4a013ed7d7d5f499292eba}} 
+void \hyperlink{memory_8h_ac1e824237e4a013ed7d7d5f499292eba}{I\+O\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the special registers in the I\+O-\/section (0x\+F\+F00-\/0x\+F\+F7F) of the memory model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{memory_8h_ab6f0ae03120ecb9322e05e1bbc27e364}\label{memory_8h_ab6f0ae03120ecb9322e05e1bbc27e364}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct \{\\
+\>\>uint8\_t $\ast$ \hyperlink{memory_8h_afa8381d8690dfa1f2bcea5a8e4d00741}{bank\_fixed}\\
+\>\>uint8\_t $\ast$ \hyperlink{memory_8h_ac710b75cc62b8885999844bf65b21c78}{bank\_swap}\\
+\>\} \hyperlink{memory_8h_a66b23f4199eb5bd14f052087bf83b770}{ROM}\\
+\>uint8\_t $\ast$ \hyperlink{memory_8h_abb4726240b8b01131746b0f199c58549}{VRAM}\\
+\>uint8\_t $\ast$ \hyperlink{memory_8h_ab1119300a60f06c45d14b0d9eafcf422}{EXTRAM}\\
+\>struct \{\\
+\>\>uint8\_t $\ast$ \hyperlink{memory_8h_afa8381d8690dfa1f2bcea5a8e4d00741}{bank\_fixed}\\
+\>\>uint8\_t $\ast$ \hyperlink{memory_8h_ac710b75cc62b8885999844bf65b21c78}{bank\_swap}\\
+\>\} \hyperlink{memory_8h_a792844e460865e8247b08da318142555}{RAM}\\
+\>uint8\_t $\ast$ \hyperlink{memory_8h_a199eddb4cf868e571fd2ed01c7a8a32e}{OAM}\\
+\>uint8\_t $\ast$ \hyperlink{memory_8h_ac7681f624878a05c3db9eade8b303001}{HRAM}\\
+\>uint8\_t \hyperlink{memory_8h_ab1ca70da5c3b3a71451a8b582d9c45ee}{IE}\\
+\} \hyperlink{memory_8h_ab6f0ae03120ecb9322e05e1bbc27e364}{Memory}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Struct that represents the memory model of the emulator. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_a5f9bd6c1e1c61a55c4dfacc0fb2fa160}\label{memory_8h_a5f9bd6c1e1c61a55c4dfacc0fb2fa160}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint8\_t \hyperlink{memory_8h_a89e93cdfda0a253e4d7ba7948fc4d577}{P1}\\
+\>uint8\_t \hyperlink{memory_8h_af6e25191020f32790ed358bdb7152678}{SB}\\
+\>uint8\_t \hyperlink{memory_8h_a994283cb179a11ded2d18c30c3710802}{SC}\\
+\>uint8\_t \hyperlink{memory_8h_aa2c865a3453e463499b654276a70e572}{DIV}\\
+\>uint8\_t \hyperlink{memory_8h_ace71b847242f481e21068751bdc85124}{TIMA}\\
+\>uint8\_t \hyperlink{memory_8h_ab51e207437a300404935b773224ca546}{TMA}\\
+\>uint8\_t \hyperlink{memory_8h_a0c2aed67688f753c0dcaccc4067c472c}{TAC}\\
+\>uint8\_t \hyperlink{memory_8h_ae8ee8fbf58d3aeb61d81bae817be8826}{IF}\\
+\>uint8\_t \hyperlink{memory_8h_ab1ca70da5c3b3a71451a8b582d9c45ee}{IE}\\
+\>uint8\_t \hyperlink{memory_8h_a8fbb8bb9ef49281d646ef1ed0c204a68}{NR10}\\
+\>uint8\_t \hyperlink{memory_8h_a01e595f265620d78598813c8653c4f5f}{NR11}\\
+\>uint8\_t \hyperlink{memory_8h_ae376586495517abdb6b30bcbf3c594ef}{NR12}\\
+\>uint8\_t \hyperlink{memory_8h_a22afb2aa1974dc6c9f1f16c9b189124e}{NR13}\\
+\>uint8\_t \hyperlink{memory_8h_a20490b899225cc36d161277515a16e56}{NR14}\\
+\>uint8\_t \hyperlink{memory_8h_a030a59f26206ac0ac4201a322b5cdd5d}{NR21}\\
+\>uint8\_t \hyperlink{memory_8h_a84a77945673e816e904657cf55b3e902}{NR22}\\
+\>uint8\_t \hyperlink{memory_8h_a86f90fa3fd15f1caaee3154f3425ad4f}{NR23}\\
+\>uint8\_t \hyperlink{memory_8h_a277721eee408eff8e2bf675da59ab0f2}{NR24}\\
+\>uint8\_t \hyperlink{memory_8h_ab1dc91e1df22fd74272e6af40c9f3e22}{NR30}\\
+\>uint8\_t \hyperlink{memory_8h_ac27fb79168070f5b8aa58ab030dbc30b}{NR31}\\
+\>uint8\_t \hyperlink{memory_8h_a012ca99b3d393d9696a57fbedba071eb}{NR32}\\
+\>uint8\_t \hyperlink{memory_8h_ab183837a14028cb6674aaaadd2ac18db}{NR33}\\
+\>uint8\_t \hyperlink{memory_8h_aa2b0164adc5f48687ffaf53ac41265b8}{NR34}\\
+\>uint8\_t \hyperlink{memory_8h_a5bb89968df1cf6d2724a2b10300fd20f}{NR41}\\
+\>uint8\_t \hyperlink{memory_8h_afa29f9e2924c6adb56e8dc67671ff3ac}{NR42}\\
+\>uint8\_t \hyperlink{memory_8h_a32e5cc4bcf2df723aeeae24c0c9b3ebe}{NR43}\\
+\>uint8\_t \hyperlink{memory_8h_a1012d06d3215a8e5833c8e02146b6c33}{NR44}\\
+\>uint8\_t \hyperlink{memory_8h_a01646acd7c6dcf29e7390e9007b6792d}{NR50}\\
+\>uint8\_t \hyperlink{memory_8h_ae1d2e83ced05b7401878c591e76def88}{NR51}\\
+\>uint8\_t \hyperlink{memory_8h_a0fe259dbbb83d897c6f5e47e04b45a78}{NR52}\\
+\>uint8\_t \hyperlink{memory_8h_ada5aa230fbe749561bbcc29c81727bed}{WAVE} \mbox{[}16\mbox{]}\\
+\>uint8\_t \hyperlink{memory_8h_a4fef16b094b310f510df6cacf7fa56c6}{LCDC}\\
+\>uint8\_t \hyperlink{memory_8h_a29552ccb0992dbc97b7cf8259c0c43fe}{STAT}\\
+\>uint8\_t \hyperlink{memory_8h_a9a7b9c16aeab96019096b5d9f509b57f}{SCY}\\
+\>uint8\_t \hyperlink{memory_8h_a4ec9bb2eafba7556ff7bd8a2ec8cf1b5}{SCX}\\
+\>uint8\_t \hyperlink{memory_8h_aac72867167411ab30a371a9d8e8076d1}{LY}\\
+\>uint8\_t \hyperlink{memory_8h_a8ae5a3bf622f470d0e5739b3b427e8a7}{LYC}\\
+\>uint8\_t \hyperlink{memory_8h_a6701d95da5fe992e672fbf3925ca2fa4}{DMA}\\
+\>uint8\_t \hyperlink{memory_8h_ac547af7ecc2c9b64f2b59c7ad9eed92f}{BGP}\\
+\>uint8\_t \hyperlink{memory_8h_a7c04e9a18ac693d6b7ba31764c3ee70e}{OBP0}\\
+\>uint8\_t \hyperlink{memory_8h_a53b57174a234f73bc93e80bd543d546a}{OBP1}\\
+\>uint8\_t \hyperlink{memory_8h_a623df2e10cad46929fa226da97926eaf}{WY}\\
+\>uint8\_t \hyperlink{memory_8h_a26cc5409e89a6f0e14b6da08870fca2d}{WX}\\
+\} \hyperlink{memory_8h_a5f9bd6c1e1c61a55c4dfacc0fb2fa160}{IO\_Registers}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em The hardware registers in the I\+O-\/section of the memory model (0x\+F\+F00-\/0x\+F\+F7F) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representation of the Game Boy\textquotesingle{}s memory model and operations to read and write to this memory. 
+
+\begin{DoxyAuthor}{Author}
+tbnbooij 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/08-\/13 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{memory_8h_a68419cc4f6bc752ecab770a4da751448}\label{memory_8h_a68419cc4f6bc752ecab770a4da751448}} 
+\index{memory.\+h@{memory.\+h}!K\+I\+L\+O\+\_\+\+B\+Y\+TE@{K\+I\+L\+O\+\_\+\+B\+Y\+TE}}
+\index{K\+I\+L\+O\+\_\+\+B\+Y\+TE@{K\+I\+L\+O\+\_\+\+B\+Y\+TE}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{K\+I\+L\+O\+\_\+\+B\+Y\+TE}{KILO\_BYTE}}
+{\footnotesize\ttfamily \#define K\+I\+L\+O\+\_\+\+B\+Y\+TE~1024}
+
+Size of a kilobyte in bytes 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{memory_8h_a23132297e97c992f33578fd53ecdcfa4}\label{memory_8h_a23132297e97c992f33578fd53ecdcfa4}} 
+\index{memory.\+h@{memory.\+h}!Memory\+\_\+load\+\_\+byte@{Memory\+\_\+load\+\_\+byte}}
+\index{Memory\+\_\+load\+\_\+byte@{Memory\+\_\+load\+\_\+byte}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{Memory\+\_\+load\+\_\+byte()}{Memory\_load\_byte()}}
+{\footnotesize\ttfamily uint8\+\_\+t Memory\+\_\+load\+\_\+byte (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{address }\end{DoxyParamCaption})}
+
+
+
+Load a byte from the emulator\textquotesingle{}s memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The 16-\/bit address of the read byte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The value at the given address 
+\end{DoxyReturn}
+\mbox{\Hypertarget{memory_8h_a25c828bd52fda6442011b6ae3d68a67f}\label{memory_8h_a25c828bd52fda6442011b6ae3d68a67f}} 
+\index{memory.\+h@{memory.\+h}!Memory\+\_\+load\+\_\+byte\+\_\+\+PC@{Memory\+\_\+load\+\_\+byte\+\_\+\+PC}}
+\index{Memory\+\_\+load\+\_\+byte\+\_\+\+PC@{Memory\+\_\+load\+\_\+byte\+\_\+\+PC}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{Memory\+\_\+load\+\_\+byte\+\_\+\+P\+C()}{Memory\_load\_byte\_PC()}}
+{\footnotesize\ttfamily uint8\+\_\+t Memory\+\_\+load\+\_\+byte\+\_\+\+PC (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Load the byte at the program counter and increment the program counter. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The value at the program counter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{memory_8h_a24f868b3fc7b551487bbd9158aaa510d}\label{memory_8h_a24f868b3fc7b551487bbd9158aaa510d}} 
+\index{memory.\+h@{memory.\+h}!Memory\+\_\+load\+\_\+word\+\_\+\+PC@{Memory\+\_\+load\+\_\+word\+\_\+\+PC}}
+\index{Memory\+\_\+load\+\_\+word\+\_\+\+PC@{Memory\+\_\+load\+\_\+word\+\_\+\+PC}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{Memory\+\_\+load\+\_\+word\+\_\+\+P\+C()}{Memory\_load\_word\_PC()}}
+{\footnotesize\ttfamily uint16\+\_\+t Memory\+\_\+load\+\_\+word\+\_\+\+PC (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Load the 16-\/bit word (L\+SB first) at the program counter and increment the program counter accordingly. 
+
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t The 16-\/bit value read at the program counter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{memory_8h_aee6c781b8a3f54504854cc852314200d}\label{memory_8h_aee6c781b8a3f54504854cc852314200d}} 
+\index{memory.\+h@{memory.\+h}!Memory\+\_\+store\+\_\+byte@{Memory\+\_\+store\+\_\+byte}}
+\index{Memory\+\_\+store\+\_\+byte@{Memory\+\_\+store\+\_\+byte}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{Memory\+\_\+store\+\_\+byte()}{Memory\_store\_byte()}}
+{\footnotesize\ttfamily void Memory\+\_\+store\+\_\+byte (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{address,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+
+
+Store a byte in the emulator\textquotesingle{}s memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The 16-\/bit address where the byte will be stored \\
+\hline
+{\em data} & The value that will be stored \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{memory_8h_afa8381d8690dfa1f2bcea5a8e4d00741}\label{memory_8h_afa8381d8690dfa1f2bcea5a8e4d00741}} 
+\index{memory.\+h@{memory.\+h}!bank\+\_\+fixed@{bank\+\_\+fixed}}
+\index{bank\+\_\+fixed@{bank\+\_\+fixed}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{bank\+\_\+fixed}{bank\_fixed}}
+{\footnotesize\ttfamily uint8\+\_\+t$\ast$ bank\+\_\+fixed}
+
+8 kB block of R\+OM that cannot be swapped by a memory bank controller (0x0000-\/0x3\+F\+FF)
+
+4 kB of internal R\+AM that cannot be swapped by an internal memory bank controller (0x\+C000-\/0x\+C\+F\+FF) \mbox{\Hypertarget{memory_8h_ac710b75cc62b8885999844bf65b21c78}\label{memory_8h_ac710b75cc62b8885999844bf65b21c78}} 
+\index{memory.\+h@{memory.\+h}!bank\+\_\+swap@{bank\+\_\+swap}}
+\index{bank\+\_\+swap@{bank\+\_\+swap}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{bank\+\_\+swap}{bank\_swap}}
+{\footnotesize\ttfamily uint8\+\_\+t$\ast$ bank\+\_\+swap}
+
+8 kB block of R\+OM that may be swapped by the memory bank controller (0x4000-\/0x7\+F\+FF)
+
+4 kB of internal R\+AM that may be swapped by an internal memory bank controller (C\+GB only; 0x\+D000-\/0x\+D\+F\+FF) \mbox{\Hypertarget{memory_8h_ac547af7ecc2c9b64f2b59c7ad9eed92f}\label{memory_8h_ac547af7ecc2c9b64f2b59c7ad9eed92f}} 
+\index{memory.\+h@{memory.\+h}!B\+GP@{B\+GP}}
+\index{B\+GP@{B\+GP}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{B\+GP}{BGP}}
+{\footnotesize\ttfamily uint8\+\_\+t B\+GP}
+
+(0x\+F\+F47) Background and window palette data (R/W) \mbox{\Hypertarget{memory_8h_aa2c865a3453e463499b654276a70e572}\label{memory_8h_aa2c865a3453e463499b654276a70e572}} 
+\index{memory.\+h@{memory.\+h}!D\+IV@{D\+IV}}
+\index{D\+IV@{D\+IV}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{D\+IV}{DIV}}
+{\footnotesize\ttfamily uint8\+\_\+t D\+IV}
+
+(0x\+F\+F03) Divider register (R/W) \mbox{\Hypertarget{memory_8h_a6701d95da5fe992e672fbf3925ca2fa4}\label{memory_8h_a6701d95da5fe992e672fbf3925ca2fa4}} 
+\index{memory.\+h@{memory.\+h}!D\+MA@{D\+MA}}
+\index{D\+MA@{D\+MA}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{D\+MA}{DMA}}
+{\footnotesize\ttfamily uint8\+\_\+t D\+MA}
+
+(0x\+F\+F46) D\+MA transfer and start address (W) \mbox{\Hypertarget{memory_8h_ab1119300a60f06c45d14b0d9eafcf422}\label{memory_8h_ab1119300a60f06c45d14b0d9eafcf422}} 
+\index{memory.\+h@{memory.\+h}!E\+X\+T\+R\+AM@{E\+X\+T\+R\+AM}}
+\index{E\+X\+T\+R\+AM@{E\+X\+T\+R\+AM}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{E\+X\+T\+R\+AM}{EXTRAM}}
+{\footnotesize\ttfamily uint8\+\_\+t$\ast$ E\+X\+T\+R\+AM}
+
+External R\+AM that may or may not be provided by a game cartridge (0x\+A000-\/0x\+B\+F\+FF) \mbox{\Hypertarget{memory_8h_ac7681f624878a05c3db9eade8b303001}\label{memory_8h_ac7681f624878a05c3db9eade8b303001}} 
+\index{memory.\+h@{memory.\+h}!H\+R\+AM@{H\+R\+AM}}
+\index{H\+R\+AM@{H\+R\+AM}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{H\+R\+AM}{HRAM}}
+{\footnotesize\ttfamily uint8\+\_\+t$\ast$ H\+R\+AM}
+
+High R\+A\+M/\+Zero page (0x\+F\+F80-\/0x\+F\+F\+FE) \mbox{\Hypertarget{memory_8h_ab1ca70da5c3b3a71451a8b582d9c45ee}\label{memory_8h_ab1ca70da5c3b3a71451a8b582d9c45ee}} 
+\index{memory.\+h@{memory.\+h}!IE@{IE}}
+\index{IE@{IE}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{IE}{IE}}
+{\footnotesize\ttfamily uint8\+\_\+t IE}
+
+Interrupt enable flag (0x\+F\+F\+FF)
+
+(0x\+F\+F\+FF) Interrupt enable flag (R/W) \mbox{\Hypertarget{memory_8h_ae8ee8fbf58d3aeb61d81bae817be8826}\label{memory_8h_ae8ee8fbf58d3aeb61d81bae817be8826}} 
+\index{memory.\+h@{memory.\+h}!IF@{IF}}
+\index{IF@{IF}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{IF}{IF}}
+{\footnotesize\ttfamily uint8\+\_\+t IF}
+
+(0x\+F\+F0F) Interrupt flag (R/W) \mbox{\Hypertarget{memory_8h_a4fef16b094b310f510df6cacf7fa56c6}\label{memory_8h_a4fef16b094b310f510df6cacf7fa56c6}} 
+\index{memory.\+h@{memory.\+h}!L\+C\+DC@{L\+C\+DC}}
+\index{L\+C\+DC@{L\+C\+DC}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{L\+C\+DC}{LCDC}}
+{\footnotesize\ttfamily uint8\+\_\+t L\+C\+DC}
+
+(0x\+F\+F40) L\+CD control (R/W) \mbox{\Hypertarget{memory_8h_aac72867167411ab30a371a9d8e8076d1}\label{memory_8h_aac72867167411ab30a371a9d8e8076d1}} 
+\index{memory.\+h@{memory.\+h}!LY@{LY}}
+\index{LY@{LY}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{LY}{LY}}
+{\footnotesize\ttfamily uint8\+\_\+t LY}
+
+(0x\+F\+F44) L\+C\+DC Y-\/coordinate (R/W) \mbox{\Hypertarget{memory_8h_a8ae5a3bf622f470d0e5739b3b427e8a7}\label{memory_8h_a8ae5a3bf622f470d0e5739b3b427e8a7}} 
+\index{memory.\+h@{memory.\+h}!L\+YC@{L\+YC}}
+\index{L\+YC@{L\+YC}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{L\+YC}{LYC}}
+{\footnotesize\ttfamily uint8\+\_\+t L\+YC}
+
+(0x\+F\+F45) LY compare (R/W) \mbox{\Hypertarget{memory_8h_a8fbb8bb9ef49281d646ef1ed0c204a68}\label{memory_8h_a8fbb8bb9ef49281d646ef1ed0c204a68}} 
+\index{memory.\+h@{memory.\+h}!N\+R10@{N\+R10}}
+\index{N\+R10@{N\+R10}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R10}{NR10}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R10}
+
+(0x\+F\+F10) Sound mode 1 register; sweep register (R/W) \mbox{\Hypertarget{memory_8h_a01e595f265620d78598813c8653c4f5f}\label{memory_8h_a01e595f265620d78598813c8653c4f5f}} 
+\index{memory.\+h@{memory.\+h}!N\+R11@{N\+R11}}
+\index{N\+R11@{N\+R11}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R11}{NR11}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R11}
+
+(0x\+F\+F11) Sound mode 1 register; sound length/wave pattern duty (R/W) \mbox{\Hypertarget{memory_8h_ae376586495517abdb6b30bcbf3c594ef}\label{memory_8h_ae376586495517abdb6b30bcbf3c594ef}} 
+\index{memory.\+h@{memory.\+h}!N\+R12@{N\+R12}}
+\index{N\+R12@{N\+R12}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R12}{NR12}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R12}
+
+(0x\+F\+F12) Sound mode 1 register; envelope (R/W) \mbox{\Hypertarget{memory_8h_a22afb2aa1974dc6c9f1f16c9b189124e}\label{memory_8h_a22afb2aa1974dc6c9f1f16c9b189124e}} 
+\index{memory.\+h@{memory.\+h}!N\+R13@{N\+R13}}
+\index{N\+R13@{N\+R13}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R13}{NR13}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R13}
+
+(0x\+F\+F13) Sound mode 1 register; frequency lo (W) \mbox{\Hypertarget{memory_8h_a20490b899225cc36d161277515a16e56}\label{memory_8h_a20490b899225cc36d161277515a16e56}} 
+\index{memory.\+h@{memory.\+h}!N\+R14@{N\+R14}}
+\index{N\+R14@{N\+R14}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R14}{NR14}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R14}
+
+(0x\+F\+F14) Sound mode 1 register; frequency hi (W) \mbox{\Hypertarget{memory_8h_a030a59f26206ac0ac4201a322b5cdd5d}\label{memory_8h_a030a59f26206ac0ac4201a322b5cdd5d}} 
+\index{memory.\+h@{memory.\+h}!N\+R21@{N\+R21}}
+\index{N\+R21@{N\+R21}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R21}{NR21}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R21}
+
+(0x\+F\+F16) Sound mode 2 register; sound length/wave pattern duty (R/W) \mbox{\Hypertarget{memory_8h_a84a77945673e816e904657cf55b3e902}\label{memory_8h_a84a77945673e816e904657cf55b3e902}} 
+\index{memory.\+h@{memory.\+h}!N\+R22@{N\+R22}}
+\index{N\+R22@{N\+R22}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R22}{NR22}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R22}
+
+(0x\+F\+F17) Sound mode 2 register; envelope (R/W) \mbox{\Hypertarget{memory_8h_a86f90fa3fd15f1caaee3154f3425ad4f}\label{memory_8h_a86f90fa3fd15f1caaee3154f3425ad4f}} 
+\index{memory.\+h@{memory.\+h}!N\+R23@{N\+R23}}
+\index{N\+R23@{N\+R23}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R23}{NR23}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R23}
+
+(0x\+F\+F18) Sound mode 2 register; frequency lo (W) \mbox{\Hypertarget{memory_8h_a277721eee408eff8e2bf675da59ab0f2}\label{memory_8h_a277721eee408eff8e2bf675da59ab0f2}} 
+\index{memory.\+h@{memory.\+h}!N\+R24@{N\+R24}}
+\index{N\+R24@{N\+R24}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R24}{NR24}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R24}
+
+(0x\+F\+F19) Sound mode 2 register; frequency hi (R/W) \mbox{\Hypertarget{memory_8h_ab1dc91e1df22fd74272e6af40c9f3e22}\label{memory_8h_ab1dc91e1df22fd74272e6af40c9f3e22}} 
+\index{memory.\+h@{memory.\+h}!N\+R30@{N\+R30}}
+\index{N\+R30@{N\+R30}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R30}{NR30}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R30}
+
+(0x\+F\+F1A) Sound mode 3 register; sound on/off (R/W) \mbox{\Hypertarget{memory_8h_ac27fb79168070f5b8aa58ab030dbc30b}\label{memory_8h_ac27fb79168070f5b8aa58ab030dbc30b}} 
+\index{memory.\+h@{memory.\+h}!N\+R31@{N\+R31}}
+\index{N\+R31@{N\+R31}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R31}{NR31}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R31}
+
+(0x\+F\+F1B) Sound mode 3 register; sound length (R/W) \mbox{\Hypertarget{memory_8h_a012ca99b3d393d9696a57fbedba071eb}\label{memory_8h_a012ca99b3d393d9696a57fbedba071eb}} 
+\index{memory.\+h@{memory.\+h}!N\+R32@{N\+R32}}
+\index{N\+R32@{N\+R32}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R32}{NR32}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R32}
+
+(0x\+F\+F1C) Sound mode 3 register, select output level (R/W) \mbox{\Hypertarget{memory_8h_ab183837a14028cb6674aaaadd2ac18db}\label{memory_8h_ab183837a14028cb6674aaaadd2ac18db}} 
+\index{memory.\+h@{memory.\+h}!N\+R33@{N\+R33}}
+\index{N\+R33@{N\+R33}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R33}{NR33}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R33}
+
+(0x\+F\+F1D) Sound mode 3 register; frequency lo (W) \mbox{\Hypertarget{memory_8h_aa2b0164adc5f48687ffaf53ac41265b8}\label{memory_8h_aa2b0164adc5f48687ffaf53ac41265b8}} 
+\index{memory.\+h@{memory.\+h}!N\+R34@{N\+R34}}
+\index{N\+R34@{N\+R34}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R34}{NR34}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R34}
+
+(0x\+F\+F1E) Sound mode 3 register; frequency hi (R/W) \mbox{\Hypertarget{memory_8h_a5bb89968df1cf6d2724a2b10300fd20f}\label{memory_8h_a5bb89968df1cf6d2724a2b10300fd20f}} 
+\index{memory.\+h@{memory.\+h}!N\+R41@{N\+R41}}
+\index{N\+R41@{N\+R41}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R41}{NR41}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R41}
+
+(0x\+F\+F20) Sound mode 4 register; sound length (R/W) \mbox{\Hypertarget{memory_8h_afa29f9e2924c6adb56e8dc67671ff3ac}\label{memory_8h_afa29f9e2924c6adb56e8dc67671ff3ac}} 
+\index{memory.\+h@{memory.\+h}!N\+R42@{N\+R42}}
+\index{N\+R42@{N\+R42}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R42}{NR42}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R42}
+
+(0x\+F\+F21) Sound mode 4 register; envelope (R/W) \mbox{\Hypertarget{memory_8h_a32e5cc4bcf2df723aeeae24c0c9b3ebe}\label{memory_8h_a32e5cc4bcf2df723aeeae24c0c9b3ebe}} 
+\index{memory.\+h@{memory.\+h}!N\+R43@{N\+R43}}
+\index{N\+R43@{N\+R43}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R43}{NR43}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R43}
+
+(0x\+F\+F22) Sound mode 4 register; polynomial counter (R/W) \mbox{\Hypertarget{memory_8h_a1012d06d3215a8e5833c8e02146b6c33}\label{memory_8h_a1012d06d3215a8e5833c8e02146b6c33}} 
+\index{memory.\+h@{memory.\+h}!N\+R44@{N\+R44}}
+\index{N\+R44@{N\+R44}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R44}{NR44}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R44}
+
+(0x\+F\+F23) Sound mode 4 register; counter/consecutive; initial (R/W) \mbox{\Hypertarget{memory_8h_a01646acd7c6dcf29e7390e9007b6792d}\label{memory_8h_a01646acd7c6dcf29e7390e9007b6792d}} 
+\index{memory.\+h@{memory.\+h}!N\+R50@{N\+R50}}
+\index{N\+R50@{N\+R50}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R50}{NR50}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R50}
+
+(0x\+F\+F24) Channel control / O\+N-\/\+O\+FF / volume (R/W) \mbox{\Hypertarget{memory_8h_ae1d2e83ced05b7401878c591e76def88}\label{memory_8h_ae1d2e83ced05b7401878c591e76def88}} 
+\index{memory.\+h@{memory.\+h}!N\+R51@{N\+R51}}
+\index{N\+R51@{N\+R51}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R51}{NR51}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R51}
+
+(0x\+F\+F25) Selection of sound output terminal (R/W) \mbox{\Hypertarget{memory_8h_a0fe259dbbb83d897c6f5e47e04b45a78}\label{memory_8h_a0fe259dbbb83d897c6f5e47e04b45a78}} 
+\index{memory.\+h@{memory.\+h}!N\+R52@{N\+R52}}
+\index{N\+R52@{N\+R52}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{N\+R52}{NR52}}
+{\footnotesize\ttfamily uint8\+\_\+t N\+R52}
+
+(0x\+F\+F26) Sound on/off (R/W) \mbox{\Hypertarget{memory_8h_a199eddb4cf868e571fd2ed01c7a8a32e}\label{memory_8h_a199eddb4cf868e571fd2ed01c7a8a32e}} 
+\index{memory.\+h@{memory.\+h}!O\+AM@{O\+AM}}
+\index{O\+AM@{O\+AM}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{O\+AM}{OAM}}
+{\footnotesize\ttfamily uint8\+\_\+t$\ast$ O\+AM}
+
+Object Attribute Memory, stores the state of the sprites (0x\+F\+E00-\/0x\+F\+E9F) \mbox{\Hypertarget{memory_8h_a7c04e9a18ac693d6b7ba31764c3ee70e}\label{memory_8h_a7c04e9a18ac693d6b7ba31764c3ee70e}} 
+\index{memory.\+h@{memory.\+h}!O\+B\+P0@{O\+B\+P0}}
+\index{O\+B\+P0@{O\+B\+P0}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{O\+B\+P0}{OBP0}}
+{\footnotesize\ttfamily uint8\+\_\+t O\+B\+P0}
+
+(0x\+F\+F48) Object palette 0 data (R/W) \mbox{\Hypertarget{memory_8h_a53b57174a234f73bc93e80bd543d546a}\label{memory_8h_a53b57174a234f73bc93e80bd543d546a}} 
+\index{memory.\+h@{memory.\+h}!O\+B\+P1@{O\+B\+P1}}
+\index{O\+B\+P1@{O\+B\+P1}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{O\+B\+P1}{OBP1}}
+{\footnotesize\ttfamily uint8\+\_\+t O\+B\+P1}
+
+(0x\+F\+F49) Object palette 1 data (R/W) \mbox{\Hypertarget{memory_8h_a89e93cdfda0a253e4d7ba7948fc4d577}\label{memory_8h_a89e93cdfda0a253e4d7ba7948fc4d577}} 
+\index{memory.\+h@{memory.\+h}!P1@{P1}}
+\index{P1@{P1}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{P1}{P1}}
+{\footnotesize\ttfamily uint8\+\_\+t P1}
+
+(0x\+F\+F00) Register for reading joy pad info and determining system type (R/W) \mbox{\Hypertarget{memory_8h_a792844e460865e8247b08da318142555}\label{memory_8h_a792844e460865e8247b08da318142555}} 
+\index{memory.\+h@{memory.\+h}!R\+AM@{R\+AM}}
+\index{R\+AM@{R\+AM}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{R\+AM}{RAM}}
+{\footnotesize\ttfamily struct \{ ... \}   R\+AM}
+
+Internal R\+AM of the Game Boy (0x\+C000-\/0x\+D\+F\+FF) \mbox{\Hypertarget{memory_8h_a66b23f4199eb5bd14f052087bf83b770}\label{memory_8h_a66b23f4199eb5bd14f052087bf83b770}} 
+\index{memory.\+h@{memory.\+h}!R\+OM@{R\+OM}}
+\index{R\+OM@{R\+OM}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{R\+OM}{ROM}}
+{\footnotesize\ttfamily struct \{ ... \}   R\+OM}
+
+The read-\/only memory as stored in the game cartrige and (potentially) controlled by a memory bank controller \mbox{\Hypertarget{memory_8h_af6e25191020f32790ed358bdb7152678}\label{memory_8h_af6e25191020f32790ed358bdb7152678}} 
+\index{memory.\+h@{memory.\+h}!SB@{SB}}
+\index{SB@{SB}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{SB}{SB}}
+{\footnotesize\ttfamily uint8\+\_\+t SB}
+
+(0x\+F\+F01) Serial transfer data (R/W) \mbox{\Hypertarget{memory_8h_a994283cb179a11ded2d18c30c3710802}\label{memory_8h_a994283cb179a11ded2d18c30c3710802}} 
+\index{memory.\+h@{memory.\+h}!SC@{SC}}
+\index{SC@{SC}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{SC}{SC}}
+{\footnotesize\ttfamily uint8\+\_\+t SC}
+
+(0x\+F\+F02) S\+IO control (R/W) \mbox{\Hypertarget{memory_8h_a4ec9bb2eafba7556ff7bd8a2ec8cf1b5}\label{memory_8h_a4ec9bb2eafba7556ff7bd8a2ec8cf1b5}} 
+\index{memory.\+h@{memory.\+h}!S\+CX@{S\+CX}}
+\index{S\+CX@{S\+CX}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{S\+CX}{SCX}}
+{\footnotesize\ttfamily uint8\+\_\+t S\+CX}
+
+(0x\+F\+F43) Scroll X (R/W) \mbox{\Hypertarget{memory_8h_a9a7b9c16aeab96019096b5d9f509b57f}\label{memory_8h_a9a7b9c16aeab96019096b5d9f509b57f}} 
+\index{memory.\+h@{memory.\+h}!S\+CY@{S\+CY}}
+\index{S\+CY@{S\+CY}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{S\+CY}{SCY}}
+{\footnotesize\ttfamily uint8\+\_\+t S\+CY}
+
+(0x\+F\+F42) Scroll Y (R/W) \mbox{\Hypertarget{memory_8h_a29552ccb0992dbc97b7cf8259c0c43fe}\label{memory_8h_a29552ccb0992dbc97b7cf8259c0c43fe}} 
+\index{memory.\+h@{memory.\+h}!S\+T\+AT@{S\+T\+AT}}
+\index{S\+T\+AT@{S\+T\+AT}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{S\+T\+AT}{STAT}}
+{\footnotesize\ttfamily uint8\+\_\+t S\+T\+AT}
+
+(0x\+F\+F41) L\+C\+DC status (R/W) \mbox{\Hypertarget{memory_8h_a0c2aed67688f753c0dcaccc4067c472c}\label{memory_8h_a0c2aed67688f753c0dcaccc4067c472c}} 
+\index{memory.\+h@{memory.\+h}!T\+AC@{T\+AC}}
+\index{T\+AC@{T\+AC}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{T\+AC}{TAC}}
+{\footnotesize\ttfamily uint8\+\_\+t T\+AC}
+
+(0x\+F\+F07) Timer control (R/W) \mbox{\Hypertarget{memory_8h_ace71b847242f481e21068751bdc85124}\label{memory_8h_ace71b847242f481e21068751bdc85124}} 
+\index{memory.\+h@{memory.\+h}!T\+I\+MA@{T\+I\+MA}}
+\index{T\+I\+MA@{T\+I\+MA}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{T\+I\+MA}{TIMA}}
+{\footnotesize\ttfamily uint8\+\_\+t T\+I\+MA}
+
+(0x\+F\+F05) Timer counter (R/W) \mbox{\Hypertarget{memory_8h_ab51e207437a300404935b773224ca546}\label{memory_8h_ab51e207437a300404935b773224ca546}} 
+\index{memory.\+h@{memory.\+h}!T\+MA@{T\+MA}}
+\index{T\+MA@{T\+MA}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{T\+MA}{TMA}}
+{\footnotesize\ttfamily uint8\+\_\+t T\+MA}
+
+(0x\+F\+F06) Timer modulo (R/W) \mbox{\Hypertarget{memory_8h_abb4726240b8b01131746b0f199c58549}\label{memory_8h_abb4726240b8b01131746b0f199c58549}} 
+\index{memory.\+h@{memory.\+h}!V\+R\+AM@{V\+R\+AM}}
+\index{V\+R\+AM@{V\+R\+AM}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{V\+R\+AM}{VRAM}}
+{\footnotesize\ttfamily uint8\+\_\+t$\ast$ V\+R\+AM}
+
+The video R\+AM of the Game Boy (0x8000-\/0x9\+F\+FF) \mbox{\Hypertarget{memory_8h_ada5aa230fbe749561bbcc29c81727bed}\label{memory_8h_ada5aa230fbe749561bbcc29c81727bed}} 
+\index{memory.\+h@{memory.\+h}!W\+A\+VE@{W\+A\+VE}}
+\index{W\+A\+VE@{W\+A\+VE}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{W\+A\+VE}{WAVE}}
+{\footnotesize\ttfamily uint8\+\_\+t W\+A\+VE\mbox{[}16\mbox{]}}
+
+(0x\+F\+F30-\/0x\+F\+F3F) Waveform storage for arbitrary sound data \mbox{\Hypertarget{memory_8h_a26cc5409e89a6f0e14b6da08870fca2d}\label{memory_8h_a26cc5409e89a6f0e14b6da08870fca2d}} 
+\index{memory.\+h@{memory.\+h}!WX@{WX}}
+\index{WX@{WX}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{WX}{WX}}
+{\footnotesize\ttfamily uint8\+\_\+t WX}
+
+(0x\+F\+F4B) Window X position (R/W) \mbox{\Hypertarget{memory_8h_a623df2e10cad46929fa226da97926eaf}\label{memory_8h_a623df2e10cad46929fa226da97926eaf}} 
+\index{memory.\+h@{memory.\+h}!WY@{WY}}
+\index{WY@{WY}!memory.\+h@{memory.\+h}}
+\subsubsection{\texorpdfstring{WY}{WY}}
+{\footnotesize\ttfamily uint8\+\_\+t WY}
+
+(0x\+F\+F4A) Window Y position (R/W) 

@@ -1,7 +1,6 @@
 #include "instructions.h"
 
-// 8-bit arithmetic
-void Instruction_ADD_A_N(uint8_t n)
+void Instruction_ADD_N(uint8_t n)
 {
     Flags_set(
         (Registers.A + n) == 0,
@@ -12,7 +11,7 @@ void Instruction_ADD_A_N(uint8_t n)
     Registers.A += n;
 }
 
-void Instruction_ADC_A_N(uint8_t n)
+void Instruction_ADC_N(uint8_t n)
 {
     uint8_t c = Flag_get_C();
 
@@ -36,7 +35,7 @@ void Instruction_SUB_N(uint8_t n)
     Registers.A -= n;
 }
 
-void Instruction_SBC_A_N(uint8_t n)
+void Instruction_SBC_N(uint8_t n)
 {
     uint8_t c = Flag_get_C();
 
@@ -113,16 +112,15 @@ void Instruction_DEC_N(uint8_t *r)
     *r--;
 }
 
-// 16-bit arithmetic
-void Instruction_ADD_HL_N(uint16_t n)
+void Instruction_ADD_HL_NN(uint16_t nn)
 {
     Flags_set(
         -1,
         0,
-        Flag_test_H_U16_U16(Registers.HL, n),
-        Flag_test_C_U16_U16(Registers.HL, n));
+        Flag_test_H_U16_U16(Registers.HL, nn),
+        Flag_test_C_U16_U16(Registers.HL, nn));
 
-    Registers.HL += n;
+    Registers.HL += nn;
 }
 
 void Instruction_CALL_NN(uint16_t nn)
@@ -148,8 +146,6 @@ void Instruction_RET(void)
     Registers.SP += 2;
     Registers.PC = Combine_MSB_LSB(msb, lsb);
 }
-
-// Rotates and shifts (CB-opcodes)
 
 void Instruction_SET_N_R(uint8_t n, uint8_t *r)
 {

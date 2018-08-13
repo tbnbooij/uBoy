@@ -11,10 +11,10 @@
 #include "debug.h"
 #include "ppu.h"
 
-static struct
+static struct 
 {
     FILE *source;
-    uint64_t clk;
+    uint64_t clk; 
 } CPU;
 
 extern void CPU_init(void);

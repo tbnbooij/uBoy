@@ -1,0 +1,21 @@
+u\+Boy (\char`\"{}micro\+Boy\char`\"{}) is an attempt at creating a small Game Boy emulator in C.
+
+\subsection*{Compiling from source}
+
+To build the project, make sure you have C\+Make 3.\+5 or higher installed. Create a build folder and execute the following commands from there.
+
+
+\begin{DoxyCode}
+$ cmake ..
+\end{DoxyCode}
+ This will create a makefile that can then be called by executing {\ttfamily make} in the same folder.
+
+\subsection*{Running the program}
+
+After compiling, the program can be started by adding a path to a Game Boy compatible R\+OM in .gb format. Due to legal reasons, these R\+O\+MS are not distributed through this repository.
+
+
+\begin{DoxyCode}
+$ ./uBoy ../ROM/tetris.gb
+\end{DoxyCode}
+ 

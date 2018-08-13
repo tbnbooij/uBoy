@@ -1,0 +1,467 @@
+\hypertarget{state_8h}{}\section{include/state.h File Reference}
+\label{state_8h}\index{include/state.\+h@{include/state.\+h}}
+
+
+Representation of the state of the emulator (registers, C\+PU mode, flags) and a set of utility functions.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+Include dependency graph for state.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{state_8h_a3e2525931bbdb2a18120b22f99c58fa0}\label{state_8h_a3e2525931bbdb2a18120b22f99c58fa0}} 
+\#define {\bfseries M\+O\+D\+E\+\_\+\+R\+UN}~0
+\item 
+\mbox{\Hypertarget{state_8h_a9c2557a2d56dadc57824c046b0238a8d}\label{state_8h_a9c2557a2d56dadc57824c046b0238a8d}} 
+\#define {\bfseries M\+O\+D\+E\+\_\+\+H\+A\+LT}~1
+\item 
+\mbox{\Hypertarget{state_8h_a29a7dfd4fec0d672f9690159d70abc0d}\label{state_8h_a29a7dfd4fec0d672f9690159d70abc0d}} 
+\#define {\bfseries M\+O\+D\+E\+\_\+\+S\+T\+OP}~2
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{state_8h_a8aac6477340919fc5e0dcd7ec8efa049}\label{state_8h_a8aac6477340919fc5e0dcd7ec8efa049}} 
+void \hyperlink{state_8h_a8aac6477340919fc5e0dcd7ec8efa049}{State\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the state of the emulator (registers, C\+PU mode, flags). \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_ae1658eac5102fd259c5b22dd458cbab2}{Extract\+\_\+\+M\+SB} (uint16\+\_\+t i)
+\begin{DoxyCompactList}\small\item\em Extract the most significant byte of an unsigned 16-\/bit constant. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_aad7eb305fc11715b17a900da0b0e6de3}{Extract\+\_\+\+L\+SB} (uint16\+\_\+t i)
+\begin{DoxyCompactList}\small\item\em Extract the least significant byte of an unsigned 16-\/bit constant. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{state_8h_ab085e353d471dd986e66ac71c78b51cb}{Combine\+\_\+\+M\+S\+B\+\_\+\+L\+SB} (uint8\+\_\+t msb, uint8\+\_\+t lsb)
+\begin{DoxyCompactList}\small\item\em Combine two unsigned bytes into an unsigned 16-\/bit value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{state_8h_a7b158fb74f4b38a7661d9d325d8f7d11}\label{state_8h_a7b158fb74f4b38a7661d9d325d8f7d11}} 
+void \hyperlink{state_8h_a7b158fb74f4b38a7661d9d325d8f7d11}{Registers\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the values of the C\+PU registers. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a5bf0ec85d0c105ebf7178fab679fd4f8}{Flag\+\_\+set\+\_\+Z} (uint8\+\_\+t state)
+\begin{DoxyCompactList}\small\item\em Set the Z-\/flag to a given value (0 or 1). \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_ac3257fc4c9a2319f178c6b7c50def4ff}{Flag\+\_\+set\+\_\+N} (uint8\+\_\+t state)
+\begin{DoxyCompactList}\small\item\em Set the N-\/flag to a given value (0 or 1). \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a34ac5640d5e81eb53acebbc77da56a42}{Flag\+\_\+set\+\_\+H} (uint8\+\_\+t state)
+\begin{DoxyCompactList}\small\item\em Set the H-\/flag to a given value (0 or 1). \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_ac0e31fc044bf31edeb5d9c86a51f21c1}{Flag\+\_\+set\+\_\+C} (uint8\+\_\+t state)
+\begin{DoxyCompactList}\small\item\em Set the C-\/flag to a given value (0 or 1). \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_afa8b8ce9d52e0f0efe0bac091698c4ef}{Flags\+\_\+set} (uint8\+\_\+t Z, uint8\+\_\+t N, uint8\+\_\+t H, uint8\+\_\+t C)
+\begin{DoxyCompactList}\small\item\em Set the flags in the F-\/register to given values (0 = reset, 1 = set, -\/1 = don\textquotesingle{}t care). \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_a0cce733f8bea02487ba45b18819ba948}{Flag\+\_\+test\+\_\+\+H\+\_\+\+U8\+\_\+\+U8} (uint8\+\_\+t a, uint8\+\_\+t b, uint8\+\_\+t add)
+\begin{DoxyCompactList}\small\item\em Test for a halfcarry in the addition or substraction of two unsigned 8-\/bit constants. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_ae9c8132a81265c1acc16ad2d9a7570e2}{Flag\+\_\+test\+\_\+\+C\+\_\+\+U8\+\_\+\+U8} (uint8\+\_\+t a, uint8\+\_\+t b, uint8\+\_\+t add)
+\begin{DoxyCompactList}\small\item\em Test for a carry in the addition or substraction of two unsigned 8-\/bit constants. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_a419f0e14d7e5c7edd095e346b7f776f1}{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+S8} (uint16\+\_\+t a, int8\+\_\+t b)
+\begin{DoxyCompactList}\small\item\em Test for a halfcarry (bit 11 to 12) in the addition an unsigned 16-\/bit constant and a signed 8-\/bit constant. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_a0e9a28936c367672398e75e5d6bdecc2}{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+S8} (uint16\+\_\+t a, int8\+\_\+t b)
+\begin{DoxyCompactList}\small\item\em Test for a carry (bit 15 to \char`\"{}16\char`\"{}) in the addition an unsigned 16-\/bit constant and a signed 8-\/bit constant. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_afeb5c65d472c8591aa13f8bc4ca10156}{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+U16} (uint16\+\_\+t a, uint16\+\_\+t b)
+\begin{DoxyCompactList}\small\item\em Test for a halfcarry in the addition of two unsigned 16-\/bit constants. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_add4dc6d2971b7af986e56752f1893c84}{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+U16} (uint16\+\_\+t a, uint16\+\_\+t b)
+\begin{DoxyCompactList}\small\item\em Test for a carry in the addition of two unsigned 16-\/bit constants. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_addd76f2cd1501b28589bfdba3f88db67}{Flag\+\_\+get\+\_\+Z} (void)
+\begin{DoxyCompactList}\small\item\em Return the value of the Z-\/flag. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_a6cecaf76981f0c46fcd0103b0c949122}{Flag\+\_\+get\+\_\+N} (void)
+\begin{DoxyCompactList}\small\item\em Return the value of the N-\/flag. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_a75b65cf0d75aa7958ff130ea5c0776c6}{Flag\+\_\+get\+\_\+H} (void)
+\begin{DoxyCompactList}\small\item\em Return the value of the H-\/flag. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{state_8h_a19a5d12cc5cc96fe31eecc5083ded92b}{Flag\+\_\+get\+\_\+C} (void)
+\begin{DoxyCompactList}\small\item\em Return the value of the C-\/flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{state_8h_ad6091a0e38f03b2c6c12aabb4b6cc59c}\label{state_8h_ad6091a0e38f03b2c6c12aabb4b6cc59c}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint8\_t {\bfseries mode}\\
+\>uint8\_t {\bfseries IME}\\
+\} {\bfseries State}\\
+
+\end{tabbing}\item 
+\mbox{\Hypertarget{state_8h_a95fb456db5026d0f69e7e5698315fb9b}\label{state_8h_a95fb456db5026d0f69e7e5698315fb9b}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>char {\bfseries name} \mbox{[}17\mbox{]}\\
+\>uint8\_t {\bfseries CGB\_flag}\\
+\>uint8\_t {\bfseries cartridge\_type}\\
+\>uint8\_t {\bfseries ROM\_size}\\
+\>uint8\_t {\bfseries RAM\_size}\\
+\>uint8\_t {\bfseries destination}\\
+\} {\bfseries Cartridge}\\
+
+\end{tabbing}\item 
+\mbox{\Hypertarget{state_8h_a9418de733657f6fb1dc6fcc5c774abf8}\label{state_8h_a9418de733657f6fb1dc6fcc5c774abf8}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\mbox{\Hypertarget{struct_0D8_ab84d627d679f68b687243dbc251e1d43}\label{struct_0D8_ab84d627d679f68b687243dbc251e1d43}} 
+\>union \{\\
+\mbox{\Hypertarget{union_0D8_1_1_0D9_a8c3b21f1b7099b4b36bc1c9643f78716}\label{union_0D8_1_1_0D9_a8c3b21f1b7099b4b36bc1c9643f78716}} 
+\>\>struct \{\\
+\>\>\>uint8\_t {\bfseries F}\\
+\>\>\>uint8\_t {\bfseries A}\\
+\>\>\} \\
+\>\>uint16\_t {\bfseries AF}\\
+\>\} \\
+\mbox{\Hypertarget{struct_0D8_a037238800153f3a46b4cfbacb33285dd}\label{struct_0D8_a037238800153f3a46b4cfbacb33285dd}} 
+\>union \{\\
+\mbox{\Hypertarget{union_0D8_1_1_0D11_a8db5ad1450b4a3c4e4dacec2f2b2f946}\label{union_0D8_1_1_0D11_a8db5ad1450b4a3c4e4dacec2f2b2f946}} 
+\>\>struct \{\\
+\>\>\>uint8\_t {\bfseries C}\\
+\>\>\>uint8\_t {\bfseries B}\\
+\>\>\} \\
+\>\>uint16\_t {\bfseries BC}\\
+\>\} \\
+\mbox{\Hypertarget{struct_0D8_aeca95e7985fa62bbffe170f0ae8794e5}\label{struct_0D8_aeca95e7985fa62bbffe170f0ae8794e5}} 
+\>union \{\\
+\mbox{\Hypertarget{union_0D8_1_1_0D13_a4441399b81a9eae47fcef9a23b467a21}\label{union_0D8_1_1_0D13_a4441399b81a9eae47fcef9a23b467a21}} 
+\>\>struct \{\\
+\>\>\>uint8\_t {\bfseries E}\\
+\>\>\>uint8\_t {\bfseries D}\\
+\>\>\} \\
+\>\>uint16\_t {\bfseries DE}\\
+\>\} \\
+\mbox{\Hypertarget{struct_0D8_a4b95f08895d6e47dfdbd463eb889fcdf}\label{struct_0D8_a4b95f08895d6e47dfdbd463eb889fcdf}} 
+\>union \{\\
+\mbox{\Hypertarget{union_0D8_1_1_0D15_a3b3b3445a872750cd39aa42e608391a5}\label{union_0D8_1_1_0D15_a3b3b3445a872750cd39aa42e608391a5}} 
+\>\>struct \{\\
+\>\>\>uint8\_t {\bfseries L}\\
+\>\>\>uint8\_t {\bfseries H}\\
+\>\>\} \\
+\>\>uint16\_t {\bfseries HL}\\
+\>\} \\
+\>uint16\_t {\bfseries SP}\\
+\>uint16\_t {\bfseries PC}\\
+\} {\bfseries Registers}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representation of the state of the emulator (registers, C\+PU mode, flags) and a set of utility functions. 
+
+\begin{DoxyAuthor}{Author}
+tbnbooij 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/08-\/13 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{state_8h_ab085e353d471dd986e66ac71c78b51cb}\label{state_8h_ab085e353d471dd986e66ac71c78b51cb}} 
+\index{state.\+h@{state.\+h}!Combine\+\_\+\+M\+S\+B\+\_\+\+L\+SB@{Combine\+\_\+\+M\+S\+B\+\_\+\+L\+SB}}
+\index{Combine\+\_\+\+M\+S\+B\+\_\+\+L\+SB@{Combine\+\_\+\+M\+S\+B\+\_\+\+L\+SB}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Combine\+\_\+\+M\+S\+B\+\_\+\+L\+S\+B()}{Combine\_MSB\_LSB()}}
+{\footnotesize\ttfamily uint16\+\_\+t Combine\+\_\+\+M\+S\+B\+\_\+\+L\+SB (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{msb,  }\item[{uint8\+\_\+t}]{lsb }\end{DoxyParamCaption})}
+
+
+
+Combine two unsigned bytes into an unsigned 16-\/bit value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msb} & The most significant byte \\
+\hline
+{\em lsb} & The least significant byte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t The combination of the two input bytes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_aad7eb305fc11715b17a900da0b0e6de3}\label{state_8h_aad7eb305fc11715b17a900da0b0e6de3}} 
+\index{state.\+h@{state.\+h}!Extract\+\_\+\+L\+SB@{Extract\+\_\+\+L\+SB}}
+\index{Extract\+\_\+\+L\+SB@{Extract\+\_\+\+L\+SB}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Extract\+\_\+\+L\+S\+B()}{Extract\_LSB()}}
+{\footnotesize\ttfamily uint8\+\_\+t Extract\+\_\+\+L\+SB (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{i }\end{DoxyParamCaption})}
+
+
+
+Extract the least significant byte of an unsigned 16-\/bit constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Unsigned 16-\/bit constant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The least significant byte of i 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_ae1658eac5102fd259c5b22dd458cbab2}\label{state_8h_ae1658eac5102fd259c5b22dd458cbab2}} 
+\index{state.\+h@{state.\+h}!Extract\+\_\+\+M\+SB@{Extract\+\_\+\+M\+SB}}
+\index{Extract\+\_\+\+M\+SB@{Extract\+\_\+\+M\+SB}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Extract\+\_\+\+M\+S\+B()}{Extract\_MSB()}}
+{\footnotesize\ttfamily uint8\+\_\+t Extract\+\_\+\+M\+SB (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{i }\end{DoxyParamCaption})}
+
+
+
+Extract the most significant byte of an unsigned 16-\/bit constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Unsigned 16-\/bit constant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The most significant byte of i 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_a19a5d12cc5cc96fe31eecc5083ded92b}\label{state_8h_a19a5d12cc5cc96fe31eecc5083ded92b}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+get\+\_\+C@{Flag\+\_\+get\+\_\+C}}
+\index{Flag\+\_\+get\+\_\+C@{Flag\+\_\+get\+\_\+C}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+get\+\_\+\+C()}{Flag\_get\_C()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+get\+\_\+C (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Return the value of the C-\/flag. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The value of the C-\/flag 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_a75b65cf0d75aa7958ff130ea5c0776c6}\label{state_8h_a75b65cf0d75aa7958ff130ea5c0776c6}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+get\+\_\+H@{Flag\+\_\+get\+\_\+H}}
+\index{Flag\+\_\+get\+\_\+H@{Flag\+\_\+get\+\_\+H}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+get\+\_\+\+H()}{Flag\_get\_H()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+get\+\_\+H (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Return the value of the H-\/flag. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The value of the H-\/flag 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_a6cecaf76981f0c46fcd0103b0c949122}\label{state_8h_a6cecaf76981f0c46fcd0103b0c949122}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+get\+\_\+N@{Flag\+\_\+get\+\_\+N}}
+\index{Flag\+\_\+get\+\_\+N@{Flag\+\_\+get\+\_\+N}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+get\+\_\+\+N()}{Flag\_get\_N()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+get\+\_\+N (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Return the value of the N-\/flag. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The value of the N-\/flag 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_addd76f2cd1501b28589bfdba3f88db67}\label{state_8h_addd76f2cd1501b28589bfdba3f88db67}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+get\+\_\+Z@{Flag\+\_\+get\+\_\+Z}}
+\index{Flag\+\_\+get\+\_\+Z@{Flag\+\_\+get\+\_\+Z}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+get\+\_\+\+Z()}{Flag\_get\_Z()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+get\+\_\+Z (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Return the value of the Z-\/flag. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t The value of the Z-\/flag 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_ac0e31fc044bf31edeb5d9c86a51f21c1}\label{state_8h_ac0e31fc044bf31edeb5d9c86a51f21c1}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+set\+\_\+C@{Flag\+\_\+set\+\_\+C}}
+\index{Flag\+\_\+set\+\_\+C@{Flag\+\_\+set\+\_\+C}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+set\+\_\+\+C()}{Flag\_set\_C()}}
+{\footnotesize\ttfamily void Flag\+\_\+set\+\_\+C (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{state }\end{DoxyParamCaption})}
+
+
+
+Set the C-\/flag to a given value (0 or 1). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The state (0 or 1) that the C-\/flag is set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{state_8h_a34ac5640d5e81eb53acebbc77da56a42}\label{state_8h_a34ac5640d5e81eb53acebbc77da56a42}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+set\+\_\+H@{Flag\+\_\+set\+\_\+H}}
+\index{Flag\+\_\+set\+\_\+H@{Flag\+\_\+set\+\_\+H}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+set\+\_\+\+H()}{Flag\_set\_H()}}
+{\footnotesize\ttfamily void Flag\+\_\+set\+\_\+H (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{state }\end{DoxyParamCaption})}
+
+
+
+Set the H-\/flag to a given value (0 or 1). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The state (0 or 1) that the H-\/flag is set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{state_8h_ac3257fc4c9a2319f178c6b7c50def4ff}\label{state_8h_ac3257fc4c9a2319f178c6b7c50def4ff}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+set\+\_\+N@{Flag\+\_\+set\+\_\+N}}
+\index{Flag\+\_\+set\+\_\+N@{Flag\+\_\+set\+\_\+N}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+set\+\_\+\+N()}{Flag\_set\_N()}}
+{\footnotesize\ttfamily void Flag\+\_\+set\+\_\+N (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{state }\end{DoxyParamCaption})}
+
+
+
+Set the N-\/flag to a given value (0 or 1). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The state (0 or 1) that the N-\/flag is set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{state_8h_a5bf0ec85d0c105ebf7178fab679fd4f8}\label{state_8h_a5bf0ec85d0c105ebf7178fab679fd4f8}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+set\+\_\+Z@{Flag\+\_\+set\+\_\+Z}}
+\index{Flag\+\_\+set\+\_\+Z@{Flag\+\_\+set\+\_\+Z}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+set\+\_\+\+Z()}{Flag\_set\_Z()}}
+{\footnotesize\ttfamily void Flag\+\_\+set\+\_\+Z (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{state }\end{DoxyParamCaption})}
+
+
+
+Set the Z-\/flag to a given value (0 or 1). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The state (0 or 1) that the Z-\/flag is set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{state_8h_a0e9a28936c367672398e75e5d6bdecc2}\label{state_8h_a0e9a28936c367672398e75e5d6bdecc2}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+S8@{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+S8}}
+\index{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+S8@{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+S8}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+S8()}{Flag\_test\_C\_U16\_S8()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+S8 (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{a,  }\item[{int8\+\_\+t}]{b }\end{DoxyParamCaption})}
+
+
+
+Test for a carry (bit 15 to \char`\"{}16\char`\"{}) in the addition an unsigned 16-\/bit constant and a signed 8-\/bit constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Unsigned 16-\/bit constant \\
+\hline
+{\em b} & Signed 8-\/bit constant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t Boolean that represents whether a carry occurs or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_add4dc6d2971b7af986e56752f1893c84}\label{state_8h_add4dc6d2971b7af986e56752f1893c84}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+U16@{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+U16}}
+\index{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+U16@{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+U16}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+U16()}{Flag\_test\_C\_U16\_U16()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+test\+\_\+\+C\+\_\+\+U16\+\_\+\+U16 (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{a,  }\item[{uint16\+\_\+t}]{b }\end{DoxyParamCaption})}
+
+
+
+Test for a carry in the addition of two unsigned 16-\/bit constants. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Unsigned 16-\/bit constant \\
+\hline
+{\em b} & Unsigned 16-\/bit constant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t Boolean that represents whether a carry occurs or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_ae9c8132a81265c1acc16ad2d9a7570e2}\label{state_8h_ae9c8132a81265c1acc16ad2d9a7570e2}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+test\+\_\+\+C\+\_\+\+U8\+\_\+\+U8@{Flag\+\_\+test\+\_\+\+C\+\_\+\+U8\+\_\+\+U8}}
+\index{Flag\+\_\+test\+\_\+\+C\+\_\+\+U8\+\_\+\+U8@{Flag\+\_\+test\+\_\+\+C\+\_\+\+U8\+\_\+\+U8}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+test\+\_\+\+C\+\_\+\+U8\+\_\+\+U8()}{Flag\_test\_C\_U8\_U8()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+test\+\_\+\+C\+\_\+\+U8\+\_\+\+U8 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{a,  }\item[{uint8\+\_\+t}]{b,  }\item[{uint8\+\_\+t}]{add }\end{DoxyParamCaption})}
+
+
+
+Test for a carry in the addition or substraction of two unsigned 8-\/bit constants. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Unsigned 8-\/bit constant \\
+\hline
+{\em b} & Unsigned 8-\/bit constant \\
+\hline
+{\em add} & The operation that is applied to the two constants (subtraction = 0, addition = 1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t Boolean that represents whether a carry occurs or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_a419f0e14d7e5c7edd095e346b7f776f1}\label{state_8h_a419f0e14d7e5c7edd095e346b7f776f1}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+S8@{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+S8}}
+\index{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+S8@{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+S8}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+S8()}{Flag\_test\_H\_U16\_S8()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+S8 (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{a,  }\item[{int8\+\_\+t}]{b }\end{DoxyParamCaption})}
+
+
+
+Test for a halfcarry (bit 11 to 12) in the addition an unsigned 16-\/bit constant and a signed 8-\/bit constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Unsigned 16-\/bit constant \\
+\hline
+{\em b} & Signed 8-\/bit constant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t Boolean that represents whether a halfcarry occurs or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_afeb5c65d472c8591aa13f8bc4ca10156}\label{state_8h_afeb5c65d472c8591aa13f8bc4ca10156}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+U16@{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+U16}}
+\index{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+U16@{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+U16}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+U16()}{Flag\_test\_H\_U16\_U16()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+test\+\_\+\+H\+\_\+\+U16\+\_\+\+U16 (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{a,  }\item[{uint16\+\_\+t}]{b }\end{DoxyParamCaption})}
+
+
+
+Test for a halfcarry in the addition of two unsigned 16-\/bit constants. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Unsigned 16-\/bit constant \\
+\hline
+{\em b} & Unsigned 16-\/bit constant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t Boolean that represents whether a halfcarry occurs or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_a0cce733f8bea02487ba45b18819ba948}\label{state_8h_a0cce733f8bea02487ba45b18819ba948}} 
+\index{state.\+h@{state.\+h}!Flag\+\_\+test\+\_\+\+H\+\_\+\+U8\+\_\+\+U8@{Flag\+\_\+test\+\_\+\+H\+\_\+\+U8\+\_\+\+U8}}
+\index{Flag\+\_\+test\+\_\+\+H\+\_\+\+U8\+\_\+\+U8@{Flag\+\_\+test\+\_\+\+H\+\_\+\+U8\+\_\+\+U8}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flag\+\_\+test\+\_\+\+H\+\_\+\+U8\+\_\+\+U8()}{Flag\_test\_H\_U8\_U8()}}
+{\footnotesize\ttfamily uint8\+\_\+t Flag\+\_\+test\+\_\+\+H\+\_\+\+U8\+\_\+\+U8 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{a,  }\item[{uint8\+\_\+t}]{b,  }\item[{uint8\+\_\+t}]{add }\end{DoxyParamCaption})}
+
+
+
+Test for a halfcarry in the addition or substraction of two unsigned 8-\/bit constants. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Unsigned 8-\/bit constant \\
+\hline
+{\em b} & Unsigned 8-\/bit constant \\
+\hline
+{\em add} & The operation that is applied to the two constants (subtraction = 0, addition = 1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t Boolean that represents whether a halfcarry occurs or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state_8h_afa8b8ce9d52e0f0efe0bac091698c4ef}\label{state_8h_afa8b8ce9d52e0f0efe0bac091698c4ef}} 
+\index{state.\+h@{state.\+h}!Flags\+\_\+set@{Flags\+\_\+set}}
+\index{Flags\+\_\+set@{Flags\+\_\+set}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Flags\+\_\+set()}{Flags\_set()}}
+{\footnotesize\ttfamily void Flags\+\_\+set (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Z,  }\item[{uint8\+\_\+t}]{N,  }\item[{uint8\+\_\+t}]{H,  }\item[{uint8\+\_\+t}]{C }\end{DoxyParamCaption})}
+
+
+
+Set the flags in the F-\/register to given values (0 = reset, 1 = set, -\/1 = don\textquotesingle{}t care). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Z} & The state (0/1/-\/1) that the Z-\/flag is set to \\
+\hline
+{\em N} & The state (0/1/-\/1) that the N-\/flag is set to \\
+\hline
+{\em H} & The state (0/1/-\/1) that the H-\/flag is set to \\
+\hline
+{\em C} & The state (0/1/-\/1) that the C-\/flag is set to \\
+\hline
+\end{DoxyParams}
