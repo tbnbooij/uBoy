@@ -71,6 +71,12 @@ extern void PPU_draw(void);
 extern void PPU_randomize(void);
 
 /**
+ * @brief Fill the framebuffer with a test pattern.
+ * 
+ */
+extern void PPU_test(void);
+
+/**
  * @brief Free all memory allocated in PPU_init() and quit SDL2.
  * 
  */

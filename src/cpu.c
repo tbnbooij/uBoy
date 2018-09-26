@@ -88,6 +88,10 @@ void CPU_start(void)
 			PPU_randomize();
 			PPU_draw();
 		}
+		else if (strcmp(buffer, "test") == 0) {
+			PPU_test();
+			PPU_draw();
+		}
 		else if (strcmp(buffer, "h") == 0 | strcmp(buffer, "help") == 0)
 		{
 			printf("n/next\t\tStep to next instruction\n");

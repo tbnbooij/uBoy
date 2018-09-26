@@ -126,6 +126,16 @@ void PPU_randomize(void)
     }
 }
 
+void PPU_test(void) {
+    for (uint8_t i = 0; i < SCREEN_HEIGHT; i++)
+    {
+        for (uint8_t j = 0; j < SCREEN_WIDTH; j++)
+        {
+            framebuffer[i * SCREEN_WIDTH + j] = (i + j) % 4;
+        }
+    }
+}
+
 void PPU_exit(void)
 {
     SDL_FreeSurface(surface);
